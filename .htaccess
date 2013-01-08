@@ -1,0 +1,13 @@
+# Turn on the RewriteEngine
+RewriteEngine On
+
+# Rules
+RewriteCond %{REQUEST_FILENAME} !-f [OR]
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)images/(.*)$ images/$2 [L]
+RewriteRule ^(.*)css/(.*)$ css/$2 [L]
+RewriteRule ^(.*)js/(.*)$ js/$2 [L]
+#RewriteRule ^(.*)flash/(.*)$ flash/$2 [L]
+RewriteRule ^(.*)$ index.php [L]
+
+#

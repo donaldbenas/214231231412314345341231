@@ -25,7 +25,12 @@ class Admin extends CI_Controller {
 							$this->load->view('admin/header');
 							$this->load->view('admin/nav');
 							$this->load->view('admin/databank');
-							$this->load->view('admin/applicantadd');
+							$this->load->model('personalmodel');
+							$data['position'] = $this->personalmodel->position();
+							$data['nationality'] = $this->personalmodel->nationality();
+							$data['civil'] = $this->personalmodel->civil();
+							$data['religion'] = $this->personalmodel->religion();
+							$this->load->view('admin/applicantadd',$data);
 							$this->load->view('admin/footer');
 							break;
 			case 'search'	:

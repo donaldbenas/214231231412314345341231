@@ -4,13 +4,12 @@
   <li><a href="#">Print Applicant</a></li>
 </ul>
 <ul class="nav nav-tabs" id="myTab">
-  <li class="active"><a href="#personal-background"><h4>Personal Background</h4></a></li>
-  <li><a href="#educational-background"><h4>Educational Background</h4></a></li>
-  <li><a href="#special-skill-background"><h4>Special Skill Background</h4></a></li>
-  <li><a href="#work-experience-background"><h4>Work Experience Background</h4></a></li>
+  <li class="active"><a href="#personal-background" id="pb"><h5>Personal Background</h5></a></li>
+  <li><a href="#educational-background" id="eb"><h5>Educational Background</h5></a></li>
+  <li><a href="#special-skill-background" id="sb"><h5>Special Skill Background</h5></a></li>
+  <li><a href="#work-experience-background" id="wb"><h5>Work Experience Background</h5></a></li>
 </ul>
- 
-<form method="post" name="myform" enctype="multipart/form-data">
+<form method="post" name="myform" enctype="multipart/form-data" id="myform">
 	<fieldset>
 		<div class="container-fluid tab-content">
 			<!--<h2>Personal Background</h2>-->
@@ -18,12 +17,27 @@
 				<legend>Applicant Information</legend>
 				<div class="row-fluid span">
 					<div class="span2"><label>Upload Photo</label></div>
-					<div class="span3"><button type="" id="file" name="fileToUpload" class="btn"></button></div>
+					<div class="span3">
+						<div class="fileupload fileupload-new" data-provides="fileupload">
+						  <div class="input-append">
+							<div class="uneditable-input span2">
+								<i class="icon-file fileupload-exists"></i> 
+								<span class="fileupload-preview"></span>
+							</div>
+							<span class="btn btn-file">
+								<span class="fileupload-new" onclick="$('#file').click()">Select file</span>
+								<span class="fileupload-exists" onclick="$('#file').click()">Change</span>
+								<input type="file" style="display:none" name=file" id="file"/>
+							</span>
+								<a href="#" class="btn fileupload-exists btn-danger" data-dismiss="fileupload">Remove</a>
+						  </div>
+						</div>
+					</div>
 					<div class="span2"><label>Date Apply</label></div> 
 					<div class="span3">
 						<select name="applyMonth" class="span3">
 							<option>MM</option>
-							<?
+							<?php
 							for ($i = 1; $i < 13; $i++) {
 							   echo "<option>".sprintf("%02s", $i)."</option>";
 							}
@@ -32,7 +46,7 @@
 						</select>
 						<select name="applyDay"  class="span3">
 							<option>DD</option>
-							<?
+							<?php
 							for ($i = 1; $i < 32; $i++) {
 							   echo "<option>".sprintf("%02s", $i)."</option>";
 							}
@@ -41,7 +55,7 @@
 						</select>
 						<select name="applyYear"  class="span4">
 							<option>YYYY</option>
-							<?
+							<?php
 							for ($i = date("Y"); $i > 1900; $i--) {
 							   echo "<option>".$i."</option>";
 							}
@@ -54,13 +68,29 @@
 					<div class="span2"><label>Applying for Position 1</label></div>
 					<div class="span3">
 						<select name="position1" class="span12">
-							<option value="0">Choose</option>	
+							<option>Choose</option>
+							<?php
+								foreach($position as $arr){
+									foreach($arr as $id => $val){
+										if( $id == 'id') $ids = $val;
+										if( $id == 'value') echo "<option value='".$ids."'>".ucfirst(strtolower($val))."</option>";
+									}
+								}
+							?>
 						</select>
 					</div>
 					<div class="span2"><label>Applying for Position 2</label></div>
 					<div class="span3">
 						<select name="position2" class="span12">
-							<option value="0">Choose</option>	
+							<option>Choose</option>
+							<?php
+								foreach($position as $arr){
+									foreach($arr as $id => $val){
+										if( $id == 'id') $ids = $val;
+										if( $id == 'value') echo "<option value='".$ids."'>".ucfirst(strtolower($val))."</option>";
+									}
+								}
+							?>
 						</select>
 					</div>
 				</div>
@@ -78,13 +108,13 @@
 				</div>
 				<legend>Personal Information</legend>
 				<div class="row-fluid span">
-					<div class="span2"><label>Firt Name</label></div>
-					<div class="span3"><input type="text" name="lastname" class="span12"/></div>
+					<div class="span2"><label class="required">Firt Name</label></div>
+					<div class="span3"><input type="text" name="firstname" class="span12"/></div>
 					<div class="span2"><label>Birth Date</label></div> 
 					<div class="span3">
 						<select name="birthMonth" class="span3">
 							<option>MM</option>
-							<?
+							<?php
 							for ($i = 1; $i < 13; $i++) {
 							   echo "<option>".sprintf("%02s", $i)."</option>";
 							}
@@ -93,7 +123,7 @@
 						</select>
 						<select name="BirthDay"  class="span3">
 							<option>DD</option>
-							<?
+							<?php
 							for ($i = 1; $i < 32; $i++) {
 							   echo "<option>".sprintf("%02s", $i)."</option>";
 							}
@@ -102,7 +132,7 @@
 						</select>
 						<select name="BirthYear"  class="span4">
 							<option>YYYY</option>
-							<?
+							<?php
 							for ($i = date("Y"); $i > 1900; $i--) {
 							   echo "<option>".$i."</option>";
 							}
@@ -112,23 +142,24 @@
 					 </div>
 				</div>
 				<div class="row-fluid span">
-					<div class="span2"><label>Middle Name</label></div>
+					<div class="span2"><label class="required">Middle Name</label></div>
 					<div class="span3"><input type="text" name="middlename" class="span12"/></div>
 					<div class="span2"><label>Birth Place</label></div>
 					<div class="span3"><input type="text" name="municipality" placeholder="Town / Municipality	" class="span12"/></div>
 				</div>
 				<div class="row-fluid span">
-					<div class="span2"><label>Last Name</label></div>
+					<div class="span2"><label class="required">Last Name</label></div>
 					<div class="span3"><input type="text" name="lastname" class="span12"/></div>
 					<div class="span2"><label></label></div>
 					<div class="span3"><input type="text" name="city" placeholder="City / Province" class="span12"/></div>
 				</div>
 				<div class="row-fluid span">
 					<div class="span2"><label>Email Address</label></div>
-					<div class="span3"><input type="email" name="email" class="span12"/></div>
+					<div class="span3"><input type="email" name="email" class="span12" id="email"/></div>
 					<div class="span2"><label>Gender</label></div>
 					<div class="span3">
 						<select name="gender" class="span12">
+							<option>Choose</option>
 							<option>Male</option>
 							<option>Female</option>
 						</select>
@@ -140,7 +171,15 @@
 					<div class="span2"><label>Civil Status</label></div>
 					<div class="span3">
 						<select name="civil" class="span12">
-							<option>Single</option>
+							<option>Choose</option>
+							<?php
+								foreach($civil as $arr){
+									foreach($arr as $id => $val){
+										if( $id == 'id') $ids = $val;
+										if( $id == 'value') echo "<option value='".$ids."'>".ucfirst(strtolower($val))."</option>";
+									}
+								}
+							?>
 						</select>
 					</div>
 				</div>
@@ -150,7 +189,15 @@
 					<div class="span2"><label>Nationality</label></div>
 					<div class="span3">
 						<select name="civil" class="span12">
-							<option>Filipino</option>
+							<option>Choose</option>
+							<?php
+								foreach($nationality as $arr){
+									foreach($arr as $id => $val){
+										if( $id == 'id') $ids = $val;
+										if( $id == 'value') echo "<option value='".$ids."'>".ucfirst(strtolower($val))."</option>";
+									}
+								}
+							?>
 						</select>
 					</div>
 				</div>
@@ -184,7 +231,15 @@
 					<div class="span2"><label>Religion</label></div>
 					<div class="span3">
 						<select name="religion" class="span12">
-							<option>Catholic</option>
+							<option>Choose</option>
+							<?php
+								foreach($religion	 as $arr){
+									foreach($arr as $id => $val){
+										if( $id == 'id') $ids = $val;
+										if( $id == 'value') echo "<option value='".$ids."'>".ucfirst(strtolower($val))."</option>";
+									}
+								}
+							?>
 						</select>
 					</div>
 					<div class="span2"><label>Philhealth Number</label></div>
@@ -233,10 +288,11 @@
 					<div class="span2"><label>Mobile Number</label></div>
 					<div class="span3"><input type="text" name="spouseMobile" class="span12"/></div>
 				</div>
+				 <a class="btn btn-danger" style="float:right" id="first_1">Next <i class="icon-chevron-right"></i></a>
 			</div>
 			<!--<h2>Educational Background</h2>-->
 			<div class="container-fluid well tab-pane" id="educational-background">
-				<legend>Educational Information</legend>
+				<legend>Educational Information<a class="btn btn-danger" style="float:right" id="second_2"> <i class="icon-chevron-left"></i> Prev</a></legend>
 				<div class="row-fluid span">
 					<div class="span2"><h5>Educational Level</h5></div>
 					<div class="span2"><h5>School Graduated / Course</h5></div>
@@ -250,7 +306,7 @@
 					<div class="span2" style="text-align:center">
 						<select name="primaryStart"  class="span6">
 							<option>YYYY</option>
-							<?
+							<?php
 							for ($i = date("Y"); $i > 1900; $i--) {
 							   echo "<option>".$i."</option>";
 							}
@@ -261,7 +317,7 @@
 					<div class="span2" style="text-align:center">
 						<select name="primaryEnd"  class="span6">
 							<option>YYYY</option>
-							<?
+							<?php
 							for ($i = date("Y"); $i > 1900; $i--) {
 							   echo "<option>".$i."</option>";
 							}
@@ -277,7 +333,7 @@
 					<div class="span2" style="text-align:center">
 						<select name="secondaryStart"  class="span6">
 							<option>YYYY</option>
-							<?
+							<?php
 							for ($i = date("Y"); $i > 1900; $i--) {
 							   echo "<option>".$i."</option>";
 							}
@@ -288,7 +344,7 @@
 					<div class="span2" style="text-align:center">
 						<select name="secondaryEnd"  class="span6">
 							<option>YYYY</option>
-							<?
+							<?php
 							for ($i = date("Y"); $i > 1900; $i--) {
 							   echo "<option>".$i."</option>";
 							}
@@ -304,7 +360,7 @@
 					<div class="span2" style="text-align:center">
 						<select name="collegeStart"  class="span6">
 							<option>YYYY</option>
-							<?
+							<?php
 							for ($i = date("Y"); $i > 1900; $i--) {
 							   echo "<option>".$i."</option>";
 							}
@@ -315,7 +371,7 @@
 					<div class="span2" style="text-align:center">
 						<select name="collegeEnd"  class="span6">
 							<option>YYYY</option>
-							<?
+							<?php
 							for ($i = date("Y"); $i > 1900; $i--) {
 							   echo "<option>".$i."</option>";
 							}
@@ -331,7 +387,7 @@
 					<div class="span2" style="text-align:center">
 						<select name="vocationalStart"  class="span6">
 							<option>YYYY</option>
-							<?
+							<?php
 							for ($i = date("Y"); $i > 1900; $i--) {
 							   echo "<option>".$i."</option>";
 							}
@@ -342,7 +398,7 @@
 					<div class="span2" style="text-align:center">
 						<select name="vocationalEnd"  class="span6">
 							<option>YYYY</option>
-							<?
+							<?php
 							for ($i = date("Y"); $i > 1900; $i--) {
 							   echo "<option>".$i."</option>";
 							}
@@ -358,7 +414,7 @@
 					<div class="span2" style="text-align:center">
 						<select name="postStart"  class="span6">
 							<option>YYYY</option>
-							<?
+							<?php
 							for ($i = date("Y"); $i > 1900; $i--) {
 							   echo "<option>".$i."</option>";
 							}
@@ -369,7 +425,7 @@
 					<div class="span2" style="text-align:center">
 						<select name="postEnd"  class="span6">
 							<option>YYYY</option>
-							<?
+							<?php
 							for ($i = date("Y"); $i > 1900; $i--) {
 							   echo "<option>".$i."</option>";
 							}
@@ -379,10 +435,11 @@
 					</div>
 					<div class="span2"><input type="text" name="postDegree" class="span12"/></div>
 				</div>
+				<a class="btn btn-danger" style="float:right" id="second_1">Next <i class="icon-chevron-right"></i></a>
 			</div>
 			<!--<h2>Special Skill Background</h2>-->
 			<div class="container-fluid well tab-pane" id="special-skill-background">
-				<legend>Spcecial Skill Information</legend>
+				<legend>Spcecial Skill Information<a class="btn btn-danger" style="float:right" id="third_2"><i class="icon-chevron-left"></i> Prev</a></legend>
 				<div class="row-fluid span">
 					<div class="span3"><h5>Couse / Seminar</h5></div>
 					<div class="span3"><h5>School or Training Center</h5></div>
@@ -399,7 +456,7 @@
 					<div class="span2" style="text-align:center">
 						<select name="skillStartMonth<?php echo $l ?>" class="span5">
 							<option>MM</option>
-							<?
+							<?php
 							for ($i = 1; $i < 13; $i++) {
 							   echo "<option>".sprintf("%02s", $i)."</option>";
 							}
@@ -408,7 +465,7 @@
 						</select>
 						<select name="skillStartYear<?php echo $l ?>" class="span6">
 							<option>YYYY</option>
-							<?
+							<?php
 							for ($i = date("Y"); $i > 1900; $i--) {
 							   echo "<option>".$i."</option>";
 							}
@@ -419,7 +476,7 @@
 					<div class="span2" style="text-align:center">
 						<select name="skillEndMonth<?php echo $l ?>" class="span5">
 							<option>MM</option>
-							<?
+							<?php
 							for ($i = 1; $i < 13; $i++) {
 							   echo "<option>".sprintf("%02s", $i)."</option>";
 							}
@@ -429,7 +486,7 @@
 						</select>
 						<select name="skillEndYear<?php echo $l ?>"  class="span6">
 							<option>YYYY</option>
-							<?
+							<?php
 							for ($i = date("Y"); $i > 1900; $i--) {
 							   echo "<option>".$i."</option>";
 							}
@@ -441,10 +498,11 @@
 				<?php
 				}
 				?>
+				<a class="btn btn-danger" style="float:right" id="third_1">Next <i class="icon-chevron-right"></i></a>
 			</div>
 			<!--<h2>Wok Experience Background</h2>-->
 			<div class="container-fluid well tab-pane" id="work-experience-background">
-				<legend>Local Work Information</legend>
+				<legend>Local Work Information<a class="btn btn-danger" style="float:right" id="fourth_2"><i class="icon-chevron-left"></i> Prev</a></legend>
 				<div class="row-fluid span">
 					<div class="span2"><h5>Company</h5></div>
 					<div class="span2"><h5>Position</h5></div>
@@ -463,7 +521,7 @@
 					<div class="span2" style="text-align:center">
 						<select name="localExperienceStartMonth<?php echo $l ?>" class="span5">
 							<option>MM</option>
-							<?
+							<?php
 							for ($i = 1; $i < 13; $i++) {
 							   echo "<option>".sprintf("%02s", $i)."</option>";
 							}
@@ -472,7 +530,7 @@
 						</select>
 						<select name="localExperienceStartYear<?php echo $l ?>" class="span6">
 							<option>YYYY</option>
-							<?
+							<?php
 							for ($i = date("Y"); $i > 1900; $i--) {
 							   echo "<option>".$i."</option>";
 							}
@@ -483,7 +541,7 @@
 					<div class="span2" style="text-align:center">
 						<select name="localExperienceEndMonth<?php echo $l ?>" class="span5">
 							<option>MM</option>
-							<?
+							<?php
 							for ($i = 1; $i < 13; $i++) {
 							   echo "<option>".sprintf("%02s", $i)."</option>";
 							}
@@ -493,7 +551,7 @@
 						</select>
 						<select name="localExperienceEndYear<?php echo $l ?>"  class="span6">
 							<option>YYYY</option>
-							<?
+							<?php
 							for ($i = date("Y"); $i > 1900; $i--) {
 							   echo "<option>".$i."</option>";
 							}
@@ -526,7 +584,7 @@
 					<div class="span2" style="text-align:center">
 						<select name="abroadExperienceStartMonth<?php echo $l ?>" class="span5">
 							<option>MM</option>
-							<?
+							<?php
 							for ($i = 1; $i < 13; $i++) {
 							   echo "<option>".sprintf("%02s", $i)."</option>";
 							}
@@ -535,7 +593,7 @@
 						</select>
 						<select name="abroadExperienceStartYear<?php echo $l ?>" class="span6">
 							<option>YYYY</option>
-							<?
+							<?php
 							for ($i = date("Y"); $i > 1900; $i--) {
 							   echo "<option>".$i."</option>";
 							}
@@ -546,7 +604,7 @@
 					<div class="span2" style="text-align:center">
 						<select name="abroadExperienceEndMonth<?php echo $l ?>" class="span5">
 							<option>MM</option>
-							<?
+							<?php
 							for ($i = 1; $i < 13; $i++) {
 							   echo "<option>".sprintf("%02s", $i)."</option>";
 							}
@@ -556,7 +614,7 @@
 						</select>
 						<select name="abroadExperienceEndYear<?php echo $l ?>"  class="span6">
 							<option>YYYY</option>
-							<?
+							<?php
 							for ($i = date("Y"); $i > 1900; $i--) {
 							   echo "<option>".$i."</option>";
 							}
@@ -570,19 +628,18 @@
 				<?php
 				}
 				?>
+				<input type="submit" class="btn btn-primary" style="float:right" value="Submit">
 			</div>
 		</div>
 	</fieldset>
 </form>
 <script>
-  $(function () {
-	  $('#tin').mask('99-9999999');
-	  $('#pagibig').mask('9999-9999-9999');
-	  $('#sss').mask('999-99-9999');
-	  $('#philhealth').mask('9999-9999-9999');	
-	  $('#myTab a').click(function (e) {
-		  e.preventDefault();
-		  $(this).tab('show');
-	  })
-  })  
+	$(document).ready(function(){
+		  $('#tin').mask('99-9999999');
+		  $('#pagibig').mask('9999-9999-9999');
+		  $('#sss').mask('999-99-9999');
+		  $('#philhealth').mask('9999-9999-9999');	
+		  $('.required').append('<span style="color:red;"> *</span>');
+	});
 </script>
+<script src="<?php echo base_url() ?>js/jquery.validate.worker.js"></script>

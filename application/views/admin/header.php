@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Bootstrap, from Twitter</title>
+    <title>Pacific Ace Resources Inc.</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -23,5 +23,6 @@
 	<script src="<?php echo base_url() ?>js/jquery.dataTables.min.js"></script>
 	<script src="<?php echo base_url() ?>js/jquery.dataTables.delay.min.js"></script>
 	<script src="<?php echo base_url() ?>js/bootstrap.js"></script>
+	<script src="<?php echo base_url() ?>js/jquery.validate.js"></script>
   </head>
   <body>

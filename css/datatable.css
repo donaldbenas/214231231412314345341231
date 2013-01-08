@@ -1,0 +1,109 @@
+#data{
+	width: 100%;
+}
+#data > tbody > tr > td{
+	vertical-align: center;
+	line-height: 30px;
+	border-right: 1px dashed #E1E1E1;
+}
+#data > tbody > tr :nth-child(5), #data > tbody > tr :nth-child(6), #data > tbody > tr :nth-child(1){
+	text-align:center;
+}#data > thead > tr{
+	height: 40px;
+}#data > thead > tr > th{
+	padding-left: 5px;
+}
+#data > thead > tr > th{
+	vertical-align: center;
+	margin-bottom: 0;
+	font-size: 14px;
+	line-height: 20px;
+	color: #333;
+	text-align: left;
+	text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+	vertical-align: middle;
+	cursor: pointer;
+	background-color: whiteSmoke;
+	background-image: -moz-linear-gradient(top, white, #E6E6E6);
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(white), to(#E6E6E6));
+	background-image: -webkit-linear-gradient(top, white, #E6E6E6);
+	background-image: -o-linear-gradient(top, white, #E6E6E6);
+	background-image: linear-gradient(to bottom, white, #E6E6E6);
+	background-repeat: repeat-x;
+	border: 1px solid #BBB;
+	border-color: #E6E6E6 #E6E6E6 #BFBFBF;
+	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+	border-bottom-color: #A2A2A2;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffe6e6e6', GradientType=0);
+	filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+	-webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+	-moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+
+}
+.dataTables_length > label {
+	float: left;	
+	text-transform: uppercase;
+	margin-right: 20px;
+}
+.dataTables_length > label > select {
+	width: 60px;
+	margin-top: 5px;
+	margin-left: 5px;
+	margin-right: 5px;
+}
+.dataTables_filter > label {
+	float: right;	
+	text-transform: uppercase;
+}
+.dataTables_filter > label > input {
+	width: 300px;
+	margin-top: 5px;
+	margin-left: 10px;
+}
+.dataTables_processing{
+	padding-top: 10px;
+	font-weight: bold;
+}
+.dataTables_info{
+	float: left;
+	width: 50%;
+	padding-top: 5px;
+	margin-bottom: 20px;
+	text-align:left;
+	list-style: none;
+	font-size: 13px;
+	*zoom: 1;
+}
+.paginate_button_disabled, .paginate_active{
+	color: #BFBFBF;
+}
+#data_paginate{
+	float: right;
+	width: 50%;
+	text-align:right;
+	list-style: none;
+	font-size: 13px;
+	*zoom: 1;
+}
+
+#data_paginate:before,
+#data_paginate:after {
+  display: table;
+  line-height: 0;
+  content: "";
+}
+
+#data_paginate > a, #data_paginate > span > a{
+  display: inline-block;
+  padding: 5px 14px;
+  cursor: pointer;
+}
+
+#data_paginate > a:hover, #data_paginate > span > a:hover {
+  text-decoration: none;
+  color: #BFBFBF;
+}

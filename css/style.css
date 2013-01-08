@@ -1,0 +1,9 @@
+.applicantAdd{
+	border: 0px solid white;
+}
+.applicantAdd > tr{
+	border: 0px solid white;
+}
+.applicantAdd > tr > td{
+	border-top: 0px solid white;
+}

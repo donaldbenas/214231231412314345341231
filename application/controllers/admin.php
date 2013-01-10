@@ -21,16 +21,39 @@ class Admin extends CI_Controller {
 		
 		switch($link)
 		{
-			case 'add' 		:
+			case 'add' 		:							
 							$this->load->view('admin/header');
 							$this->load->view('admin/nav');
 							$this->load->view('admin/databank');
 							$this->load->model('personalmodel');
+							$this->load->model('applicantModel');
 							$data['position'] = $this->personalmodel->position();
 							$data['nationality'] = $this->personalmodel->nationality();
 							$data['civil'] = $this->personalmodel->civil();
 							$data['religion'] = $this->personalmodel->religion();
+							if(isset($_POST['submit'])){
+								$this->applicantModel->save();
+								redirect(base_url().'admin/worker/add');
+							}
 							$this->load->view('admin/applicantadd',$data);
+							$this->load->view('admin/footer');
+							break;
+			case 'edit' 		:							
+							$this->load->view('admin/header');
+							$this->load->view('admin/nav');
+							$this->load->view('admin/databank');
+							$this->load->model('personalmodel');
+							$this->load->model('applicantModel');
+							$data['position'] = $this->personalmodel->position();
+							$data['nationality'] = $this->personalmodel->nationality();
+							$data['civil'] = $this->personalmodel->civil();
+							$data['religion'] = $this->personalmodel->religion();
+							$data['personalbackground'] = $this->applicantModel->loadpersonalbackground($this->uri->segment(4));
+							if(isset($_POST['submit'])){
+								$this->applicantModel->edit($this->input->post('appid'));
+								redirect(base_url()."admin/worker/edit/".$this->input->post('appid'));
+							}
+							$this->load->view('admin/applicantedit',$data);
 							$this->load->view('admin/footer');
 							break;
 			case 'search'	:
@@ -41,7 +64,7 @@ class Admin extends CI_Controller {
 							$this->load->view('admin/footer');
 							break;
 			default			:
-							redirect(site_url());
+							redirect(base_url());
 		}
 	}
 	
@@ -50,13 +73,13 @@ class Admin extends CI_Controller {
 		$this->load->helper('url');
 		$this->load->database();
 		
-        $aColumns = array('applicant.id AS id', 'applicant.firstname AS firstname', 'applicant.lastname AS lastname', 'list.value AS position');
-        $cColumns = array('applicant.id', 'applicant.firstname', 'applicant.lastname', 'list.value');
+        $aColumns = array('applicant.appid AS id', 'applicant.firstname AS firstname', 'applicant.lastname AS lastname', 'list.value AS position');
+        $cColumns = array('applicant.appid', 'applicant.firstname', 'applicant.lastname', 'list.value');
         $nColumns = array('id', 'firstname', 'lastname', 'position');
         
 		$sIndexColumn = 'applicant.id';
 		        
-        $sTable = 'applicant LEFT JOIN list ON applicant.id=list.id';
+        $sTable = 'applicant LEFT JOIN list ON applicant.position1=list.id';
 		
 		$iDisplayStart = $this->input->get('iDisplayStart');
 		$iDisplayLength = $this->input->get('iDisplayLength');
@@ -160,8 +183,8 @@ class Admin extends CI_Controller {
                 if($col === 'id') $id =  $aRow[$col];
             }
             
-			$row[] = "<button class='btn btn-warning'><i class='icon-edit'></i></button></td>";
-			$row[] = "<button class='btn btn-danger'><i class='icon-trash'></i></button></td>";
+			$row[] = "<a href='".base_url()."admin/worker/edit/".$id."' class='btn btn-warning'><i class='icon-edit'></i></a></td>";
+			$row[] = "<a href='".base_url()."admin/worker/delete/".$id."' class='btn btn-danger'><i class='icon-trash'></i></a></td>";
 			
             $output['aaData'][] = $row;
 		}

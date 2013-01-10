@@ -4,10 +4,10 @@
   <li><a href="#">Print Applicant</a></li>
 </ul>
 <ul class="nav nav-tabs" id="myTab">
-  <li class="active"><a href="#personal-background" id="pb"><h5>Personal Background</h5></a></li>
-  <li><a href="#educational-background" id="eb"><h5>Educational Background</h5></a></li>
-  <li><a href="#special-skill-background" id="sb"><h5>Special Skill Background</h5></a></li>
-  <li><a href="#work-experience-background" id="wb"><h5>Work Experience Background</h5></a></li>
+  <li class="active"><a href="#personal-background"><h5>Personal Background</h5></a></li>
+  <li><a href="#educational-background"><h5>Educational Background</h5></a></li>
+  <li><a href="#special-skill-background"><h5>Special Skill Background</h5></a></li>
+  <li><a href="#work-experience-background"><h5>Work Experience Background</h5></a></li>
 </ul>
 <form method="post" name="myform" enctype="multipart/form-data" id="myform">
 	<input type="text" name="appid" value="<?php echo $personalbackground['0']['appid'] ?>" style="display:none">
@@ -319,11 +319,11 @@
 					<div class="span2"><label>Mobile Number</label></div>
 					<div class="span3"><input type="text" name="spouseMobile" class="span12" value="<?php echo $personalbackground['0']['smobile'] ?>"/></div>
 				</div>
-				 <a class="btn btn-danger" style="float:right" id="first_1">Next <i class="icon-chevron-right"></i></a>
+				<input type="submit" name="submit" class="btn btn-primary" style="float:right" value="Submit">
 			</div>
 			<!--<h2>Educational Background</h2>-->
 			<div class="container-fluid well tab-pane" id="educational-background">
-				<legend>Educational Information<a class="btn btn-danger" style="float:right" id="second_2"> <i class="icon-chevron-left"></i> Prev</a></legend>
+				<legend>Educational Information</legend>
 				<div class="row-fluid span">
 					<div class="span2"><h5>Educational Level</h5></div>
 					<div class="span2"><h5>School Graduated / Course</h5></div>
@@ -333,13 +333,15 @@
 				</div>
 				<div class="row-fluid span">
 					<div class="span2"><label>Primary Level</label></div>
-					<div class="span2"><input type="text" name="primarySchool" class="span12"/></div>
+					<div class="span2"><input type="text" name="primarySchool" class="span12" value="<?php echo $educationalbackground['0']['elementary'] ?>"/></div>
 					<div class="span2" style="text-align:center">
 						<select name="primaryStart"  class="span6">
 							<option>YYYY</option>
 							<?php
 							for ($i = date("Y"); $i > 1900; $i--) {
-							   echo "<option>".$i."</option>";
+								if( $i == $educationalbackground['0']['efrom'] ) $select = "selected";
+								else $select = "";
+							   echo "<option {$select}>".$i."</option>";
 							}
 							?>
 						  
@@ -350,7 +352,9 @@
 							<option>YYYY</option>
 							<?php
 							for ($i = date("Y"); $i > 1900; $i--) {
-							   echo "<option>".$i."</option>";
+								if( $i == $educationalbackground['0']['eto'] ) $select = "selected";
+								else $select = "";
+							   echo "<option {$select}>".$i."</option>";
 							}
 							?>
 						  
@@ -360,13 +364,15 @@
 				</div>
 				<div class="row-fluid span">
 					<div class="span2"><label>Secondary Level</label></div>
-					<div class="span2"><input type="text" name="secondarySchool" class="span12"/></div>
+					<div class="span2"><input type="text" name="secondarySchool" class="span12" value="<?php echo $educationalbackground['0']['highschool'] ?>"/></div>
 					<div class="span2" style="text-align:center">
 						<select name="secondaryStart"  class="span6">
 							<option>YYYY</option>
 							<?php
 							for ($i = date("Y"); $i > 1900; $i--) {
-							   echo "<option>".$i."</option>";
+								if( $i == $educationalbackground['0']['hfrom'] ) $select = "selected";
+								else $select = "";
+							   echo "<option {$select}>".$i."</option>";
 							}
 							?>
 						  
@@ -377,7 +383,9 @@
 							<option>YYYY</option>
 							<?php
 							for ($i = date("Y"); $i > 1900; $i--) {
-							   echo "<option>".$i."</option>";
+								if( $i == $educationalbackground['0']['hto'] ) $select = "selected";
+								else $select = "";
+							   echo "<option {$select}>".$i."</option>";
 							}
 							?>
 						  
@@ -387,13 +395,15 @@
 				</div>
 				<div class="row-fluid span">
 					<div class="span2"><label>College Level</label></div>
-					<div class="span2"><input type="text" name="collegeSchool" class="span12"/></div>
+					<div class="span2"><input type="text" name="collegeSchool" class="span12" value="<?php echo $educationalbackground['0']['college'] ?>"/></div>
 					<div class="span2" style="text-align:center">
 						<select name="collegeStart"  class="span6">
 							<option>YYYY</option>
 							<?php
 							for ($i = date("Y"); $i > 1900; $i--) {
-							   echo "<option>".$i."</option>";
+								if( $i == $educationalbackground['0']['cfrom'] ) $select = "selected";
+								else $select = "";
+							   echo "<option {$select}>".$i."</option>";
 							}
 							?>
 						  
@@ -404,23 +414,27 @@
 							<option>YYYY</option>
 							<?php
 							for ($i = date("Y"); $i > 1900; $i--) {
-							   echo "<option>".$i."</option>";
+								if( $i == $educationalbackground['0']['cto'] ) $select = "selected";
+								else $select = "";
+							   echo "<option {$select}>".$i."</option>";
 							}
 							?>
 						  
 						</select>
 					</div>
-					<div class="span2"><input type="text" name="collegeDegree" class="span12"/></div>
+					<div class="span2"><input type="text" name="collegeDegree" class="span12" value="<?php echo $educationalbackground['0']['ccourse'] ?>"/></div>
 				</div>
 				<div class="row-fluid span">
 					<div class="span2"><label>Vocational Course</label></div>
-					<div class="span2"><input type="text" name="vocationalCourse" class="span12"/></div>
+					<div class="span2"><input type="text" name="vocationalCourse" class="span12" value="<?php echo $educationalbackground['0']['vocational'] ?>"/></div>
 					<div class="span2" style="text-align:center">
 						<select name="vocationalStart"  class="span6">
 							<option>YYYY</option>
 							<?php
 							for ($i = date("Y"); $i > 1900; $i--) {
-							   echo "<option>".$i."</option>";
+								if( $i == $educationalbackground['0']['vfrom'] ) $select = "selected";
+								else $select = "";
+								echo "<option {$select}>".$i."</option>";
 							}
 							?>
 						  
@@ -431,7 +445,9 @@
 							<option>YYYY</option>
 							<?php
 							for ($i = date("Y"); $i > 1900; $i--) {
-							   echo "<option>".$i."</option>";
+								if( $i == $educationalbackground['0']['vto'] ) $select = "selected";
+								else $select = "";
+								echo "<option {$select}>".$i."</option>";
 							}
 							?>
 						  
@@ -441,13 +457,15 @@
 				</div>
 				<div class="row-fluid span">
 					<div class="span2"><label>Post Graduate</label></div>
-					<div class="span2"><input type="text" name="postSchool" class="span12"/></div>
+					<div class="span2"><input type="text" name="postSchool" class="span12" value="<?php echo $educationalbackground['0']['postgraduate'] ?>"/></div>
 					<div class="span2" style="text-align:center">
 						<select name="postStart"  class="span6">
 							<option>YYYY</option>
 							<?php
 							for ($i = date("Y"); $i > 1900; $i--) {
-							   echo "<option>".$i."</option>";
+								if( $i == $educationalbackground['0']['pfrom'] ) $select = "selected";
+								else $select = "";
+								echo "<option {$select}>".$i."</option>";
 							}
 							?>
 						  
@@ -458,19 +476,21 @@
 							<option>YYYY</option>
 							<?php
 							for ($i = date("Y"); $i > 1900; $i--) {
-							   echo "<option>".$i."</option>";
+								if( $i == $educationalbackground['0']['pto'] ) $select = "selected";
+								else $select = "";
+								echo "<option {$select}>".$i."</option>";
 							}
 							?>
 						  
 						</select>
 					</div>
-					<div class="span2"><input type="text" name="postDegree" class="span12"/></div>
+					<div class="span2"><input type="text" name="postDegree" class="span12" value="<?php echo $educationalbackground['0']['pcourse'] ?>"/></div>
 				</div>
-				<a class="btn btn-danger" style="float:right" id="second_1">Next <i class="icon-chevron-right"></i></a>
+				<input type="submit" name="submit" class="btn btn-primary" style="float:right" value="Submit">
 			</div>
 			<!--<h2>Special Skill Background</h2>-->
 			<div class="container-fluid well tab-pane" id="special-skill-background">
-				<legend>Spcecial Skill Information<a class="btn btn-danger" style="float:right" id="third_2"><i class="icon-chevron-left"></i> Prev</a></legend>
+				<legend>Spcecial Skill Information</legend>
 				<div class="row-fluid span">
 					<div class="span3"><h5>Couse / Seminar</h5></div>
 					<div class="span3"><h5>School or Training Center</h5></div>
@@ -529,11 +549,11 @@
 				<?php
 				}
 				?>
-				<a class="btn btn-danger" style="float:right" id="third_1">Next <i class="icon-chevron-right"></i></a>
+				<input type="submit" name="submit" class="btn btn-primary" style="float:right" value="Submit">
 			</div>
 			<!--<h2>Wok Experience Background</h2>-->
 			<div class="container-fluid well tab-pane" id="work-experience-background">
-				<legend>Local Work Information<a class="btn btn-danger" style="float:right" id="fourth_2"><i class="icon-chevron-left"></i> Prev</a></legend>
+				<legend>Local Work Information</legend>
 				<div class="row-fluid span">
 					<div class="span2"><h5>Company</h5></div>
 					<div class="span2"><h5>Position</h5></div>
@@ -671,6 +691,10 @@
 		  $('#sss').mask('999-99-9999');
 		  $('#philhealth').mask('9999-9999-9999');	
 		  $('.required').append('<span style="color:red;"> *</span>');
+		  $('#myTab a').click(function (e) {
+			  e.preventDefault();
+			  $(this).tab('show');
+		  })
 	});
 </script>
-<script src="<?php echo base_url() ?>js/jquery.validate.worker.js"></script>
+<script src="<?php echo base_url() ?>js/jquery.validate.worker-edit.js"></script>

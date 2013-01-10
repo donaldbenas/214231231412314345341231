@@ -48,7 +48,9 @@ class Admin extends CI_Controller {
 							$data['nationality'] = $this->personalmodel->nationality();
 							$data['civil'] = $this->personalmodel->civil();
 							$data['religion'] = $this->personalmodel->religion();
+							if($this->uri->total_segments()==3) redirect(base_url()."admin/worker/search/");
 							$data['personalbackground'] = $this->applicantModel->loadpersonalbackground($this->uri->segment(4));
+							$data['educationalbackground'] = $this->applicantModel->loadeducationalbackground($this->uri->segment(4));
 							if(isset($_POST['submit'])){
 								$this->applicantModel->edit($this->input->post('appid'));
 								redirect(base_url()."admin/worker/edit/".$this->input->post('appid'));
@@ -140,6 +142,9 @@ class Admin extends CI_Controller {
 			}
 		}
 		
+		if($sWhere=="") $sWhere = " WHERE applicant.activate=1";
+		else $sWhere .= " AND applicant.activate=1";
+		
 		$sQuery = "
 			SELECT SQL_CALC_FOUND_ROWS ".str_replace(" , ", " ", implode(", ", $aColumns))."
 			FROM   $sTable
@@ -158,7 +163,7 @@ class Admin extends CI_Controller {
 		
 		$sQuery = "
 			SELECT COUNT(".$sIndexColumn.") AS Count
-			FROM   $sTable
+			FROM   $sTable  WHERE applicant.activate=1
 		";		
 		$rResultTotal = $this->db->query($sQuery);
         $aResultTotal = $rResultTotal->result();

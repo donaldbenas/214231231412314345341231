@@ -52,7 +52,7 @@ class applicantModel extends CI_Model{
 	public function __construct(){
 		parent::__construct();
 		$this->load->database();
-		
+		$this->load->helper('array');
 	}
 	
 	public function save(){
@@ -78,20 +78,20 @@ class applicantModel extends CI_Model{
 			'prefer2' => strtoupper($_POST['reference2']),
 			'salary1' => strtoupper($_POST['salary1']),
 			'salary2' => strtoupper($_POST['salary2']),
-			'email' => strtoupper($_POST['email']),
-			'password' => strtoupper($_POST['password1']),
+			'email' => $_POST['email'],
+			'password' => $_POST['password1'],
 			'lastname' => strtoupper($_POST['lastname']),
 			'firstname' => strtoupper($_POST['firstname']),
 			'middlename' => strtoupper($_POST['middlename']),
 			'gender' => strtoupper($_POST['gender']),
-			'paddress' => strtoupper($_POST['permanentAddressMunicpality']).", ".strtoupper($_POST['permanentAddressCity']),
-			'caddress' => strtoupper($_POST['currentAddressMunicpality']).", ".strtoupper($_POST['currentAddressCity']),
+			'paddress' => strtoupper($_POST['permanentAddressMunicpality'])."--".strtoupper($_POST['permanentAddressCity']),
+			'caddress' => strtoupper($_POST['currentAddressMunicpality'])."--".strtoupper($_POST['currentAddressCity']),
 			'pphone' => strtoupper($_POST['permanentTelephone']),
 			'pmobile' => strtoupper($_POST['permanentMobile']),
 			'cphone' => strtoupper($_POST['currentTelephone']),
 			'cmobile' => strtoupper($_POST['currentMobile']),
 			'datebirth' => strtoupper($_POST['BirthYear'])."-".strtoupper($_POST['birthMonth'])."-".strtoupper($_POST['BirthDay']),
-			'placebirth' => strtoupper($_POST['municipality']).", ".strtoupper($_POST['city']),
+			'placebirth' => strtoupper($_POST['municipality'])."--".strtoupper($_POST['city']),
 			'religion' => strtoupper($_POST['religion']),
 			'nationality' => strtoupper($_POST['nationality']),
 			'civilstatus' => strtoupper($_POST['civil']),
@@ -111,14 +111,36 @@ class applicantModel extends CI_Model{
 			'nphone' => strtoupper($_POST['emergencyTelephone']),
 			'nmobile' => strtoupper($_POST['emergencyMobile']),
 			'added' => strtoupper($_POST['applyYear'])."-".strtoupper($_POST['applyMonth'])."-".strtoupper($_POST['applyDay']),
-			'activate' => '0',
+			'activate' => '1',
 			'type' => '2'
 		);
 		$this->db->insert("applicant",$data);
+		
+		$education = array(
+			'id' => $id,
+			'elementary' => strtoupper($_POST['primarySchool']),
+			'efrom' => strtoupper($_POST['primaryStart']),
+			'eto' => strtoupper($_POST['primaryEnd']),
+			'highschool' => strtoupper($_POST['secondarySchool']),
+			'hfrom' => strtoupper($_POST['secondaryStart']),
+			'hto' => strtoupper($_POST['secondaryEnd']),
+			'college' => strtoupper($_POST['collegeSchool']),
+			'cfrom' => strtoupper($_POST['collegeStart']),
+			'cto' => strtoupper($_POST['collegeEnd']),
+			'ccourse' => strtoupper($_POST['collegeDegree']),
+			'vocational' => strtoupper($_POST['vocationalCourse']),
+			'vfrom' => strtoupper($_POST['vocationalStart']),
+			'vto' => strtoupper($_POST['vocationalEnd']),
+			'postgraduate' => strtoupper($_POST['postSchool']),
+			'pfrom' => strtoupper($_POST['postStart']),
+			'pto' => strtoupper($_POST['postEnd']),
+			'pcourse' => strtoupper($_POST['postDegree'])
+		);
+		$this->db->insert("education",$education);
 	}
 	
 	
-	public function edit($id){
+	public function edit($appid){
 		
 		$data = array(
 			'empid' => '1',
@@ -129,20 +151,20 @@ class applicantModel extends CI_Model{
 			'prefer2' => strtoupper($_POST['reference2']),
 			'salary1' => strtoupper($_POST['salary1']),
 			'salary2' => strtoupper($_POST['salary2']),
-			'email' => strtoupper($_POST['email']),
-			'password' => strtoupper($_POST['password1']),
+			'email' => $_POST['email'],
+			'password' => $_POST['password1'],
 			'lastname' => strtoupper($_POST['lastname']),
 			'firstname' => strtoupper($_POST['firstname']),
 			'middlename' => strtoupper($_POST['middlename']),
 			'gender' => strtoupper($_POST['gender']),
-			'paddress' => strtoupper($_POST['permanentAddressMunicpality']).", ".strtoupper($_POST['permanentAddressCity']),
-			'caddress' => strtoupper($_POST['currentAddressMunicpality']).", ".strtoupper($_POST['currentAddressCity']),
+			'paddress' => strtoupper($_POST['permanentAddressMunicpality'])."--".strtoupper($_POST['permanentAddressCity']),
+			'caddress' => strtoupper($_POST['currentAddressMunicpality'])."--".strtoupper($_POST['currentAddressCity']),
 			'pphone' => strtoupper($_POST['permanentTelephone']),
 			'pmobile' => strtoupper($_POST['permanentMobile']),
 			'cphone' => strtoupper($_POST['currentTelephone']),
 			'cmobile' => strtoupper($_POST['currentMobile']),
 			'datebirth' => strtoupper($_POST['BirthYear'])."-".strtoupper($_POST['birthMonth'])."-".strtoupper($_POST['BirthDay']),
-			'placebirth' => strtoupper($_POST['municipality']).", ".strtoupper($_POST['city']),
+			'placebirth' => strtoupper($_POST['municipality'])."--".strtoupper($_POST['city']),
 			'religion' => strtoupper($_POST['religion']),
 			'nationality' => strtoupper($_POST['nationality']),
 			'civilstatus' => strtoupper($_POST['civil']),
@@ -164,8 +186,33 @@ class applicantModel extends CI_Model{
 			'added' => strtoupper($_POST['applyYear'])."-".strtoupper($_POST['applyMonth'])."-".strtoupper($_POST['applyDay']),
 			'type' => '2'
 		);
-		$this->db->where("appid",$id);
+		$this->db->where("appid",$appid);
 		$this->db->update("applicant",$data);
+		$id = $this->getID('applicant',$appid);
+		$education = array(
+			'id' => $id,
+			'elementary' => strtoupper($_POST['primarySchool']),
+			'efrom' => strtoupper($_POST['primaryStart']),
+			'eto' => strtoupper($_POST['primaryEnd']),
+			'highschool' => strtoupper($_POST['secondarySchool']),
+			'hfrom' => strtoupper($_POST['secondaryStart']),
+			'hto' => strtoupper($_POST['secondaryEnd']),
+			'college' => strtoupper($_POST['collegeSchool']),
+			'cfrom' => strtoupper($_POST['collegeStart']),
+			'cto' => strtoupper($_POST['collegeEnd']),
+			'ccourse' => strtoupper($_POST['collegeDegree']),
+			'vocational' => strtoupper($_POST['vocationalCourse']),
+			'vfrom' => strtoupper($_POST['vocationalStart']),
+			'vto' => strtoupper($_POST['vocationalEnd']),
+			'postgraduate' => strtoupper($_POST['postSchool']),
+			'pfrom' => strtoupper($_POST['postStart']),
+			'pto' => strtoupper($_POST['postEnd']),
+			'pcourse' => strtoupper($_POST['postDegree'])
+		);
+		
+		$this->db->where("id",$id);
+		$this->db->update("education",$education);
+		
 	}
 	
 	public function loadpersonalbackground($id){
@@ -174,6 +221,22 @@ class applicantModel extends CI_Model{
 		$this->db->where('appid',$id);
 		$data = $this->db->get();
 		return $data->result_array();
+	}
+	
+	public function loadeducationalbackground($appid){
+		$id = $this->getID('applicant',$appid);
+		$this->db->select('*');
+		$this->db->from('education');
+		$this->db->where('id',$id);
+		$data = $this->db->get();
+		return $data->result_array();
+	}
+	
+	public function getID($table,$appid){
+		$this->db->select("id");
+		$this->db->where("appid",$appid);
+		$id = $this->db->get($table)->result();
+		return $id[0]->id;
 	}
 	
 }

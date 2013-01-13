@@ -562,7 +562,7 @@
 					<div class="span2"><h5>Position</h5></div>
 					<div class="span2" style="text-align:center"><h5>Start Period</h5></div>
 					<div class="span2" style="text-align:center"><h5>End Period</h5></div>
-					<div class="span1"><h5>Main Duties</h5></div>
+					<div class="span2"><h5>Main Duties</h5></div>
 					<div class="span1"><h5>R of Leaving	</h5></div>
 				</div>
 				<div class="row-fluid" id="local-experience"></div>
@@ -618,7 +618,7 @@
 					<div class="span2"><h5>Position</h5></div>
 					<div class="span2" style="text-align:center"><h5>Start Period</h5></div>
 					<div class="span2" style="text-align:center"><h5>End Period</h5></div>
-					<div class="span1"><h5>Main Duties</h5></div>
+					<div class="span2"><h5>Main Duties</h5></div>
 					<div class="span1"><h5>R of Leaving	</h5></div>
 				</div>
 				<div class="row-fluid" id="abroad-experience"></div>

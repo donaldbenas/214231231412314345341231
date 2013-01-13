@@ -662,8 +662,8 @@
 												getThisYear(bEndDate[1])+
 											"</select>"+
 										"</div>"+
-										"<div id='localExperienceDuties"+id+"'  class='span1'><input type='text' name='localExperienceDuties[]' class='span12' value='"+local[i].main+"'/></div>"+
-										"<div id='localExperienceReason"+id+"'  class='span2'><input type='text' name='localExperienceReason[]' class='span12' value='"+local[i].reason+"'/></div>"+
+										"<div id='localExperienceDuties"+id+"'  class='span2'><input type='text' name='localExperienceDuties[]' class='span12' value='"+local[i].main+"'/></div>"+
+										"<div id='localExperienceReason"+id+"'  class='span1'><input type='text' name='localExperienceReason[]' class='span12' value='"+local[i].reason+"'/></div>"+
 										"<div id='localButton"+id+"'  class='span1' style='text-align:left;width:10px'>"+
 											"<a class='btn btn-danger' onclick='deletelocalnode("+id+")'><i class='icon-trash'></i></a>"+
 										"</div>"

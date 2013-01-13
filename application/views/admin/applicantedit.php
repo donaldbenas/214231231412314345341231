@@ -500,7 +500,7 @@
 					<div class="span2" style="text-align:center"><h5>Start Period</h5></div>
 					<div class="span2" style="text-align:center"><h5>End Period</h5></div>
 				</div>
-				<div class="row-fluid" id="spanasda">
+				<div class="row-fluid" id="skill-background">
 				</div>
 				<input type="button" class="btn btn-primary" style="float:left;margin-left:2.5%" id="addskill" value="Add New">
 				<script>
@@ -518,7 +518,7 @@
 								var bStartDate=startDate.split("-");
 								var endDate=skill[i]['endDate'];
 								var bEndDate=endDate.split("-");
-								$('#spanasda').append(""+
+								$('#skill-background').append(""+
 										"<div id='skillCourse"+id+"' class='span3'"+style+"><input type='text' name='skillCourse[]' class='span12' value='"+skill[i].course+"'/></div>"+
 										"<div id='skillSchool"+id+"' class='span3'><input type='text' name='skillSchool[]' class='span12' value='"+skill[i].school+"'/></div>"+
 										"<div id='skillStart"+id+"' class='span2' style='text-align:center'>"+

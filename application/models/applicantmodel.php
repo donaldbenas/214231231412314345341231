@@ -64,10 +64,8 @@ class applicantModel extends CI_Model{
 			}
 		}
 		$appid = $appid + 1;
-		$id = $this->db->count_all('applicant') + 1;
 		
 		$data = array(
-			'id' => $id,
 			'status' => '1',
 			'appid' => $appid,
 			'empid' => '1',
@@ -117,7 +115,7 @@ class applicantModel extends CI_Model{
 		$this->db->insert("applicant",$data);
 		
 		$education = array(
-			'id' => $id,
+			'appid' => $appid,
 			'elementary' => strtoupper($_POST['primarySchool']),
 			'efrom' => strtoupper($_POST['primaryStart']),
 			'eto' => strtoupper($_POST['primaryEnd']),
@@ -137,6 +135,17 @@ class applicantModel extends CI_Model{
 			'pcourse' => strtoupper($_POST['postDegree'])
 		);
 		$this->db->insert("education",$education);
+		
+		for($i=0;$i<count($_POST["skillCourse"]);$i++){
+			$skill = array(
+				'appid' => $appid,
+				'course' => strtoupper($_POST['skillCourse'][$i]),
+				'school' => strtoupper($_POST['skillSchool'][$i]),
+				'startDate' => $_POST['skillStartMonth'][$i]."-".$_POST['skillStartYear'][$i],
+				'endDate' => $_POST['skillEndMonth'][$i]."-".$_POST['skillEndYear'][$i]
+			);
+			$this->db->insert("skills",$skill);
+		}
 	}
 	
 	
@@ -189,10 +198,7 @@ class applicantModel extends CI_Model{
 		$this->db->where("appid",$appid);
 		$this->db->update("applicant",$data);
 		
-		$id = $this->getID('applicant',$appid);
-		
 		$education = array(
-			'id' => $id,
 			'elementary' => strtoupper($_POST['primarySchool']),
 			'efrom' => strtoupper($_POST['primaryStart']),
 			'eto' => strtoupper($_POST['primaryEnd']),
@@ -211,7 +217,7 @@ class applicantModel extends CI_Model{
 			'pto' => strtoupper($_POST['postEnd']),
 			'pcourse' => strtoupper($_POST['postDegree'])
 		);
-		$this->db->where("id",$id);
+		$this->db->where("appid",$appid);
 		$this->db->update("education",$education);
 		
 		$this->db->where("appid",$appid);
@@ -240,10 +246,9 @@ class applicantModel extends CI_Model{
 	}
 	
 	public function loadeducationalbackground($appid){
-		$id = $this->getID('applicant',$appid);
 		$this->db->select('*');
 		$this->db->from('education');
-		$this->db->where('id',$id);
+		$this->db->where('appid',$appid);
 		$data = $this->db->get();
 		return $data->result_array();
 	}

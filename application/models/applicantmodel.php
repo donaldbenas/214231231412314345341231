@@ -146,6 +146,32 @@ class applicantModel extends CI_Model{
 			);
 			$this->db->insert("skills",$skill);
 		}
+		
+		for($i=0;$i<count($_POST["localExperienceCompany"]);$i++){
+			$local = array(
+				'appid' => $appid,
+				'company' => $_POST['localExperienceCompany'][$i],
+				'position' =>  $_POST['localExperiencePosition'][$i],
+				'start' =>  $_POST['localExperienceStartMonth'][$i]."-".$_POST['localExperienceStartYear'][$i],
+				'end' =>  $_POST['localExperienceEndMonth'][$i]."-".$_POST['localExperienceEndYear'][$i], 
+				'main' =>  $_POST['localExperienceDuties'][$i], 
+				'reason' => $_POST['localExperienceReason'][$i], 
+			);
+			$this->db->insert("local",$local);
+		}
+		
+		for($i=0;$i<count($_POST["abroadExperienceCompany"]);$i++){
+			$abroad = array(
+				'appid' => $appid,
+				'company' => $_POST['abroadExperienceCompany'][$i],
+				'position' =>  $_POST['abroadExperiencePosition'][$i],
+				'start' =>  $_POST['abroadExperienceStartMonth'][$i]."-".$_POST['abroadExperienceStartYear'][$i],
+				'end' =>  $_POST['abroadExperienceEndMonth'][$i]."-".$_POST['abroadExperienceEndYear'][$i], 
+				'main' =>  $_POST['abroadExperienceDuties'][$i], 
+				'reason' => $_POST['abroadExperienceReason'][$i], 
+			);
+			$this->db->insert("abroad",$abroad);
+		}
 	}
 	
 	
@@ -234,6 +260,38 @@ class applicantModel extends CI_Model{
 			$this->db->insert("skills",$skill);
 		}
 		
+		$this->db->where("appid",$appid);
+		$this->db->delete("local");
+		
+		for($i=0;$i<count($_POST["localExperienceCompany"]);$i++){
+			$local = array(
+				'appid' => $appid,
+				'company' => $_POST['localExperienceCompany'][$i],
+				'position' =>  $_POST['localExperiencePosition'][$i],
+				'start' =>  $_POST['localExperienceStartMonth'][$i]."-".$_POST['localExperienceStartYear'][$i],
+				'end' =>  $_POST['localExperienceEndMonth'][$i]."-".$_POST['localExperienceEndYear'][$i], 
+				'main' =>  $_POST['localExperienceDuties'][$i], 
+				'reason' => $_POST['localExperienceReason'][$i], 
+			);
+			$this->db->insert("local",$local);
+		}
+		
+		$this->db->where("appid",$appid);
+		$this->db->delete("abroad");
+		
+		for($i=0;$i<count($_POST["abroadExperienceCompany"]);$i++){
+			$abroad = array(
+				'appid' => $appid,
+				'company' => $_POST['abroadExperienceCompany'][$i],
+				'position' =>  $_POST['abroadExperiencePosition'][$i],
+				'start' =>  $_POST['abroadExperienceStartMonth'][$i]."-".$_POST['abroadExperienceStartYear'][$i],
+				'end' =>  $_POST['abroadExperienceEndMonth'][$i]."-".$_POST['abroadExperienceEndYear'][$i], 
+				'main' =>  $_POST['abroadExperienceDuties'][$i], 
+				'reason' => $_POST['abroadExperienceReason'][$i], 
+			);
+			$this->db->insert("abroad",$abroad);
+		}
+		
 		
 	}
 	
@@ -256,6 +314,22 @@ class applicantModel extends CI_Model{
 	public function loadskillbackground($appid){
 		$this->db->select('*');
 		$this->db->from('skills');
+		$this->db->where('appid',$appid);
+		$data = $this->db->get();
+		return $data->result_array();
+	}
+	
+	public function loadlocalexperience($appid){
+		$this->db->select('*');
+		$this->db->from('local');
+		$this->db->where('appid',$appid);
+		$data = $this->db->get();
+		return $data->result_array();
+	}
+	
+	public function loadabroadexperience($appid){
+		$this->db->select('*');
+		$this->db->from('abroad');
 		$this->db->where('appid',$appid);
 		$data = $this->db->get();
 		return $data->result_array();

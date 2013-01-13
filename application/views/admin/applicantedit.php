@@ -500,9 +500,8 @@
 					<div class="span2" style="text-align:center"><h5>Start Period</h5></div>
 					<div class="span2" style="text-align:center"><h5>End Period</h5></div>
 				</div>
-				<div class="row-fluid" id="skill-background">
-				</div>
-				<input type="button" class="btn btn-primary" style="float:left;margin-left:2.5%" id="addskill" value="Add New">
+				<div class="row-fluid" id="skill-background"></div>
+				<a class="btn btn-warning" style="float:left;margin-left:2.5%" id="addskill"><i class="icon-plus"></i> Add New</a>
 				<script>
 					var id=0;
 					var skill = <?php
@@ -545,63 +544,42 @@
 								);
 								id++;
 							}
-						}
+						};
 						$('#addskill').click(function(){
-							$('#spanasda').append(""+
+							$('#skill-background').append(""+
 									"<div id='skillCourse"+id+"'  class='span3'"+style+"><input type='text' name='skillCourse[]' class='span12'/></div>"+
 									"<div id='skillSchool"+id+"'  class='span3'><input type='text' name='skillSchool[]' class='span12'/></div>"+
 									"<div id='skillStart"+id+"'  class='span2' style='text-align:center'>"+
 										"<select name='skillStartMonth[]' class='span5'>"+
-											getThisMonth(bStartDate[0])+
+											getThisMonth()+
 										"</select>"+
 										"</select>"+
 										"<select name='skillStartYear[]'  class='span6'>"+
-											getThisYear(bStartDate[1])+
+											getThisYear()+
 										"</select>"+
 									"</div>"+
 									"<div id='skillEnd"+id+"'  class='span2' style='text-align:center'>"+
 										"<select name='skillEndMonth[]' class='span5'>"+
-											getThisMonth(bStartDate[0])+
+											getThisMonth()+
 										"</select>"+
 										"</select>"+
 										"<select name='skillEndYear[]'  class='span6'>"+
-											getThisYear(bStartDate[1])+
+											getThisYear()+
 										"</select>"+
 									"</div>"+
-									"<div id='skillButton[]'  class='span1' style='text-align:left'>"+
+									"<div id='skillButton"+id+"'  class='span1' style='text-align:left'>"+
 										"<a class='btn btn-danger' name='skillButton"+id+"'onclick='deletenode("+id+")'><i class='icon-trash'></i></a>"+
 									"</div>"
 							);
 							id++;
 						});
 					});
-					function getThisMonth(node){
-						str = "<option value='00'>MM</option>";
-						for (k = 1; k < 13; k++){
-							if(k==node) str =  str + "<option selected>"+zeroPad(k,2)+"</option>";
-							else str =  str + "<option>"+zeroPad(k,2)+"</option>";
-						}
-						return str;
-					}
-					function getThisYear(node){
-						cDate = new Date();
-						str = "<option value='00'>YYYY</option>";
-						for (k =  cDate.getFullYear(); k > 1900; k--){
-							if(k==node) str =  str + "<option selected>"+k+"</option>";
-							else str =  str + "<option>"+k+"</option>";
-						}
-						return str;
-					}
 					function deletenode(node){
 						$("#skillCourse"+node).remove();
 						$("#skillSchool"+node).remove();
 						$("#skillStart"+node).remove();
 						$("#skillEnd"+node).remove();
 						$("#skillButton"+node).remove();
-					}
-					function zeroPad(num, places) {
-						var zero = places - num.toString().length + 1;
-						return Array(+(zero > 0 && zero)).join("0") + num;
 					}
 				</script>
 				<input type="submit" name="submit" class="btn btn-primary" style="float:right" value="Submit">
@@ -614,126 +592,182 @@
 					<div class="span2"><h5>Position</h5></div>
 					<div class="span2" style="text-align:center"><h5>Start Period</h5></div>
 					<div class="span2" style="text-align:center"><h5>End Period</h5></div>
-					<div class="span1"><h5>Main Duties</h5></div>
-					<div class="span2"><h5>Reason of Leaving	</h5></div>
+					<div class="span2"><h5>Main Duties</h5></div>
+					<div class="span1"><h5>R of Leaving	</h5></div>
 				</div>
-				<?php
-				for ($l=1; $l<=5; $l++)
-				{
-				?>
-				<div class="row-fluid span">
-					<div class="span2"><input type="text" name="localExperienceCompany<?php echo $l ?>" class="span12"/></div>
-					<div class="span2"><input type="text" name="localExperiencePosition<?php echo $l ?>" class="span12"/></div>
-					<div class="span2" style="text-align:center">
-						<select name="localExperienceStartMonth<?php echo $l ?>" class="span5">
-							<option>MM</option>
-							<?php
-							for ($i = 1; $i < 13; $i++) {
-							   echo "<option>".sprintf("%02s", $i)."</option>";
+				<div class="row-fluid" id="local-experience"></div>
+				<a class="btn btn-warning" style="float:left;margin-left:2.5%" id="addlocal"><i class="icon-plus"></i> Add New</a>
+				<script>
+					var id=0;
+					var local = <?php echo json_encode($localexperience); ?>;
+					var style="";
+					if (id == 0) style = "style='margin-left:2.5%'";
+					else style = "";
+					$(document).ready(function(){
+						if(local.length>0){
+							for(i=0;i<local.length;i++){
+								var startDate=local[i]['start'];
+								var bStartDate=startDate.split("-");
+								var endDate=local[i]['end'];
+								var bEndDate=endDate.split("-");
+								$('#local-experience').append(""+
+										"<div id='localExperienceCompany"+id+"'  class='span2' "+style+"><input type='text' name='localExperienceCompany[]' class='span12' value='"+local[i].company+"'/></div>"+
+										"<div id='localExperiencePosition"+id+"'  class='span2'><input type='text' name='localExperiencePosition[]' class='span12' value='"+local[i].position+"'/></div>"+
+										"<div id='localExperienceStart"+id+"'  class='span2' style='text-align:center'>"+
+											"<select name='localExperienceStartMonth[]' class='span5'>"+
+												getThisMonth(bStartDate[0])+
+											"</select>"+
+											"<select name='localExperienceStartYear[]' class='span6'>"+
+												getThisYear(bStartDate[1])+
+											"</select>"+
+										"</div>"+
+										"<div id='localExperienceEnd"+id+"'  class='span2' style='text-align:center'>"+
+											"<select name='localExperienceEndMonth[]' class='span5'>"+
+												getThisMonth(bEndDate[0])+
+											"</select>"+
+											"<select name='localExperienceEndYear[]'  class='span6'>"+
+												getThisYear(bEndDate[1])+
+											"</select>"+
+										"</div>"+
+										"<div id='localExperienceDuties"+id+"'  class='span1'><input type='text' name='localExperienceDuties[]' class='span12' value='"+local[i].main+"'/></div>"+
+										"<div id='localExperienceReason"+id+"'  class='span2'><input type='text' name='localExperienceReason[]' class='span12' value='"+local[i].reason+"'/></div>"+
+										"<div id='localButton"+id+"'  class='span1' style='text-align:left;width:10px'>"+
+											"<a class='btn btn-danger' onclick='deletelocalnode("+id+")'><i class='icon-trash'></i></a>"+
+										"</div>"
+								);
+								id++;
 							}
-							?>
-						  
-						</select>
-						<select name="localExperienceStartYear<?php echo $l ?>" class="span6">
-							<option>YYYY</option>
-							<?php
-							for ($i = date("Y"); $i > 1900; $i--) {
-							   echo "<option>".$i."</option>";
-							}
-							?>
-						  
-						</select>
-					</div>
-					<div class="span2" style="text-align:center">
-						<select name="localExperienceEndMonth<?php echo $l ?>" class="span5">
-							<option>MM</option>
-							<?php
-							for ($i = 1; $i < 13; $i++) {
-							   echo "<option>".sprintf("%02s", $i)."</option>";
-							}
-							?>
-						  
-						</select>
-						</select>
-						<select name="localExperienceEndYear<?php echo $l ?>"  class="span6">
-							<option>YYYY</option>
-							<?php
-							for ($i = date("Y"); $i > 1900; $i--) {
-							   echo "<option>".$i."</option>";
-							}
-							?>
-						  
-						</select>
-					</div>
-					<div class="span1"><input type="text" name="localExperienceDuties<?php echo $l ?>" class="span12"/></div>
-					<div class="span2"><input type="text" name="localExperienceReason<?php echo $l ?>" class="span12"/></div>
-				</div>
-				<?php
-				}
-				?>
+						};
+						$('#addlocal').click(function(){
+							$('#local-experience').append(""+
+									"<div id='localExperienceCompany"+id+"' class='span2'"+style+"><input type='text' name='localExperienceCompany[]' class='span12'/></div>"+
+									"<div id='localExperiencePosition"+id+"'  class='span2'><input type='text' name='localExperiencePosition[]' class='span12'/></div>"+
+									"<div id='localExperienceStart"+id+"'  class='span2' style='text-align:center'>"+
+										"<select name='localExperienceStartMonth[]' class='span5'>"+
+											getThisMonth()+
+										"</select>"+
+										"<select name='localExperienceStartYear[]' class='span6'>"+
+											getThisYear()+
+										"</select>"+
+									"</div>"+
+									"<div id='localExperienceEnd"+id+"'  class='span2' style='text-align:center'>"+
+										"<select name='localExperienceEndMonth[]' class='span5'>"+
+											getThisMonth()+
+										"</select>"+
+										"<select name='localExperienceEndYear[]'  class='span6'>"+
+											getThisYear()+
+										"</select>"+
+									"</div>"+
+									"<div id='localExperienceDuties"+id+"'  class='span2'><input type='text' name='localExperienceDuties[]' class='span12'/></div>"+
+									"<div id='localExperienceReason"+id+"'  class='span1'><input type='text' name='localExperienceReason[]' class='span12'/></div>"+
+									"<div id='localButton"+id+"'  class='span1' style='text-align:left;width:10px'>"+
+										"<a class='btn btn-danger' onclick='deletelocalnode("+id+")'><i class='icon-trash'></i></a>"+
+									"</div>"
+							);
+							id++;
+						});
+					});
+					function deletelocalnode(node){
+						$("#localExperienceCompany"+node).remove();
+						$("#localExperiencePosition"+node).remove();
+						$("#localExperienceStart"+node).remove();
+						$("#localExperienceEnd"+node).remove();
+						$("#localExperienceDuties"+node).remove();
+						$("#localExperienceReason"+node).remove();
+						$("#localButton"+node).remove();
+					}
+				</script>
 				<legend>Abroad Work Information</legend>
 				<div class="row-fluid span">
 					<div class="span2"><h5>Company</h5></div>
 					<div class="span2"><h5>Position</h5></div>
 					<div class="span2" style="text-align:center"><h5>Start Period</h5></div>
 					<div class="span2" style="text-align:center"><h5>End Period</h5></div>
-					<div class="span1"><h5>Main Duties</h5></div>
-					<div class="span2"><h5>Reason of Leaving	</h5></div>
+					<div class="span2"><h5>Main Duties</h5></div>
+					<div class="span1"><h5>R of Leaving	</h5></div>
 				</div>
-				<?php
-				for ($l=1; $l<=5; $l++)
-				{
-				?>
-				<div class="row-fluid span">
-					<div class="span2"><input type="text" name="abroadExperienceCompany<?php echo $l ?>" class="span12"/></div>
-					<div class="span2"><input type="text" name="abroadExperiencePosition<?php echo $l ?>" class="span12"/></div>
-					<div class="span2" style="text-align:center">
-						<select name="abroadExperienceStartMonth<?php echo $l ?>" class="span5">
-							<option>MM</option>
-							<?php
-							for ($i = 1; $i < 13; $i++) {
-							   echo "<option>".sprintf("%02s", $i)."</option>";
+				<div class="row-fluid" id="abroad-experience"></div>
+				<a class="btn btn-warning" style="float:left;margin-left:2.5%" id="addabroad"><i class="icon-plus"></i> Add New</a>
+				<script>
+					var id=0;
+					var abroad = <?php echo json_encode($abroadexperience); ?>;
+					var style="";
+					if (id == 0) style = "style='margin-left:2.5%'";
+					else style = "";
+					$(document).ready(function(){
+						if(abroad.length>0){
+							for(i=0;i<abroad.length;i++){
+								var startDate=abroad[i]['start'];
+								var bStartDate=startDate.split("-");
+								var endDate=abroad[i]['end'];
+								var bEndDate=endDate.split("-");
+								$('#abroad-experience').append(""+
+										"<div id='abroadExperienceCompany"+id+"' class='span2'"+style+"><input type='text' name='abroadExperienceCompany[]' class='span12' value='"+abroad[i].company+"'/></div>"+
+										"<div id='abroadExperiencePosition"+id+"'  class='span2'><input type='text' name='abroadExperiencePosition[]' class='span12' value='"+abroad[i].position+"'/></div>"+
+										"<div id='abroadExperienceStart"+id+"'  class='span2' style='text-align:center'>"+
+											"<select name='abroadExperienceStartMonth[]' class='span5'>"+
+												getThisMonth(bStartDate[0])+
+											"</select>"+
+											"<select name='abroadExperienceStartYear[]' class='span6'>"+
+												getThisYear(bStartDate[1])+
+											"</select>"+
+										"</div>"+
+										"<div id='abroadExperienceEnd"+id+"'  class='span2' style='text-align:center'>"+
+											"<select name='abroadExperienceEndMonth[]' class='span5'>"+
+												getThisMonth(bEndDate[0])+
+											"</select>"+
+											"<select name='abroadExperienceEndYear[]'  class='span6'>"+
+												getThisYear(bEndDate[1])+
+											"</select>"+
+										"</div>"+
+										"<div id='abroadExperienceDuties"+id+"'  class='span2'><input type='text' name='abroadExperienceDuties[]' class='span12' value='"+abroad[i].main+"'/></div>"+
+										"<div id='abroadExperienceReason"+id+"'  class='span1'><input type='text' name='abroadExperienceReason[]' class='span12' value='"+abroad[i].reason+"'/></div>"+
+										"<div id='abroadButton"+id+"'  class='span1' style='text-align:left;width:10px'>"+
+											"<a class='btn btn-danger' onclick='deleteabroadnode("+id+")'><i class='icon-trash'></i></a>"+
+										"</div>"
+								);
+								id++;
 							}
-							?>
-						  
-						</select>
-						<select name="abroadExperienceStartYear<?php echo $l ?>" class="span6">
-							<option>YYYY</option>
-							<?php
-							for ($i = date("Y"); $i > 1900; $i--) {
-							   echo "<option>".$i."</option>";
-							}
-							?>
-						  
-						</select>
-					</div>
-					<div class="span2" style="text-align:center">
-						<select name="abroadExperienceEndMonth<?php echo $l ?>" class="span5">
-							<option>MM</option>
-							<?php
-							for ($i = 1; $i < 13; $i++) {
-							   echo "<option>".sprintf("%02s", $i)."</option>";
-							}
-							?>
-						  
-						</select>
-						</select>
-						<select name="abroadExperienceEndYear<?php echo $l ?>"  class="span6">
-							<option>YYYY</option>
-							<?php
-							for ($i = date("Y"); $i > 1900; $i--) {
-							   echo "<option>".$i."</option>";
-							}
-							?>
-						  
-						</select>
-					</div>
-					<div class="span1"><input type="text" name="abroadExperienceDuties<?php echo $l ?>" class="span12"/></div>
-					<div class="span2"><input type="text" name="abroadExperienceReason<?php echo $l ?>" class="span12"/></div>
-				</div>
-				<?php
-				}
-				?>
+						};
+						$('#addabroad').click(function(){
+							$('#abroad-experience').append(""+
+									"<div id='abroadExperienceCompany"+id+"' class='span2'"+style+"><input type='text' name='abroadExperienceCompany[]' class='span12'/></div>"+
+									"<div id='abroadExperiencePosition"+id+"'  class='span2'><input type='text' name='abroadExperiencePosition[]' class='span12'/></div>"+
+									"<div id='abroadExperienceStart"+id+"'  class='span2' style='text-align:center'>"+
+										"<select name='abroadExperienceStartMonth[]' class='span5'>"+
+											getThisMonth()+
+										"</select>"+
+										"<select name='abroadExperienceStartYear[]' class='span6'>"+
+											getThisYear()+
+										"</select>"+
+									"</div>"+
+									"<div id='abroadExperienceEnd"+id+"'  class='span2' style='text-align:center'>"+
+										"<select name='abroadExperienceEndMonth[]' class='span5'>"+
+											getThisMonth()+
+										"</select>"+
+										"<select name='abroadExperienceEndYear[]'  class='span6'>"+
+											getThisYear()+
+										"</select>"+
+									"</div>"+
+									"<div id='abroadExperienceDuties"+id+"'  class='span2'><input type='text' name='abroadExperienceDuties[]' class='span12'/></div>"+
+									"<div id='abroadExperienceReason"+id+"'  class='span1'><input type='text' name='abroadExperienceReason[]' class='span12'/></div>"+
+									"<div id='abroadButton"+id+"'  class='span1' style='text-align:left;width:10px'>"+
+										"<a class='btn btn-danger' onclick='deleteabroadnode("+id+")'><i class='icon-trash'></i></a>"+
+									"</div>"
+							);
+							id++;
+						});
+					});
+					function deleteabroadnode(node){
+						$("#abroadExperienceCompany"+node).remove();
+						$("#abroadExperiencePosition"+node).remove();
+						$("#abroadExperienceStart"+node).remove();
+						$("#abroadExperienceEnd"+node).remove();
+						$("#abroadExperienceDuties"+node).remove();
+						$("#abroadExperienceReason"+node).remove();
+						$("#abroadButton"+node).remove();
+					}
+				</script>
 				<input type="submit" name="submit" class="btn btn-primary" style="float:right" value="Submit">
 			</div>
 		</div>
@@ -751,5 +785,26 @@
 			  $(this).tab('show');
 		  })
 	});
+	function getThisMonth(node){
+		str = "<option value='00'>MM</option>";
+		for (k = 1; k < 13; k++){
+			if(k==node) str =  str + "<option selected>"+zeroPad(k,2)+"</option>";
+			else str =  str + "<option>"+zeroPad(k,2)+"</option>";
+		}
+		return str;
+	}
+	function getThisYear(node){
+		cDate = new Date();
+		str = "<option value='00'>YYYY</option>";
+		for (k =  cDate.getFullYear(); k > 1900; k--){
+			if(k==node) str =  str + "<option selected>"+k+"</option>";
+			else str =  str + "<option>"+k+"</option>";
+		}
+		return str;
+	}
+	function zeroPad(num, places) {
+		var zero = places - num.toString().length + 1;
+		return Array(+(zero > 0 && zero)).join("0") + num;
+	}
 </script>
 <script src="<?php echo base_url() ?>js/jquery.validate.worker-edit.js"></script>

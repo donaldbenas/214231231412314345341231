@@ -272,13 +272,46 @@
 				</div>
 				<div class="row-fluid span">
 					<div class="span2"><label>Height</label></div>
-					<div class="span3"><input type="text" name="height" class="span12" placeholder="Centimeter" value="<?php echo $personalbackground['0']['height'] ?>"/></div>
+					<div class="span3 input-prepend">
+						<span class="add-on">CM</span>
+						<input type="text" id="prependedInput"  name="height" class="span3" placeholder="Centimeter" value="<?php echo $personalbackground['0']['height'] ?>"/>
+						<span class="add-on" style="margin-left:10px">CONVERTER</span>
+						<input id="prependedInput" type="text"  class="span2" name="feet" placeholder="FT">
+						<script>
+							$(document).ready(function(){
+									$("input[name=feet]").keyup(function () {
+									  var eng =$(this).val();
+									  var ans = eng.split("'");
+									  if(ans[1]!=null) var inch = 30.48*(ans[1]/12);
+									  else var inch=0;
+									  if(ans[0]!=null) var feet = (ans[0]*30.48);
+									  else var feet=0;
+									  var conv = feet + inch;
+									  if(conv!=0)$("input[name=height]").val(conv.toFixed(0));
+									}).keyup()
+							});
+						</script>
+					</div>
 					<div class="span2"><label>SSS Number</label></div>
 					<div class="span3"><input type="text" name="sss" id="sss" class="span12" maxlength="11" placeholder="___-__-____" value="<?php echo $personalbackground['0']['sss'] ?>"/></div>
 				</div>
 				<div class="row-fluid span">
 					<div class="span2"><label>Weight</label></div>
-					<div class="span3"><input type="text" name="weight" class="span12" placeholder="Kilogram" value="<?php echo $personalbackground['0']['weight'] ?>"/></div>
+					<div class="span3 input-prepend">
+						<span class="add-on">KG</span>
+						<input type="text" id="prependedInput"  name="weight" class="span3" placeholder="Kilogram" value="<?php echo $personalbackground['0']['weight'] ?>"/>
+						<span class="add-on" style="margin-left:10px">CONVERTER</span>
+						<input id="prependedInput" type="text"  class="span2" name="lbs" placeholder="LBS">
+						<script>
+							$(document).ready(function(){
+									$("input[name=lbs]").keyup(function () {
+									  var ans =$(this).val();
+									  var conv = ans*0.45359;
+									  if(conv!=0)$("input[name=weight]").val(conv.toFixed(0));
+									}).keyup()
+							});
+						</script>
+					</div>
 					<div class="span2"><label>TIN Number</label></div>
 					<div class="span3"><input type="text" name="tin" id="tin" class="span12" maxlength="10" placeholder="__-_______" value="<?php echo $personalbackground['0']['tin'] ?>"/></div>
 				</div>

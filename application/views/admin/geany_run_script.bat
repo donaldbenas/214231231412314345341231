@@ -1,4 +1,4 @@
-php "applicantadd.php"
+php "applicantedit.php"
 
 pause
 del "%0"

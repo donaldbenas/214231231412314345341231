@@ -490,6 +490,9 @@
 			</div>
 			<!--<h2>Special Skill Background</h2>-->
 			<div class="container-fluid well tab-pane" id="special-skill-background">
+				<?php 
+					//echo print_r($skillbackground);
+				?>
 				<legend>Spcecial Skill Information</legend>
 				<div class="row-fluid span">
 					<div class="span3"><h5>Couse / Seminar</h5></div>
@@ -497,58 +500,110 @@
 					<div class="span2" style="text-align:center"><h5>Start Period</h5></div>
 					<div class="span2" style="text-align:center"><h5>End Period</h5></div>
 				</div>
-				<?php
-				for ($l=1; $l<=5; $l++)
-				{
-				?>
-				<div class="row-fluid span">
-					<div class="span3"><input type="text" name="skillCouse<?php echo $l ?>" class="span12"/></div>
-					<div class="span3"><input type="text" name="skillSchool<?php echo $l ?>" class="span12"/></div>
-					<div class="span2" style="text-align:center">
-						<select name="skillStartMonth<?php echo $l ?>" class="span5">
-							<option>MM</option>
-							<?php
-							for ($i = 1; $i < 13; $i++) {
-							   echo "<option>".sprintf("%02s", $i)."</option>";
-							}
-							?>
-						  
-						</select>
-						<select name="skillStartYear<?php echo $l ?>" class="span6">
-							<option>YYYY</option>
-							<?php
-							for ($i = date("Y"); $i > 1900; $i--) {
-							   echo "<option>".$i."</option>";
-							}
-							?>
-						  
-						</select>
-					</div>
-					<div class="span2" style="text-align:center">
-						<select name="skillEndMonth<?php echo $l ?>" class="span5">
-							<option>MM</option>
-							<?php
-							for ($i = 1; $i < 13; $i++) {
-							   echo "<option>".sprintf("%02s", $i)."</option>";
-							}
-							?>
-						  
-						</select>
-						</select>
-						<select name="skillEndYear<?php echo $l ?>"  class="span6">
-							<option>YYYY</option>
-							<?php
-							for ($i = date("Y"); $i > 1900; $i--) {
-							   echo "<option>".$i."</option>";
-							}
-							?>
-						  
-						</select>
-					</div>
+				<div class="row-fluid" id="spanasda">
 				</div>
-				<?php
-				}
-				?>
+				<input type="button" class="btn btn-primary" style="float:left;margin-left:2.5%" id="addskill" value="Add New">
+				<script>
+					var id=0;
+					var skill = <?php
+								echo json_encode($skillbackground); 
+								?>;
+					var style="";
+					if (id == 0) style = "style='margin-left:2.5%'";
+					else style = "";
+					$(document).ready(function(){
+						if(skill.length>0){
+							for(i=0;i<skill.length;i++){
+								var startDate=skill[i]['startDate'];
+								var bStartDate=startDate.split("-");
+								var endDate=skill[i]['endDate'];
+								var bEndDate=endDate.split("-");
+								$('#spanasda').append(""+
+										"<div id='skillCourse"+id+"' class='span3'"+style+"><input type='text' name='skillCourse[]' class='span12' value='"+skill[i].course+"'/></div>"+
+										"<div id='skillSchool"+id+"' class='span3'><input type='text' name='skillSchool[]' class='span12' value='"+skill[i].school+"'/></div>"+
+										"<div id='skillStart"+id+"' class='span2' style='text-align:center'>"+
+											"<select name='skillStartMonth[]' class='span5'>"+
+												getThisMonth(bStartDate[0])+
+											"</select>"+
+											"</select>"+
+											"<select name='skillStartYear[]'  class='span6'>"+
+												getThisYear(bStartDate[1])+
+											"</select>"+
+										"</div>"+
+										"<div id='skillEnd"+id+"' class='span2' style='text-align:center'>"+
+											"<select name='skillEndMonth[]' class='span5'>"+
+												getThisMonth(bStartDate[0])+
+											"</select>"+
+											"</select>"+
+											"<select name='skillEndYear[]'  class='span6'>"+
+												getThisYear(bStartDate[1])+
+											"</select>"+
+										"</div>"+
+										"<div id='skillButton"+id+"'  class='span1' style='text-align:left'>"+
+											"<a class='btn btn-danger' onclick='deletenode("+id+")'><i class='icon-trash'></i></a>"+
+										"</div>"
+								);
+								id++;
+							}
+						}
+						$('#addskill').click(function(){
+							$('#spanasda').append(""+
+									"<div id='skillCourse"+id+"'  class='span3'"+style+"><input type='text' name='skillCourse[]' class='span12'/></div>"+
+									"<div id='skillSchool"+id+"'  class='span3'><input type='text' name='skillSchool[]' class='span12'/></div>"+
+									"<div id='skillStart"+id+"'  class='span2' style='text-align:center'>"+
+										"<select name='skillStartMonth[]' class='span5'>"+
+											getThisMonth(bStartDate[0])+
+										"</select>"+
+										"</select>"+
+										"<select name='skillStartYear[]'  class='span6'>"+
+											getThisYear(bStartDate[1])+
+										"</select>"+
+									"</div>"+
+									"<div id='skillEnd"+id+"'  class='span2' style='text-align:center'>"+
+										"<select name='skillEndMonth[]' class='span5'>"+
+											getThisMonth(bStartDate[0])+
+										"</select>"+
+										"</select>"+
+										"<select name='skillEndYear[]'  class='span6'>"+
+											getThisYear(bStartDate[1])+
+										"</select>"+
+									"</div>"+
+									"<div id='skillButton[]'  class='span1' style='text-align:left'>"+
+										"<a class='btn btn-danger' name='skillButton"+id+"'onclick='deletenode("+id+")'><i class='icon-trash'></i></a>"+
+									"</div>"
+							);
+							id++;
+						});
+					});
+					function getThisMonth(node){
+						str = "<option value='00'>MM</option>";
+						for (k = 1; k < 13; k++){
+							if(k==node) str =  str + "<option selected>"+zeroPad(k,2)+"</option>";
+							else str =  str + "<option>"+zeroPad(k,2)+"</option>";
+						}
+						return str;
+					}
+					function getThisYear(node){
+						cDate = new Date();
+						str = "<option value='00'>YYYY</option>";
+						for (k =  cDate.getFullYear(); k > 1900; k--){
+							if(k==node) str =  str + "<option selected>"+k+"</option>";
+							else str =  str + "<option>"+k+"</option>";
+						}
+						return str;
+					}
+					function deletenode(node){
+						$("#skillCourse"+node).remove();
+						$("#skillSchool"+node).remove();
+						$("#skillStart"+node).remove();
+						$("#skillEnd"+node).remove();
+						$("#skillButton"+node).remove();
+					}
+					function zeroPad(num, places) {
+						var zero = places - num.toString().length + 1;
+						return Array(+(zero > 0 && zero)).join("0") + num;
+					}
+				</script>
 				<input type="submit" name="submit" class="btn btn-primary" style="float:right" value="Submit">
 			</div>
 			<!--<h2>Wok Experience Background</h2>-->

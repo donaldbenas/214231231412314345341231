@@ -51,6 +51,7 @@ class Admin extends CI_Controller {
 							if($this->uri->total_segments()==3) redirect(base_url()."admin/worker/search/");
 							$data['personalbackground'] = $this->applicantModel->loadpersonalbackground($this->uri->segment(4));
 							$data['educationalbackground'] = $this->applicantModel->loadeducationalbackground($this->uri->segment(4));
+							$data['skillbackground'] = $this->applicantModel->loadskillbackground($this->uri->segment(4));
 							if(isset($_POST['submit'])){
 								$this->applicantModel->edit($this->input->post('appid'));
 								redirect(base_url()."admin/worker/edit/".$this->input->post('appid'));

@@ -188,7 +188,9 @@ class applicantModel extends CI_Model{
 		);
 		$this->db->where("appid",$appid);
 		$this->db->update("applicant",$data);
+		
 		$id = $this->getID('applicant',$appid);
+		
 		$education = array(
 			'id' => $id,
 			'elementary' => strtoupper($_POST['primarySchool']),
@@ -209,9 +211,23 @@ class applicantModel extends CI_Model{
 			'pto' => strtoupper($_POST['postEnd']),
 			'pcourse' => strtoupper($_POST['postDegree'])
 		);
-		
 		$this->db->where("id",$id);
 		$this->db->update("education",$education);
+		
+		$this->db->where("appid",$appid);
+		$this->db->delete("skills");
+		
+		for($i=0;$i<count($_POST["skillCourse"]);$i++){
+			$skill = array(
+				'appid' => $appid,
+				'course' => strtoupper($_POST['skillCourse'][$i]),
+				'school' => strtoupper($_POST['skillSchool'][$i]),
+				'startDate' => $_POST['skillStartMonth'][$i]."-".$_POST['skillStartYear'][$i],
+				'endDate' => $_POST['skillEndMonth'][$i]."-".$_POST['skillEndYear'][$i]
+			);
+			$this->db->insert("skills",$skill);
+		}
+		
 		
 	}
 	
@@ -228,6 +244,14 @@ class applicantModel extends CI_Model{
 		$this->db->select('*');
 		$this->db->from('education');
 		$this->db->where('id',$id);
+		$data = $this->db->get();
+		return $data->result_array();
+	}
+	
+	public function loadskillbackground($appid){
+		$this->db->select('*');
+		$this->db->from('skills');
+		$this->db->where('appid',$appid);
 		$data = $this->db->get();
 		return $data->result_array();
 	}

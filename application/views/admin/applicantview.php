@@ -3,39 +3,20 @@
   <li class="active"><a href="<?php echo base_url() ?>admin/worker/search">Search Applicant</a></li>
   <li><a href="#">Print Applicant</a></li>
 </ul>
-<ul class="nav nav-tabs" id="myTab">
-  <li class="active"><a href="#personal-background"><h5>Personal Background</h5></a></li>
-  <li><a href="#educational-background"><h5>Educational Background</h5></a></li>
-  <li><a href="#special-skill-background"><h5>Special Skill Background</h5></a></li>
-  <li><a href="#work-experience-background"><h5>Work Experience Background</h5></a></li>
-</ul>
 <form method="post" name="myform" enctype="multipart/form-data" id="myform">
 	<input type="text" name="appid" value="<?php echo $personalbackground['0']['appid'] ?>" style="display:none">
 	<fieldset>
-		<div class="container-fluid tab-content">
+		<div class="container-fluid">
 			<!--<h2>Personal Background</h2>-->
-			<div class="container-fluid well tab-pane active" id="personal-background">
+			<div class="container-fluid well" id="personal-background">
 				<legend>Applicant Information</legend>
 				<div class="row-fluid span">
-					<div class="span2"><label>Upload Photo</label></div>
+					<div class="span2" id="top_margin1"><label>Upload Photo</label></div>
 					<div class="span3">
-						<div class="fileupload fileupload-new" data-provides="fileupload">
-						  <div class="input-append">
-							<div class="uneditable-input span2">
-								<i class="icon-file fileupload-exists"></i> 
-								<span class="fileupload-preview"></span>
-							</div>
-							<span class="btn btn-file">
-								<span class="fileupload-new" onclick="$('#photo').click()">Select file</span>
-								<span class="fileupload-exists" onclick="$('#photo').click()">Change</span>
-								<input type="file" style="display:none" name="photo" id="photo"/>
-							</span>
-								<a href="#" class="btn fileupload-exists btn-danger" data-dismiss="fileupload">Remove</a>
-						  </div>
-						</div>
+						<img src="<?php echo base_url()."photos/".$uploadphoto[0]['appid'].".".$uploadphoto[0]['type']; ?>" class="img-polaroid" style="height:20px;width:20px;margin-bottom:15px" id="photo">
 					</div>
-					<div class="span2"><label>Date Apply</label></div> 
-					<div class="span3">
+					<div class="span2" id="top_margin2"><label>Date Apply</label></div> 
+					<div class="span3" id="top_margin3">
 						<select name="applyMonth" class="span3">
 							<option>MM</option>
 							<?php
@@ -352,7 +333,6 @@
 					<div class="span2"><label>Mobile Number</label></div>
 					<div class="span3"><input type="text" name="spouseMobile" class="span12" value="<?php echo $personalbackground['0']['smobile'] ?>"/></div>
 				</div>
-				<input type="submit" name="submit" class="btn btn-primary" style="float:right" value="Submit">
 			</div>
 			<!--<h2>Educational Background</h2>-->
 			<div class="container-fluid well tab-pane" id="educational-background">
@@ -519,7 +499,6 @@
 					</div>
 					<div class="span2"><input type="text" name="postDegree" class="span12" value="<?php echo $educationalbackground['0']['pcourse'] ?>"/></div>
 				</div>
-				<input type="submit" name="submit" class="btn btn-primary" style="float:right" value="Submit">
 			</div>
 			<!--<h2>Special Skill Background</h2>-->
 			<div class="container-fluid well tab-pane" id="special-skill-background">
@@ -534,7 +513,6 @@
 					<div class="span2" style="text-align:center"><h5>End Period</h5></div>
 				</div>
 				<div class="row-fluid" id="skill-background"></div>
-				<a class="btn btn-warning" style="float:left;margin-left:2.5%" id="addskill"><i class="icon-plus"></i> Add New</a>
 				<script>
 					var id=0;
 					var skill = <?php
@@ -572,40 +550,11 @@
 											"</select>"+
 										"</div>"+
 										"<div id='skillButton"+id+"'  class='span1' style='text-align:left'>"+
-											"<a class='btn btn-danger' onclick='deletenode("+id+")'><i class='icon-trash'></i></a>"+
 										"</div>"
 								);
 								id++;
 							}
 						};
-						$('#addskill').click(function(){
-							$('#skill-background').append(""+
-									"<div id='skillCourse"+id+"'  class='span3'"+style+"><input type='text' name='skillCourse[]' class='span12'/></div>"+
-									"<div id='skillSchool"+id+"'  class='span3'><input type='text' name='skillSchool[]' class='span12'/></div>"+
-									"<div id='skillStart"+id+"'  class='span2' style='text-align:center'>"+
-										"<select name='skillStartMonth[]' class='span5'>"+
-											getThisMonth()+
-										"</select>"+
-										"</select>"+
-										"<select name='skillStartYear[]'  class='span6'>"+
-											getThisYear()+
-										"</select>"+
-									"</div>"+
-									"<div id='skillEnd"+id+"'  class='span2' style='text-align:center'>"+
-										"<select name='skillEndMonth[]' class='span5'>"+
-											getThisMonth()+
-										"</select>"+
-										"</select>"+
-										"<select name='skillEndYear[]'  class='span6'>"+
-											getThisYear()+
-										"</select>"+
-									"</div>"+
-									"<div id='skillButton"+id+"'  class='span1' style='text-align:left'>"+
-										"<a class='btn btn-danger' name='skillButton"+id+"'onclick='deletenode("+id+")'><i class='icon-trash'></i></a>"+
-									"</div>"
-							);
-							id++;
-						});
 					});
 					function deletenode(node){
 						$("#skillCourse"+node).remove();
@@ -615,7 +564,6 @@
 						$("#skillButton"+node).remove();
 					}
 				</script>
-				<input type="submit" name="submit" class="btn btn-primary" style="float:right" value="Submit">
 			</div>
 			<!--<h2>Wok Experience Background</h2>-->
 			<div class="container-fluid well tab-pane" id="work-experience-background">
@@ -629,7 +577,6 @@
 					<div class="span1"><h5>R of Leaving	</h5></div>
 				</div>
 				<div class="row-fluid" id="local-experience"></div>
-				<a class="btn btn-warning" style="float:left;margin-left:2.5%" id="addlocal"><i class="icon-plus"></i> Add New</a>
 				<script>
 					var id=0;
 					var local = <?php echo json_encode($localexperience); ?>;
@@ -665,40 +612,11 @@
 										"<div id='localExperienceDuties"+id+"'  class='span2'><input type='text' name='localExperienceDuties[]' class='span12' value='"+local[i].main+"'/></div>"+
 										"<div id='localExperienceReason"+id+"'  class='span1'><input type='text' name='localExperienceReason[]' class='span12' value='"+local[i].reason+"'/></div>"+
 										"<div id='localButton"+id+"'  class='span1' style='text-align:left;width:10px'>"+
-											"<a class='btn btn-danger' onclick='deletelocalnode("+id+")'><i class='icon-trash'></i></a>"+
 										"</div>"
 								);
 								id++;
 							}
 						};
-						$('#addlocal').click(function(){
-							$('#local-experience').append(""+
-									"<div id='localExperienceCompany"+id+"' class='span2'"+style+"><input type='text' name='localExperienceCompany[]' class='span12'/></div>"+
-									"<div id='localExperiencePosition"+id+"'  class='span2'><input type='text' name='localExperiencePosition[]' class='span12'/></div>"+
-									"<div id='localExperienceStart"+id+"'  class='span2' style='text-align:center'>"+
-										"<select name='localExperienceStartMonth[]' class='span5'>"+
-											getThisMonth()+
-										"</select>"+
-										"<select name='localExperienceStartYear[]' class='span6'>"+
-											getThisYear()+
-										"</select>"+
-									"</div>"+
-									"<div id='localExperienceEnd"+id+"'  class='span2' style='text-align:center'>"+
-										"<select name='localExperienceEndMonth[]' class='span5'>"+
-											getThisMonth()+
-										"</select>"+
-										"<select name='localExperienceEndYear[]'  class='span6'>"+
-											getThisYear()+
-										"</select>"+
-									"</div>"+
-									"<div id='localExperienceDuties"+id+"'  class='span2'><input type='text' name='localExperienceDuties[]' class='span12'/></div>"+
-									"<div id='localExperienceReason"+id+"'  class='span1'><input type='text' name='localExperienceReason[]' class='span12'/></div>"+
-									"<div id='localButton"+id+"'  class='span1' style='text-align:left;width:10px'>"+
-										"<a class='btn btn-danger' onclick='deletelocalnode("+id+")'><i class='icon-trash'></i></a>"+
-									"</div>"
-							);
-							id++;
-						});
 					});
 					function deletelocalnode(node){
 						$("#localExperienceCompany"+node).remove();
@@ -710,6 +628,7 @@
 						$("#localButton"+node).remove();
 					}
 				</script>
+				<hr>
 				<legend>Abroad Work Information</legend>
 				<div class="row-fluid span">
 					<div class="span2"><h5>Company</h5></div>
@@ -720,7 +639,6 @@
 					<div class="span1"><h5>R of Leaving	</h5></div>
 				</div>
 				<div class="row-fluid" id="abroad-experience"></div>
-				<a class="btn btn-warning" style="float:left;margin-left:2.5%" id="addabroad"><i class="icon-plus"></i> Add New</a>
 				<script>
 					var id=0;
 					var abroad = <?php echo json_encode($abroadexperience); ?>;
@@ -756,40 +674,11 @@
 										"<div id='abroadExperienceDuties"+id+"'  class='span2'><input type='text' name='abroadExperienceDuties[]' class='span12' value='"+abroad[i].main+"'/></div>"+
 										"<div id='abroadExperienceReason"+id+"'  class='span1'><input type='text' name='abroadExperienceReason[]' class='span12' value='"+abroad[i].reason+"'/></div>"+
 										"<div id='abroadButton"+id+"'  class='span1' style='text-align:left;width:10px'>"+
-											"<a class='btn btn-danger' onclick='deleteabroadnode("+id+")'><i class='icon-trash'></i></a>"+
 										"</div>"
 								);
 								id++;
 							}
 						};
-						$('#addabroad').click(function(){
-							$('#abroad-experience').append(""+
-									"<div id='abroadExperienceCompany"+id+"' class='span2'"+style+"><input type='text' name='abroadExperienceCompany[]' class='span12'/></div>"+
-									"<div id='abroadExperiencePosition"+id+"'  class='span2'><input type='text' name='abroadExperiencePosition[]' class='span12'/></div>"+
-									"<div id='abroadExperienceStart"+id+"'  class='span2' style='text-align:center'>"+
-										"<select name='abroadExperienceStartMonth[]' class='span5'>"+
-											getThisMonth()+
-										"</select>"+
-										"<select name='abroadExperienceStartYear[]' class='span6'>"+
-											getThisYear()+
-										"</select>"+
-									"</div>"+
-									"<div id='abroadExperienceEnd"+id+"'  class='span2' style='text-align:center'>"+
-										"<select name='abroadExperienceEndMonth[]' class='span5'>"+
-											getThisMonth()+
-										"</select>"+
-										"<select name='abroadExperienceEndYear[]'  class='span6'>"+
-											getThisYear()+
-										"</select>"+
-									"</div>"+
-									"<div id='abroadExperienceDuties"+id+"'  class='span2'><input type='text' name='abroadExperienceDuties[]' class='span12'/></div>"+
-									"<div id='abroadExperienceReason"+id+"'  class='span1'><input type='text' name='abroadExperienceReason[]' class='span12'/></div>"+
-									"<div id='abroadButton"+id+"'  class='span1' style='text-align:left;width:10px'>"+
-										"<a class='btn btn-danger' onclick='deleteabroadnode("+id+")'><i class='icon-trash'></i></a>"+
-									"</div>"
-							);
-							id++;
-						});
 					});
 					function deleteabroadnode(node){
 						$("#abroadExperienceCompany"+node).remove();
@@ -801,7 +690,6 @@
 						$("#abroadButton"+node).remove();
 					}
 				</script>
-				<input type="submit" name="submit" class="btn btn-primary" style="float:right" value="Submit">
 			</div>
 		</div>
 	</fieldset>
@@ -816,7 +704,26 @@
 		  $('#myTab a').click(function (e) {
 			  e.preventDefault();
 			  $(this).tab('show');
-		  })
+		  });
+		  $("input").attr('disabled','disabled').css('color','#2C2C2C');
+		  $("select").attr('disabled','disabled').css('color','#2C2C2C');
+		  
+		  TriggerClick = 1;
+		  $("#photo").on('click', function(){
+			if(TriggerClick==0){
+				 TriggerClick=1;
+				 $("#photo").css({width:'20px',height:'20px'}, 200);
+				 $("#top_margin1").css('margin-top','10px', 500);
+				 $("#top_margin2").css('margin-top','10px', 500);
+				 $("#top_margin3").css('margin-top','10px', 500);
+			}else{
+				 TriggerClick=0;
+				 $("#photo").css({width:'180px',height:'200px'});
+				 $("#top_margin1").css('margin-top','195px');
+				 $("#top_margin2").css('margin-top','195px');
+				 $("#top_margin3").css('margin-top','180px');
+			};
+		  });
 	});
 	function getThisMonth(node){
 		str = "<option value='00'>MM</option>";
@@ -840,4 +747,3 @@
 		return Array(+(zero > 0 && zero)).join("0") + num;
 	}
 </script>
-<script src="<?php echo base_url() ?>js/jquery.validate.worker-edit.js"></script>

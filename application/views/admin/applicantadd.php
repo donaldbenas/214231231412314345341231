@@ -25,9 +25,9 @@
 								<span class="fileupload-preview"></span>
 							</div>
 							<span class="btn btn-file">
-								<span class="fileupload-new" onclick="$('#file').click()">Select file</span>
-								<span class="fileupload-exists" onclick="$('#file').click()">Change</span>
-								<input type="file" style="display:none" name=file" id="file"/>
+								<span class="fileupload-new" onclick="$('#photo').click()">Select file</span>
+								<span class="fileupload-exists" onclick="$('#photo').click()">Change</span>
+								<input type="file" style="display:none" name="photo" id="photo"/>
 							</span>
 								<a href="#" class="btn fileupload-exists btn-danger" data-dismiss="fileupload">Remove</a>
 						  </div>

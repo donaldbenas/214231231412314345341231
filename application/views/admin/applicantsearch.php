@@ -13,6 +13,7 @@
 					<th width="48%">Position</th>
 					<th style="width:10px"></th>
 					<th style="width:10px"></th>
+					<th style="width:10px"></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -54,6 +55,7 @@
 				{ "bVisible": true, "bSearchable": true, "bSortable": true },
 				{ "bVisible": true, "bSearchable": true, "bSortable": true },
 				{ "bVisible": true, "bSearchable": true, "bSortable": true },
+				{ "bVisible": true, "bSearchable": false, "bSortable": false },
 				{ "bVisible": true, "bSearchable": false, "bSortable": false },
 				{ "bVisible": true, "bSearchable": false, "bSortable": false }
 				]

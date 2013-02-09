@@ -15,11 +15,11 @@
 					for($i=0;$i<count($agency);$i++){
 						if($id == $agency[$i][0]) {
 							?>
-								<option value='<?php echo base_url()."transaction/propose/".$agency[$i][0] ?>' selected><?php echo $agency[$i][1]." (".$agency[$i][2].")" ?></option>
+								<option value='<?php echo base_url()."transaction/propose/".$agency[$i][0] ?>' selected><?php echo $agency[$i][1] ?></option>
 							<?php
 						}else{ 
 							?>
-								<option value='<?php echo base_url()."transaction/propose/".$agency[$i][0] ?>'><?php echo $agency[$i][1]." (".$agency[$i][2].")" ?></option>
+								<option value='<?php echo base_url()."transaction/propose/".$agency[$i][0] ?>'><?php echo $agency[$i][1] ?></option>
 							<?php
 						}
 					}
@@ -55,6 +55,36 @@
 			</tbody>
 		</table>
 	  </div>
+ 
+		<!-- Modal -->
+		<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		  <div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+			<h3 id="myModalLabel">Propose Applicant</h3>
+		  </div>
+		  <div class="modal-body">
+			<p id="modal-body-text"></p>
+		  </div>
+		  <div class="modal-footer">
+			<button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+			<button class="btn btn-primary">Propose</button>
+		  </div>
+		</div>
+ 
+		<!-- Modal -->
+		<div id="myModal1" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		  <div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+			<h3 id="myModalLabel">Propose Applicant</h3>
+		  </div>
+		  <div class="modal-body">
+			<p id="modal-body-text1"></p>
+		  </div>
+		  <div class="modal-footer">
+			<button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+			<button class="btn btn-primary">Propose</button>
+		  </div>
+		</div>
 	  <?php } ?>
 	  
 	  <script type="text/javascript" charset="utf-8">
@@ -91,6 +121,13 @@
 				{ "bVisible": true, "bSearchable": false, "bSortable": false }
 				]
 			})
-		  });
-			  
+		  }); 
+		  function erase(id,name){
+			$('#modal-body-text').html("Do you wish to propose applicant <b>"+name+"</b> and all data related to it?");
+			$('#modal-footer-delete').attr("href","<?php echo base_url()."clients/delete/" ?>"+id);
+		  }
+		  function view(id,name){
+			$('#modal-body-text1').html("http:\\www.google.com");
+			$('#modal-footer-delete1').attr("href","<?php echo base_url()."clients/delete/" ?>"+id);
+		  }
 		</script>

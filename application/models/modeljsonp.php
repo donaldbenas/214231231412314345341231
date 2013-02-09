@@ -9,16 +9,16 @@ class modelJsonp extends CI_Model{
 		$this->load->helper('url');
 		$this->load->database();
 		
-        $aColumns = array('applicant.id AS id', 'applicant.firstname AS firstname', 'applicant.lastname AS lastname', 'list.value AS position');
-        $cColumns = array('applicant.id', 'applicant.firstname', 'applicant.lastname', 'list.value');
-        $nColumns = array('id', 'firstname', 'lastname', 'position');
+        $aColumns = array('applicant.appid AS appid', 'applicant.firstname AS firstname', 'applicant.lastname AS lastname', 'list.value AS position');
+        $cColumns = array('applicant.appid', 'applicant.firstname', 'applicant.lastname', 'list.value');
+        $nColumns = array('appid', 'firstname', 'lastname', 'position');
         
-		$sIndexColumn = 'applicant.id';
+		$sIndexColumn = 'applicant.appid';
 		if($agency!=null){        
-			$sTable = 'applicant LEFT JOIN list ON applicant.id=list.id';
+			$sTable = 'applicant LEFT JOIN list ON applicant.position1=list.id';
 			$sTable.= '          LEFT JOIN employer ON applicant.emrid=employer.id';
         }else{
-			$sTable = 'applicant LEFT JOIN list ON applicant.id=list.id';
+			$sTable = 'applicant LEFT JOIN list ON applicant.position1=list.id';
 		}
 		
 		$iDisplayStart = $this->input->get('iDisplayStart');
@@ -128,11 +128,13 @@ class modelJsonp extends CI_Model{
             foreach($nColumns as $col)
             {
                 $row[] = $aRow[$col];
-                if($col === 'id') $id =  $aRow[$col];
+                if($col === 'appid') $id =  $aRow[$col];
+                if($col === 'firstname') $fname =  $aRow[$col];
+                if($col === 'lastname') $lname =  $aRow[$col];
             }
             
-			$row[] = "<button class='btn btn-success'><i class='icon-ok'></i></button></td>";
-			$row[] = "<button class='btn btn-warning'><i class='icon-remove'></i></button></td>";
+			$row[] = "<button href=\"#myModal\" role=\"button\" data-toggle=\"modal\" class='btn btn-success' onclick=\"erase('{$id}','{$fname} {$lname}')\"><i class='icon-ok'></i></button></td>";
+			$row[] = "<button href=\"#myModal1\" role=\"button\" data-toggle=\"modal\" class='btn btn-warning' onclick=\"view('{$id}')\"><i class='icon-search'></i></button></td>";
 			
             $output['aaData'][] = $row;
 		}

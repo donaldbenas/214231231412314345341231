@@ -4,13 +4,12 @@ class Transaction extends CI_Controller
 {
 	public function __construct() {
 		parent::__construct();
+		$this->load->helper('url');
+		$this->load->database();
 	}
 	
 	public function index()
-	{
-		$this->load->helper('url');
-		$this->load->database();
-		
+	{		
 		$this->load->view('admin/header');
 		$this->load->view('admin/nav');
 		$this->load->view('admin/databank');
@@ -23,10 +22,7 @@ class Transaction extends CI_Controller
 	}
 	
 	public function propose($id = null)
-	{
-		$this->load->helper('url');
-		$this->load->database();
-		
+	{		
 		$this->load->view('admin/header');
 		$this->load->view('admin/nav');
 		$this->load->view('admin/databank');
@@ -51,11 +47,12 @@ class Transaction extends CI_Controller
 		$this->load->view('admin/footer');
 	}
 	
+	public function view($id){
+		$this->load->load('admin/transactionproposeview');
+	}
+	
 	public function recruitment($id = null)
-	{
-		$this->load->helper('url');
-		$this->load->database();
-		
+	{		
 		$this->load->view('admin/header');
 		$this->load->view('admin/nav');
 		$this->load->view('admin/databank');
@@ -81,10 +78,7 @@ class Transaction extends CI_Controller
 	}
 	
 	public function processing($id = null)
-	{
-		$this->load->helper('url');
-		$this->load->database();
-		
+	{		
 		$this->load->view('admin/header');
 		$this->load->view('admin/nav');
 		$this->load->view('admin/databank');
@@ -111,9 +105,6 @@ class Transaction extends CI_Controller
 	
 	public function departure($id = null)
 	{
-		$this->load->helper('url');
-		$this->load->database();
-		
 		$this->load->view('admin/header');
 		$this->load->view('admin/nav');
 		$this->load->view('admin/databank');
@@ -139,10 +130,7 @@ class Transaction extends CI_Controller
 	}
 	
 	public function arrival($id = null)
-	{
-		$this->load->helper('url');
-		$this->load->database();
-		
+	{		
 		$this->load->view('admin/header');
 		$this->load->view('admin/nav');
 		$this->load->view('admin/databank');
@@ -168,15 +156,12 @@ class Transaction extends CI_Controller
 	}
 	
 	public function countAgency($status,$id)
-	{
-		$this->load->database();
-		
+	{		
 		return $this->modelagency->getCount($status,$id);
 	}
 	
 	
     public function jsonp($status,$id = null){
-		$this->load->helper('url');
 		$this->load->model('modeljsonp');
 		echo $this->modeljsonp->getTable($status,$id);
 	}

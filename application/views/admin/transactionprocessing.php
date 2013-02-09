@@ -3,10 +3,13 @@
 	  <li><a href="#">PROCESSING</a><span class="divider">/</span></li>
 	  <li class="active" style="text-transform:capitalize"><?php if(isset($company))	echo $company ?></li>
 	  <li class="pull-right span7 active">
-		  <div class="pull-right row span">
-			  <div class="span5"><label>Select Company :</label></div>
-			  <div class="span6">
-				  <select style="width:117%" id="agency">
+	     <div class="form-horizontal pull-right">
+		  <div class="control-group">
+			  <div class="control-label">
+				  <label>Select Company :</label>
+			  </div>
+			  <div class="controls">
+				  <select id="agency">
 					<option value='<?php echo base_url()."transaction/processing" ?>'>AGENCY</option>
 					<?php
 					for($i=0;$i<count($agency);$i++){
@@ -28,6 +31,7 @@
 					});
 				  </script>
 			  </div>
+		    </div>
 		  </div>
 	  </li>
 	</ul>

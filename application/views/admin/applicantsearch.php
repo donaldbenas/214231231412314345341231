@@ -23,8 +23,19 @@
 			</tbody>
 		</table>
 	  </div>
-	  <hr>
-	  
+		<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		  <div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+			<h3 id="myModalLabel">Applicant Delete</h3>
+		  </div>
+		  <div class="modal-body">
+			<p>Do you want to delete <b><span id='deleteme'></span></b>!</p>
+		  </div>
+		  <div class="modal-footer">
+			<button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+			<a class="btn btn-danger" id="deleteok">Delete</a>
+		  </div>
+		</div>
 	  <script type="text/javascript" charset="utf-8">
 		$(function(){
 			$('#data').dataTable({
@@ -59,6 +70,10 @@
 				{ "bVisible": true, "bSearchable": false, "bSortable": false },
 				{ "bVisible": true, "bSearchable": false, "bSortable": false }
 				]
-			})
+			});
 		});
+		function trash(id,name){
+			$("#deleteme").html(name);
+			$("#deleteok").attr('href','<?php echo base_url()."admin/worker/delete/"?>'+id);
+		}
 		</script>

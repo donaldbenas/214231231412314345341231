@@ -121,7 +121,7 @@ class modelSearchJsonp extends CI_Model{
             
 			$row[] = "<a href='".base_url()."admin/worker/edit/".$id."' class='btn btn-warning'><i class='icon-edit'></i></a></td>";
 			$row[] = "<a href='".base_url()."admin/worker/view/".$id."' class='btn btn-info'><i class='icon-search'></i></a></td>";
-			$row[] = "<a href='".base_url()."admin/worker/delete/".$id."' class='btn btn-danger'><i class='icon-trash'></i></a></td>";
+			$row[] = "<a onclick=\"trash('".$id."','".$aRow['firstname']."')\" href='#myModal' role='button' data-toggle='modal' class='btn btn-danger'><i class='icon-trash'></i></a></td>";
 			
             $output['aaData'][] = $row;
 		}

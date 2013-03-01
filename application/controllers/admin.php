@@ -76,6 +76,11 @@ class Admin extends CI_Controller {
 							$this->load->view('admin/applicantview',$data);
 							$this->load->view('admin/footer');
 							break;
+			case 'delete'	:
+							$this->load->model('applicantModel');
+							$this->applicantModel->delete($this->uri->segment(4));
+							redirect(base_url()."admin/worker/search");
+							break;
 			case 'search'	:
 							$this->load->view('admin/header');
 							$this->load->view('admin/nav');

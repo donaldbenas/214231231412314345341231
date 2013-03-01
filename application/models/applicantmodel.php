@@ -65,12 +65,7 @@ class applicantModel extends CI_Model{
 		}
 		$appid = $appid + 1;
 				
-		$type = 'jpg';
-		$file = array(array('image/png','png'),array('image/x-png','png'),array('image/gif','gif'),array('image/jpeg','jpg'),array('image/jpg','jpg'));
-		foreach($file as $row){
-			if(in_array($_FILES['photo']['type'],$row))
-				$type = $row[1];
-		}
+		$type = end(explode(".",$_FILES['photo']['name']));
 		$data = array(
 			'appid' => $appid,
 			'type' => $type,
@@ -217,26 +212,30 @@ class applicantModel extends CI_Model{
 		$config['max_height'] = '1280';
 		$config['overwrite'] = TRUE;
 		
-		$file = array(array('image/png','png'),array('image/x-png','png'),array('image/gif','gif'),array('image/jpeg','jpg'),array('image/jpg','jpg'));
-		foreach($file as $row){
-			if(in_array($_FILES['photo']['type'],$row)){
-				$type = $row[1];
-				$up = $this->loaduploadphoto($appid);
-				echo $config['upload_path'].$up[0]['appid'].".".$up[0]['type'];
-				unlink($config['upload_path'].$up[0]['appid'].".".$up[0]['type']);
-			}
-		}
-		$data = array(
-			'type' => $type,
-			'size' => $_FILES['photo']['size']
-		);
-		$this->load->library('upload');
-		foreach ($_FILES as $key => $value){
-			if (!empty($key['name'])){
-				$this->upload->initialize($config);
-				if ($this->upload->do_upload($key)){
-					$this->db->where("appid",$appid);
-					$this->db->update("photo",$data);
+		if(isset($_FILES['photo'])){
+			$this->db->query("DELETE FROM photo WHERE appid = ?",array($appid));
+			$type = end(explode(".",$_FILES['photo']['name']));
+			$data = array(
+				'appid' => $appid,
+				'type' => $type,
+				'size' => $_FILES['photo']['size']
+			);
+			
+			$config['upload_path'] = './photos/';
+			$path=$config['upload_path'];
+			$config['allowed_types'] = 'gif|jpg|jpeg|png';
+			$config['file_name'] = $appid.".".$type;
+			$config['max_size'] = '1024';
+			$config['max_width'] = '1920';
+			$config['max_height'] = '1280';
+			$config['overwrite'] = TRUE;
+			$this->load->library('upload');
+			foreach ($_FILES as $key => $value){
+				if (!empty($key['name'])){
+					$this->upload->initialize($config);
+					if ($this->upload->do_upload($key)){
+						$this->db->insert("photo",$data);
+					}
 				}
 			}
 		}
@@ -412,6 +411,11 @@ class applicantModel extends CI_Model{
 		$this->db->where("appid",$appid);
 		$id = $this->db->get($table)->result();
 		return $id[0]->id;
+	}
+	
+	public function delete($appid){
+		$sql = "UPDATE applicant SET activate = '0' WHERE appid = ?";
+		$this->db->query($sql,array($appid));		
 	}
 
 }

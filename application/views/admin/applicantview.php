@@ -11,12 +11,12 @@
 			<div class="container-fluid well" id="personal-background">
 				<legend>Applicant Information</legend>
 				<div class="row-fluid span">
-					<div class="span2" id="top_margin1"><label>Upload Photo</label></div>
+					<div class="span2" id="top_margin1" style="margin-top:190px"><label>Upload Photo</label></div>
 					<div class="span3">
-						<img src="<?php if(isset($uploadphoto[0]['appid'])) echo base_url()."photos/".$uploadphoto[0]['appid'].".".$uploadphoto[0]['type']; ?>" class="img-polaroid" style="height:20px;width:20px;margin-bottom:15px" id="photo">
+						<img src="<?php if(isset($uploadphoto[0]['appid'])) echo base_url()."photos/".$uploadphoto[0]['appid'].".".$uploadphoto[0]['type']; ?>" class="img-polaroid" style="height:200px;width:180px;margin-bottom:15px" 	>
 					</div>
-					<div class="span2" id="top_margin2"><label>Date Apply</label></div> 
-					<div class="span3" id="top_margin3">
+					<div class="span2" id="top_margin2" style="margin-top:190px"><label>Date Apply</label></div> 
+					<div class="span3" id="top_margin3" style="margin-top:190px">
 						<select name="applyMonth" class="span3">
 							<option>MM</option>
 							<?php

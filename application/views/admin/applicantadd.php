@@ -160,8 +160,8 @@
 					<div class="span3">
 						<select name="gender" class="span12">
 							<option value="">Choose</option>
-							<option>Male</option>
-							<option>Female</option>
+							<option value="1">Male</option>
+							<option value="2">Female</option>
 						</select>
 					</div>
 				</div>
@@ -327,6 +327,26 @@
 					<div class="span2"><label>Mobile Number</label></div>
 					<div class="span3"><input type="text" name="spouseMobile" class="span12"/></div>
 				</div>
+				<legend>Document Attachment</legend>
+				<div class="row-fluid span">
+					<div class="span2"><label>Upload Resume</label></div>
+					<div class="span3">
+						<div class="fileupload fileupload-new" data-provides="fileupload">
+						  <div class="input-append">
+							<div class="uneditable-input span2">
+								<i class="icon-file fileupload-exists"></i> 
+								<span class="fileupload-preview"></span>
+							</div>
+							<span class="btn btn-file">
+								<span class="fileupload-new" onclick="$('#resume').click()">Select file</span>
+								<span class="fileupload-exists" onclick="$('#resume').click()">Change</span>
+								<input type="file" style="display:none" name="resume" id="resume"/>
+							</span>
+								<a href="#" class="btn fileupload-exists btn-danger" data-dismiss="fileupload">Remove</a>
+						  </div>
+						</div>
+					</div>
+				 </div>
 				 <a class="btn btn-danger" style="float:right" id="first_1">Next <i class="icon-chevron-right"></i></a>
 			</div>
 			<!--<h2>Educational Background</h2>-->

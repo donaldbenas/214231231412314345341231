@@ -179,8 +179,8 @@
 					<div class="span3">
 						<select name="gender" class="span12">
 							<option value="">Choose</option>
-							<option <?php if($personalbackground['0']['gender'] === '1') echo "selected"; ?>/>Male</option>
-							<option <?php if($personalbackground['0']['gender'] === '2') echo "selected"; ?>/>Female</option>
+							<option <?php if($personalbackground['0']['gender'] === '1') echo "selected"; ?> value="1">Male</option>
+							<option <?php if($personalbackground['0']['gender'] === '2') echo "selected"; ?> value="2">Female</option>
 						</select>
 					</div>
 				</div>

@@ -66,7 +66,11 @@ class Admin extends CI_Controller {
 							$this->load->view('admin/header');
 							$this->load->view('admin/nav');
 							$this->load->view('admin/databank');
+							$this->load->model('personalmodel');
 							$this->load->model('applicantModel');
+							$data['nationality'] = $this->personalmodel->nationality();
+							$data['civil'] = $this->personalmodel->civil();
+							$data['religion'] = $this->personalmodel->religion();
 							$data['personalbackground'] = $this->applicantModel->loadpersonalbackground($this->uri->segment(4));
 							$data['educationalbackground'] = $this->applicantModel->loadeducationalbackground($this->uri->segment(4));
 							$data['skillbackground'] = $this->applicantModel->loadskillbackground($this->uri->segment(4));

@@ -15,7 +15,7 @@
 		<div class="container-fluid tab-content">
 			<!--<h2>Personal Background</h2>-->
 			<div class="container-fluid well tab-pane active" id="personal-background">
-				<legend>Applicant Information</legend>
+				<legend>Applicant Information <a href="<?php echo base_url()."admin/worker/view/".$this->uri->segment(4) ?>" class="pull-right btn btn-info"><i class="icon-search icon-white"></i> View</a></legend>
 				<div class="row-fluid span">
 					<div class="span2"><label>Upload Photo</label></div>
 					<div class="span3">
@@ -376,7 +376,7 @@
 			</div>
 			<!--<h2>Educational Background</h2>-->
 			<div class="container-fluid well tab-pane" id="educational-background">
-				<legend>Educational Information</legend>
+				<legend>Educational Information<a href="<?php echo base_url()."admin/worker/view/".$this->uri->segment(4) ?>" class="pull-right btn btn-info"><i class="icon-search icon-white"></i> View</a></legend>
 				<div class="row-fluid span">
 					<div class="span2"><h5>Educational Level</h5></div>
 					<div class="span2"><h5>School Graduated / Course</h5></div>
@@ -546,7 +546,7 @@
 				<?php 
 					//echo print_r($skillbackground);
 				?>
-				<legend>Spcecial Skill Information</legend>
+				<legend>Spcecial Skill Information<a href="<?php echo base_url()."admin/worker/view/".$this->uri->segment(4) ?>" class="pull-right btn btn-info"><i class="icon-search icon-white"></i> View</a></legend>
 				<div class="row-fluid span">
 					<div class="span3"><h5>Couse / Seminar</h5></div>
 					<div class="span3"><h5>School or Training Center</h5></div>
@@ -639,7 +639,7 @@
 			</div>
 			<!--<h2>Wok Experience Background</h2>-->
 			<div class="container-fluid well tab-pane" id="work-experience-background">
-				<legend>Local Work Information</legend>
+				<legend>Local Work Information<a href="<?php echo base_url()."admin/worker/view/".$this->uri->segment(4) ?>" class="pull-right btn btn-info"><i class="icon-search icon-white"></i> View</a></legend>
 				<div class="row-fluid span">
 					<div class="span2"><h5>Company</h5></div>
 					<div class="span2"><h5>Position</h5></div>
@@ -730,7 +730,8 @@
 						$("#localButton"+node).remove();
 					}
 				</script>
-				<legend>Abroad Work Information</legend>
+				<br><br><br><br>
+				<legend>Abroad Work Information<a href="<?php echo base_url()."admin/worker/view/".$this->uri->segment(4) ?>" class="pull-right btn btn-info"><i class="icon-search icon-white"></i> View</a></legend>
 				<div class="row-fluid span">
 					<div class="span2"><h5>Company</h5></div>
 					<div class="span2"><h5>Position</h5></div>

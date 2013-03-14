@@ -13,7 +13,7 @@
 				<div class="row-fluid span">
 					<div class="span2" id="top_margin1" style="margin-top:190px"><label>Upload Photo</label></div>
 					<div class="span3">
-						<img src="<?php if(isset($uploadphoto[0]['appid'])) echo base_url()."photos/".$uploadphoto[0]['appid'].".".$uploadphoto[0]['type']; ?>" class="img-polaroid" style="height:200px;width:180px;margin-bottom:15px" 	>
+						<img src="<?php if(isset($uploadphoto[0]['appid'])) echo base_url()."documents/photos/".$uploadphoto[0]['appid'].".".$uploadphoto[0]['type']; ?>" class="img-polaroid" style="height:200px;width:180px;margin-bottom:15px" 	>
 					</div>
 					<div class="span2" id="top_margin2" style="margin-top:190px"><label>Date Apply</label></div> 
 					<div class="span3" id="top_margin3" style="margin-top:190px">
@@ -333,6 +333,14 @@
 					<div class="span2"><label>Mobile Number</label></div>
 					<div class="span3"><input type="text" name="spouseMobile" class="span12" value="<?php echo $personalbackground['0']['smobile'] ?>"/></div>
 				</div>
+				<legend>Document Attachment</legend>
+				<div class="row-fluid span">
+					<div class="span2"><label>Upload Resume</label></div>
+					<div class="span3">
+						<a href="<?php echo "http://docs.google.com/viewer?url=".base_url()."documents/resumes/".$uploadresume['0']['appid'].".".$uploadresume['0']['type'] ?>" class="btn" data-toggle="tooltip" data-placement="top" title="" data-original-title="View" id="view"><i class="icon-zoom-in"></i></a>
+						<a href="<?php echo base_url()."documents/resumes/".$uploadresume['0']['appid'].".".$uploadresume['0']['type'] ?>" class="btn" data-toggle="tooltip" data-placement="top" title="" data-original-title="Download" id="download"><i class=" icon-download-alt"></i></a>
+					</div>
+				 </div>
 			</div>
 			<!--<h2>Educational Background</h2>-->
 			<div class="container-fluid well tab-pane" id="educational-background">
@@ -746,5 +754,6 @@
 		var zero = places - num.toString().length + 1;
 		return Array(+(zero > 0 && zero)).join("0") + num;
 	}
-	
+	$('#view').tooltip();
+	$('#download').tooltip();
 </script>

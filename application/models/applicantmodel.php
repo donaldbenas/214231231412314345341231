@@ -53,6 +53,7 @@ class applicantModel extends CI_Model{
 		parent::__construct();
 		$this->load->database();
 		$this->load->helper('array');
+		$this->load->helper("file");
 	}
 	
 	public function save(){
@@ -63,29 +64,69 @@ class applicantModel extends CI_Model{
 				$appid = $row['appid'];
 			}
 		}
-		$appid = $appid + 1;
-				
-		$type = end(explode(".",$_FILES['photo']['name']));
-		$data = array(
-			'appid' => $appid,
-			'type' => $type,
-			'size' => $_FILES['photo']['size']
-		);
+		$appid = $appid + 1;		
 		
-		$config['upload_path'] = './photos/';
-		$path=$config['upload_path'];
-		$config['allowed_types'] = 'gif|jpg|jpeg|png';
-		$config['file_name'] = $appid.".".$type;
-		$config['max_size'] = '1024';
-		$config['max_width'] = '1920';
-		$config['max_height'] = '1280';
-		$config['overwrite'] = TRUE;
-		$this->load->library('upload');
-		foreach ($_FILES as $key => $value){
-			if (!empty($key['name'])){
-				$this->upload->initialize($config);
-				if ($this->upload->do_upload($key)){
-					$this->db->insert("photo",$data);
+		if(isset($_FILES['photo'])){			
+			$query = $this->db->query("SELECT * FROM photo WHERE appid = ?",array($appid));
+			foreach($query->result() as $rows){
+				unlink("./documents/photos/".$rows->appid.".".$rows->type);
+			}
+			$this->db->query("DELETE FROM photo WHERE appid = ?",array($appid));
+			$type = end(explode(".",$_FILES['photo']['name']));
+			$data = array(
+				'appid' => $appid,
+				'type' => $type,
+				'size' => $_FILES['photo']['size']
+			);
+			
+			$config['upload_path'] = './documents/photos/';
+			$config['upload_path'];
+			$config['allowed_types'] = 'gif|jpg|jpeg|png';
+			$config['file_name'] = $appid.".".$type;
+			$config['max_size'] = '1024';
+			$config['max_width'] = '1920';
+			$config['max_height'] = '1280';
+			$config['overwrite'] = TRUE;
+			$this->load->library('upload');
+			foreach ($_FILES as $key => $value){
+				if (!empty($key['name'])){
+					$this->upload->initialize($config);
+					if ($this->upload->do_upload($key)){
+						$this->db->insert("photo",$data);
+					}
+				}
+			}
+		}
+		
+		if(isset($_FILES['resume'])){
+			$query = $this->db->query("SELECT * FROM resume WHERE appid = ?",array($appid));
+			foreach($query->result() as $rows){
+				unlink("./documents/resumes/".$rows->appid.".".$rows->type);
+			}
+			$this->db->query("DELETE FROM resume WHERE appid = ?",array($appid));
+			$type = end(explode(".",$_FILES['resume']['name']));
+			$data = array(
+				'appid' => $appid,
+				'type' => $type,
+				'size' => $_FILES['resume']['size']
+			);
+			
+			$config['upload_path'] = './documents/resumes/';
+			$config['upload_path'];
+			$config['allowed_types'] = 'pdf|doc|docx|';
+			$config['file_name'] = $appid.".".$type;
+			$config['max_size'] = '1024';
+			$config['max_width'] = '1920';
+			$config['max_height'] = '1280';
+			$config['overwrite'] = TRUE;
+			$this->load->library('upload');
+			foreach ($_FILES as $key => $value){
+				if (!empty($key['name'])){
+					$this->upload->initialize($config);
+					$this->upload->initialize($config);
+					if ($this->upload->do_upload($key)){
+						$this->db->insert("resume",$data);
+					}
 				}
 			}
 		}
@@ -202,17 +243,11 @@ class applicantModel extends CI_Model{
 	
 	public function edit($appid){
 		
-		$type = 'jpg';
-		$config['upload_path'] = './photos/';
-		$path=$config['upload_path'];
-		$config['allowed_types'] = 'gif|jpg|jpeg|png';
-		$config['file_name'] = $appid.".".$type;
-		$config['max_size'] = '1024';
-		$config['max_width'] = '1920';
-		$config['max_height'] = '1280';
-		$config['overwrite'] = TRUE;
-		
-		if(isset($_FILES['photo'])){
+		if(isset($_FILES['photo'])){			
+			$query = $this->db->query("SELECT * FROM photo WHERE appid = ?",array($appid));
+			foreach($query->result() as $rows){
+				unlink("./documents/photos/".$rows->appid.".".$rows->type);
+			}
 			$this->db->query("DELETE FROM photo WHERE appid = ?",array($appid));
 			$type = end(explode(".",$_FILES['photo']['name']));
 			$data = array(
@@ -221,8 +256,8 @@ class applicantModel extends CI_Model{
 				'size' => $_FILES['photo']['size']
 			);
 			
-			$config['upload_path'] = './photos/';
-			$path=$config['upload_path'];
+			$config['upload_path'] = './documents/photos/';
+			$config['upload_path'];
 			$config['allowed_types'] = 'gif|jpg|jpeg|png';
 			$config['file_name'] = $appid.".".$type;
 			$config['max_size'] = '1024';
@@ -235,6 +270,39 @@ class applicantModel extends CI_Model{
 					$this->upload->initialize($config);
 					if ($this->upload->do_upload($key)){
 						$this->db->insert("photo",$data);
+					}
+				}
+			}
+		}
+		
+		if(isset($_FILES['resume'])){
+			$query = $this->db->query("SELECT * FROM resume WHERE appid = ?",array($appid));
+			foreach($query->result() as $rows){
+				unlink("./documents/resumes/".$rows->appid.".".$rows->type);
+			}
+			$this->db->query("DELETE FROM resume WHERE appid = ?",array($appid));
+			$type = end(explode(".",$_FILES['resume']['name']));
+			$data = array(
+				'appid' => $appid,
+				'type' => $type,
+				'size' => $_FILES['resume']['size']
+			);
+			
+			$config['upload_path'] = './documents/resumes/';
+			$config['upload_path'];
+			$config['allowed_types'] = 'pdf|doc|docx|';
+			$config['file_name'] = $appid.".".$type;
+			$config['max_size'] = '1024';
+			$config['max_width'] = '1920';
+			$config['max_height'] = '1280';
+			$config['overwrite'] = TRUE;
+			$this->load->library('upload');
+			foreach ($_FILES as $key => $value){
+				if (!empty($key['name'])){
+					$this->upload->initialize($config);
+					$this->upload->initialize($config);
+					if ($this->upload->do_upload($key)){
+						$this->db->insert("resume",$data);
 					}
 				}
 			}
@@ -401,6 +469,14 @@ class applicantModel extends CI_Model{
 	public function loaduploadphoto($appid){
 		$this->db->select('*');
 		$this->db->from('photo');
+		$this->db->where('appid',$appid);
+		$data = $this->db->get();
+		return $data->result_array();
+	}
+	
+	public function loaduploadresume($appid){
+		$this->db->select('*');
+		$this->db->from('resume');
 		$this->db->where('appid',$appid);
 		$data = $this->db->get();
 		return $data->result_array();

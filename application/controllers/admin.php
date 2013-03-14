@@ -55,6 +55,7 @@ class Admin extends CI_Controller {
 							$data['localexperience'] = $this->applicantModel->loadlocalexperience($this->uri->segment(4));
 							$data['abroadexperience'] = $this->applicantModel->loadabroadexperience($this->uri->segment(4));
 							$data['uploadphoto'] = $this->applicantModel->loaduploadphoto($this->uri->segment(4));
+							$data['uploadresume'] = $this->applicantModel->loaduploadphoto($this->uri->segment(4));
 							if(isset($_POST['submit'])){
 								$this->applicantModel->edit($this->input->post('appid'));
 								redirect(base_url()."admin/worker/edit/".$this->input->post('appid'));
@@ -77,6 +78,7 @@ class Admin extends CI_Controller {
 							$data['localexperience'] = $this->applicantModel->loadlocalexperience($this->uri->segment(4));
 							$data['abroadexperience'] = $this->applicantModel->loadabroadexperience($this->uri->segment(4));
 							$data['uploadphoto'] = $this->applicantModel->loaduploadphoto($this->uri->segment(4));
+							$data['uploadresume'] = $this->applicantModel->loaduploadresume($this->uri->segment(4));
 							$this->load->view('admin/applicantview',$data);
 							$this->load->view('admin/footer');
 							break;

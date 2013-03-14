@@ -352,6 +352,26 @@
 					<div class="span2"><label>Mobile Number</label></div>
 					<div class="span3"><input type="text" name="spouseMobile" class="span12" value="<?php echo $personalbackground['0']['smobile'] ?>"/></div>
 				</div>
+				<legend>Document Attachment</legend>
+				<div class="row-fluid span">
+					<div class="span2"><label>Upload Resume</label></div>
+					<div class="span3">
+						<div class="fileupload fileupload-new" data-provides="fileupload">
+						  <div class="input-append">
+							<div class="uneditable-input span2">
+								<i class="icon-file fileupload-exists"></i> 
+								<span class="fileupload-preview"></span>
+							</div>
+							<span class="btn btn-file">
+								<span class="fileupload-new" onclick="$('#resume').click()">Select file</span>
+								<span class="fileupload-exists" onclick="$('#resume').click()">Change</span>
+								<input type="file" style="display:none" name="resume" id="resume"/>
+							</span>
+								<a href="#" class="btn fileupload-exists btn-danger" data-dismiss="fileupload">Remove</a>
+						  </div>
+						</div>
+					</div>
+				 </div>
 				<input type="submit" name="submit" class="btn btn-primary" style="float:right" value="Submit">
 			</div>
 			<!--<h2>Educational Background</h2>-->

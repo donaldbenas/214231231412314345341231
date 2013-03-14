@@ -118,7 +118,7 @@
 					<div class="span2"><label>Salary Expected</label></div>
 					<div class="span3"><input type="text" name="salary2" class="span12" value="<?php echo $personalbackground['0']['salary2'] ?>"/></div>
 				</div>
-				<legend>Personal Information</legend>
+				<legend>Personal Information<a href="<?php echo base_url()."admin/worker/view/".$this->uri->segment(4) ?>" class="pull-right btn btn-info"><i class="icon-search icon-white"></i> View</a></legend>
 				<div class="row-fluid span">
 					<div class="span2"><label class="required">Firt Name</label></div>
 					<div class="span3"><input type="text" name="firstname" class="span12" value="<?php echo $personalbackground['0']['firstname'] ?>"/></div>
@@ -224,7 +224,7 @@
 						</select>
 					</div>
 				</div>
-				<legend>Address Information</legend>
+				<legend>Address Information<a href="<?php echo base_url()."admin/worker/view/".$this->uri->segment(4) ?>" class="pull-right btn btn-info"><i class="icon-search icon-white"></i> View</a></legend>
 				<div class="row-fluid span">
 					<div class="span2"><label>Current Address</label></div>
 					<div class="span3"><input type="text" name="currentAddressMunicpality" placeholder="Town / Municipality" class="span12" value="<?php $caddress = explode('--',$personalbackground['0']['caddress'] ); if(isset($caddress[0])) echo $caddress[0]; ?>"/></div>
@@ -249,7 +249,7 @@
 					<div class="span2"><label>Mobile Number</label></div>
 					<div class="span3"><input type="text" name="permanentMobile" class="span12" value="<?php echo $personalbackground['0']['pmobile'] ?>"/></div>
 				</div>
-				<legend>Other Information</legend>
+				<legend>Other Information<a href="<?php echo base_url()."admin/worker/view/".$this->uri->segment(4) ?>" class="pull-right btn btn-info"><i class="icon-search icon-white"></i> View</a></legend>
 				<div class="row-fluid span">
 					<div class="span2"><label>Religion</label></div>
 					<div class="span3">
@@ -321,7 +321,7 @@
 					<div class="span2"><label>Pagibig Number</label></div>
 					<div class="span3"><input type="text" name="pagibig" id="pagibig" class="span12" maxlength="14" placeholder="____-____-____" value="<?php echo $personalbackground['0']['pagibig'] ?>"/></div>
 				</div>
-				<legend>Emergency Information</legend>
+				<legend>Emergency Information<a href="<?php echo base_url()."admin/worker/view/".$this->uri->segment(4) ?>" class="pull-right btn btn-info"><i class="icon-search icon-white"></i> View</a></legend>
 				<div class="row-fluid span">
 					<div class="span2"><label>Person Noitfy</label></div>
 					<div class="span3"><input type="text" name="emergencyNotify"class="span12" value="<?php echo $personalbackground['0']['notify'] ?>"/></div>
@@ -352,7 +352,7 @@
 					<div class="span2"><label>Mobile Number</label></div>
 					<div class="span3"><input type="text" name="spouseMobile" class="span12" value="<?php echo $personalbackground['0']['smobile'] ?>"/></div>
 				</div>
-				<legend>Document Attachment</legend>
+				<legend>Document Attachment<a href="<?php echo base_url()."admin/worker/view/".$this->uri->segment(4) ?>" class="pull-right btn btn-info"><i class="icon-search icon-white"></i> View</a></legend>
 				<div class="row-fluid span">
 					<div class="span2"><label>Upload Resume</label></div>
 					<div class="span3">

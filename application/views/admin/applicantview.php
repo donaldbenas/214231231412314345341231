@@ -9,7 +9,7 @@
 		<div class="container-fluid">
 			<!--<h2>Personal Background</h2>-->
 			<div class="container-fluid well" id="personal-background">
-				<legend>Applicant Information</legend>
+				<legend>Applicant Information<a href="<?php echo base_url()."admin/worker/edit/".$this->uri->segment(4) ?>" class="pull-right btn btn-info"><i class="icon-edit icon-white"></i> Edit</a></legend>
 				<div class="row-fluid span">
 					<div class="span2" id="top_margin1" style="margin-top:190px"><label>Upload Photo</label></div>
 					<div class="span3">
@@ -99,7 +99,7 @@
 					<div class="span2"><label>Salary Expected</label></div>
 					<div class="span3"><input type="text" name="salary2" class="span12" value="<?php echo $personalbackground['0']['salary2'] ?>"/></div>
 				</div>
-				<legend>Personal Information</legend>
+				<legend>Personal Information<a href="<?php echo base_url()."admin/worker/edit/".$this->uri->segment(4) ?>" class="pull-right btn btn-info"><i class="icon-edit icon-white"></i> Edit</a></legend>
 				<div class="row-fluid span">
 					<div class="span2"><label class="required">Firt Name</label></div>
 					<div class="span3"><input type="text" name="firstname" class="span12" value="<?php echo $personalbackground['0']['firstname'] ?>"/></div>
@@ -205,7 +205,7 @@
 						</select>
 					</div>
 				</div>
-				<legend>Address Information</legend>
+				<legend>Address Information<a href="<?php echo base_url()."admin/worker/edit/".$this->uri->segment(4) ?>" class="pull-right btn btn-info"><i class="icon-edit icon-white"></i> Edit</a></legend>
 				<div class="row-fluid span">
 					<div class="span2"><label>Current Address</label></div>
 					<div class="span3"><input type="text" name="currentAddressMunicpality" placeholder="Town / Municipality" class="span12" value="<?php $caddress = explode('--',$personalbackground['0']['caddress'] ); if(isset($caddress[0])) echo $caddress[0]; ?>"/></div>
@@ -230,7 +230,7 @@
 					<div class="span2"><label>Mobile Number</label></div>
 					<div class="span3"><input type="text" name="permanentMobile" class="span12" value="<?php echo $personalbackground['0']['pmobile'] ?>"/></div>
 				</div>
-				<legend>Other Information</legend>
+				<legend>Other Information<a href="<?php echo base_url()."admin/worker/edit/".$this->uri->segment(4) ?>" class="pull-right btn btn-info"><i class="icon-edit icon-white"></i> Edit</a></legend>
 				<div class="row-fluid span">
 					<div class="span2"><label>Religion</label></div>
 					<div class="span3">
@@ -302,7 +302,7 @@
 					<div class="span2"><label>Pagibig Number</label></div>
 					<div class="span3"><input type="text" name="pagibig" id="pagibig" class="span12" maxlength="14" placeholder="____-____-____" value="<?php echo $personalbackground['0']['pagibig'] ?>"/></div>
 				</div>
-				<legend>Emergency Information</legend>
+				<legend>Emergency Information<a href="<?php echo base_url()."admin/worker/edit/".$this->uri->segment(4) ?>" class="pull-right btn btn-info"><i class="icon-edit icon-white"></i> Edit</a></legend>
 				<div class="row-fluid span">
 					<div class="span2"><label>Person Noitfy</label></div>
 					<div class="span3"><input type="text" name="emergencyNotify"class="span12" value="<?php echo $personalbackground['0']['notify'] ?>"/></div>
@@ -333,18 +333,20 @@
 					<div class="span2"><label>Mobile Number</label></div>
 					<div class="span3"><input type="text" name="spouseMobile" class="span12" value="<?php echo $personalbackground['0']['smobile'] ?>"/></div>
 				</div>
-				<legend>Document Attachment</legend>
+				<legend>Document Attachment<a href="<?php echo base_url()."admin/worker/edit/".$this->uri->segment(4) ?>" class="pull-right btn btn-info"><i class="icon-edit icon-white"></i> Edit</a></legend>
 				<div class="row-fluid span">
 					<div class="span2"><label>Upload Resume</label></div>
 					<div class="span3">
-						<a href="<?php echo "http://docs.google.com/viewer?url=".base_url()."documents/resumes/".$uploadresume['0']['appid'].".".$uploadresume['0']['type'] ?>" class="btn" data-toggle="tooltip" data-placement="top" title="" data-original-title="View" id="view"><i class="icon-zoom-in"></i></a>
-						<a href="<?php echo base_url()."documents/resumes/".$uploadresume['0']['appid'].".".$uploadresume['0']['type'] ?>" class="btn" data-toggle="tooltip" data-placement="top" title="" data-original-title="Download" id="download"><i class=" icon-download-alt"></i></a>
+						<?php if(isset($uploadresume['0'])){ ?>
+						<a href="<?php echo "http://docs.google.com/viewer?url=".base_url()."documents/resumes/".$uploadresume['0']['appid'].".".$uploadresume['0']['type'] ?>" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="" data-original-title="View" id="view"><i class="icon-zoom-in"></i></a>
+						<a href="<?php echo base_url()."documents/resumes/".$uploadresume['0']['appid'].".".$uploadresume['0']['type'] ?>" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="" data-original-title="Download" id="download"><i class=" icon-download-alt"></i></a>
+						<?php }else  echo "No Resume Uploaded"; ?>
 					</div>
 				 </div>
 			</div>
 			<!--<h2>Educational Background</h2>-->
 			<div class="container-fluid well tab-pane" id="educational-background">
-				<legend>Educational Information</legend>
+				<legend>Educational Information<a href="<?php echo base_url()."admin/worker/edit/".$this->uri->segment(4) ?>" class="pull-right btn btn-info"><i class="icon-edit icon-white"></i> Edit</a></legend>
 				<div class="row-fluid span">
 					<div class="span2"><h5>Educational Level</h5></div>
 					<div class="span2"><h5>School Graduated / Course</h5></div>
@@ -513,7 +515,7 @@
 				<?php 
 					//echo print_r($skillbackground);
 				?>
-				<legend>Spcecial Skill Information</legend>
+				<legend>Spcecial Skill Information<a href="<?php echo base_url()."admin/worker/edit/".$this->uri->segment(4) ?>" class="pull-right btn btn-info"><i class="icon-edit icon-white"></i> Edit</a></legend>
 				<div class="row-fluid span">
 					<div class="span3"><h5>Couse / Seminar</h5></div>
 					<div class="span3"><h5>School or Training Center</h5></div>
@@ -575,7 +577,7 @@
 			</div>
 			<!--<h2>Wok Experience Background</h2>-->
 			<div class="container-fluid well tab-pane" id="work-experience-background">
-				<legend>Local Work Information</legend>
+				<legend>Local Work Information<a href="<?php echo base_url()."admin/worker/edit/".$this->uri->segment(4) ?>" class="pull-right btn btn-info"><i class="icon-edit icon-white"></i> Edit</a></legend>
 				<div class="row-fluid span">
 					<div class="span2"><h5>Company</h5></div>
 					<div class="span2"><h5>Position</h5></div>
@@ -637,7 +639,7 @@
 					}
 				</script>
 				<hr>
-				<legend>Abroad Work Information</legend>
+				<legend>Abroad Work Information<a href="<?php echo base_url()."admin/worker/edit/".$this->uri->segment(4) ?>" class="pull-right btn btn-info"><i class="icon-edit icon-white"></i> Edit</a></legend>
 				<div class="row-fluid span">
 					<div class="span2"><h5>Company</h5></div>
 					<div class="span2"><h5>Position</h5></div>

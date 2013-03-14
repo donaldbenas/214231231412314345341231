@@ -66,7 +66,7 @@ class applicantModel extends CI_Model{
 		}
 		$appid = $appid + 1;		
 		
-		if(isset($_FILES['photo'])){			
+		if($_FILES['photo']['name']!=""){			
 			$query = $this->db->query("SELECT * FROM photo WHERE appid = ?",array($appid));
 			foreach($query->result() as $rows){
 				unlink("./documents/photos/".$rows->appid.".".$rows->type);
@@ -98,7 +98,7 @@ class applicantModel extends CI_Model{
 			}
 		}
 		
-		if(isset($_FILES['resume'])){
+		if($_FILES['resume']['name']!=""){
 			$query = $this->db->query("SELECT * FROM resume WHERE appid = ?",array($appid));
 			foreach($query->result() as $rows){
 				unlink("./documents/resumes/".$rows->appid.".".$rows->type);
@@ -243,7 +243,7 @@ class applicantModel extends CI_Model{
 	
 	public function edit($appid){
 		
-		if(isset($_FILES['photo'])){			
+		if($_FILES['photo']['name']!=""){			
 			$query = $this->db->query("SELECT * FROM photo WHERE appid = ?",array($appid));
 			foreach($query->result() as $rows){
 				unlink("./documents/photos/".$rows->appid.".".$rows->type);
@@ -275,7 +275,7 @@ class applicantModel extends CI_Model{
 			}
 		}
 		
-		if(isset($_FILES['resume'])){
+		if($_FILES['resume']['name']!=""){
 			$query = $this->db->query("SELECT * FROM resume WHERE appid = ?",array($appid));
 			foreach($query->result() as $rows){
 				unlink("./documents/resumes/".$rows->appid.".".$rows->type);

@@ -83,9 +83,7 @@ class applicantModel extends CI_Model{
 			$config['upload_path'];
 			$config['allowed_types'] = 'gif|jpg|jpeg|png';
 			$config['file_name'] = $appid.".".$type;
-			$config['max_size'] = '1024';
-			$config['max_width'] = '1920';
-			$config['max_height'] = '1280';
+			$config['max_size'] = '20000';
 			$config['overwrite'] = TRUE;
 			$this->load->library('upload');
 			foreach ($_FILES as $key => $value){
@@ -115,9 +113,7 @@ class applicantModel extends CI_Model{
 			$config['upload_path'];
 			$config['allowed_types'] = 'pdf|doc|docx|';
 			$config['file_name'] = $appid.".".$type;
-			$config['max_size'] = '1024';
-			$config['max_width'] = '1920';
-			$config['max_height'] = '1280';
+			$config['max_size'] = '20000';
 			$config['overwrite'] = TRUE;
 			$this->load->library('upload');
 			foreach ($_FILES as $key => $value){
@@ -260,9 +256,7 @@ class applicantModel extends CI_Model{
 			$config['upload_path'];
 			$config['allowed_types'] = 'gif|jpg|jpeg|png';
 			$config['file_name'] = $appid.".".$type;
-			$config['max_size'] = '1024';
-			$config['max_width'] = '1920';
-			$config['max_height'] = '1280';
+			$config['max_size'] = '20000';
 			$config['overwrite'] = TRUE;
 			$this->load->library('upload');
 			foreach ($_FILES as $key => $value){
@@ -292,9 +286,7 @@ class applicantModel extends CI_Model{
 			$config['upload_path'];
 			$config['allowed_types'] = 'pdf|doc|docx|';
 			$config['file_name'] = $appid.".".$type;
-			$config['max_size'] = '1024';
-			$config['max_width'] = '1920';
-			$config['max_height'] = '1280';
+			$config['max_size'] = '20000';
 			$config['overwrite'] = TRUE;
 			$this->load->library('upload');
 			foreach ($_FILES as $key => $value){

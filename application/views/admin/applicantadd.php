@@ -4,10 +4,10 @@
   <li><a href="#">Print Applicant</a></li>
 </ul>
 <ul class="nav nav-tabs" id="myTab">
-  <li class="active"><a href="#personal-background" id="pb"><h5>Personal Background</h5></a></li>
-  <li><a href="#educational-background" id="eb"><h5>Educational Background</h5></a></li>
-  <li><a href="#special-skill-background" id="sb"><h5>Special Skill Background</h5></a></li>
-  <li><a href="#work-experience-background" id="wb"><h5>Work Experience Background</h5></a></li>
+  <li class="active"><a href="#personal-background" id="pb">Personal Background</a></li>
+  <li><a href="#educational-background" id="eb">Educational Background</a></li>
+  <li><a href="#special-skill-background" id="sb">Special Skill Background</a></li>
+  <li><a href="#work-experience-background" id="wb">Work Experience Background</a></li>
 </ul>
 <form method="post" name="myform" enctype="multipart/form-data" id="myform">
 	<fieldset>

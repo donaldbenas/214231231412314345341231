@@ -1,6 +1,6 @@
-	<div id="navbar-example" class="navbar navbar-static" style="margin-left:20px;margin-right:20px">
+	<div class="navbar navbar-fixed-top">
 	  <div class="navbar-inner">
-		<div class="container" style="width: auto;">
+		<div class="container-fluid" style="width: auto;">
 		  <a class="brand" href="#">Administrator</a>
 		  <ul class="nav" role="navigation">
 			<li class="dropdown">

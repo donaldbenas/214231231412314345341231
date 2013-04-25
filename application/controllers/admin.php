@@ -15,6 +15,21 @@ class Admin extends CI_Controller {
 		
 	}
 	
+	public function rnm(){
+		$this->load->database();
+		$sql = "SELECT id, firstname, lastname FROM applicant ORDER BY lastname";
+		$query = $this->db->query($sql);
+		foreach($query->result() as $rows){
+			$fname = strtolower($rows->lastname)."_".strtolower($rows->firstname);
+			mkdir("./documents/attachments/".$fname);
+				//rename("./documents/attachments/".$fname,"./documents/attachments/".$rows->id);
+		}			
+		echo $i;
+		//mkdir("./documents/attachments/", 0700);
+	    //rename("./documents/attachments/","./documents/attachments/");
+
+	}
+	
 	public function worker($link)
 	{
 		$this->load->helper('url');

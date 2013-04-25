@@ -14,6 +14,14 @@
 		.tab-content{
 			overflow:hidden;
 		}
+		body {
+			padding-top: 60px;
+		}
+		@media (max-width: 979px) {
+			body {
+				padding-top: 0px;
+			}
+		}
 	</style>
 	<script src="<?php echo base_url() ?>js/jquery.js"></script>
 	<script src="<?php echo base_url() ?>js/jquery.maskedinput-1.3.js"></script>

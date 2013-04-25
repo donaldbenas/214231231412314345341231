@@ -4,9 +4,8 @@
   <li><a href="#">Print Applicant</a></li>
 </ul>
 <form method="post" name="myform" enctype="multipart/form-data" id="myform">
-	<input type="text" name="appid" value="<?php echo $personalbackground['0']['appid'] ?>" style="display:none">
 	<fieldset>
-		<div class="container-fluid">
+		<div class="container" style="width:900px;">
 			<!--<h2>Personal Background</h2>-->
 			<div class="container-fluid well" id="personal-background">
 				<legend>Applicant Information<a href="<?php echo base_url()."admin/worker/edit/".$this->uri->segment(4) ?>" class="pull-right btn btn-info"><i class="icon-edit icon-white"></i> Edit</a></legend>
@@ -253,45 +252,16 @@
 				</div>
 				<div class="row-fluid span">
 					<div class="span2"><label>Height</label></div>
-					<div class="span3 input-prepend">
-						<span class="add-on">CM</span>
+					<div class="span3">
 						<input type="text" id="prependedInput"  name="height" class="span3" placeholder="Centimeter" value="<?php echo $personalbackground['0']['height'] ?>"/>
-						<span class="add-on" style="margin-left:10px">CONVERTER</span>
-						<input id="prependedInput" type="text"  class="span2" name="feet" placeholder="FT">
-						<script>
-							$(document).ready(function(){
-									$("input[name=feet]").keyup(function () {
-									  var eng =$(this).val();
-									  var ans = eng.split("'");
-									  if(ans[1]!=null) var inch = 30.48*(ans[1]/12);
-									  else var inch=0;
-									  if(ans[0]!=null) var feet = (ans[0]*30.48);
-									  else var feet=0;
-									  var conv = feet + inch;
-									  if(conv!=0)$("input[name=height]").val(conv.toFixed(0));
-									}).keyup()
-							});
-						</script>
 					</div>
 					<div class="span2"><label>SSS Number</label></div>
 					<div class="span3"><input type="text" name="sss" id="sss" class="span12" maxlength="11" placeholder="___-__-____" value="<?php echo $personalbackground['0']['sss'] ?>"/></div>
 				</div>
 				<div class="row-fluid span">
 					<div class="span2"><label>Weight</label></div>
-					<div class="span3 input-prepend">
-						<span class="add-on">KG</span>
+					<div class="span3">
 						<input type="text" id="prependedInput"  name="weight" class="span3" placeholder="Kilogram" value="<?php echo $personalbackground['0']['weight'] ?>"/>
-						<span class="add-on" style="margin-left:10px">CONVERTER</span>
-						<input id="prependedInput" type="text"  class="span2" name="lbs" placeholder="LBS">
-						<script>
-							$(document).ready(function(){
-									$("input[name=lbs]").keyup(function () {
-									  var ans =$(this).val();
-									  var conv = ans*0.45359;
-									  if(conv!=0)$("input[name=weight]").val(conv.toFixed(0));
-									}).keyup()
-							});
-						</script>
 					</div>
 					<div class="span2"><label>TIN Number</label></div>
 					<div class="span3"><input type="text" name="tin" id="tin" class="span12" maxlength="10" placeholder="__-_______" value="<?php echo $personalbackground['0']['tin'] ?>"/></div>
@@ -349,14 +319,14 @@
 				<legend>Educational Information<a href="<?php echo base_url()."admin/worker/edit/".$this->uri->segment(4) ?>" class="pull-right btn btn-info"><i class="icon-edit icon-white"></i> Edit</a></legend>
 				<div class="row-fluid span">
 					<div class="span2"><h5>Educational Level</h5></div>
-					<div class="span2"><h5>School Graduated / Course</h5></div>
+					<div class="span3"><h5>School Graduated / Course</h5></div>
 					<div class="span2" style="text-align:center"><h5>Year Start</h5></div>
 					<div class="span2" style="text-align:center"><h5>Year End</h5></div>
 					<div class="span2"><h5>College Degree</h5></div>
 				</div>
 				<div class="row-fluid span">
 					<div class="span2"><label>Primary Level</label></div>
-					<div class="span2"><input type="text" name="primarySchool" class="span12" value="<?php echo $educationalbackground['0']['elementary'] ?>"/></div>
+					<div class="span3"><input type="text" name="primarySchool" class="span12" value="<?php echo $educationalbackground['0']['elementary'] ?>"/></div>
 					<div class="span2" style="text-align:center">
 						<select name="primaryStart"  class="span6">
 							<option>YYYY</option>
@@ -387,7 +357,7 @@
 				</div>
 				<div class="row-fluid span">
 					<div class="span2"><label>Secondary Level</label></div>
-					<div class="span2"><input type="text" name="secondarySchool" class="span12" value="<?php echo $educationalbackground['0']['highschool'] ?>"/></div>
+					<div class="span3"><input type="text" name="secondarySchool" class="span12" value="<?php echo $educationalbackground['0']['highschool'] ?>"/></div>
 					<div class="span2" style="text-align:center">
 						<select name="secondaryStart"  class="span6">
 							<option>YYYY</option>
@@ -418,7 +388,7 @@
 				</div>
 				<div class="row-fluid span">
 					<div class="span2"><label>College Level</label></div>
-					<div class="span2"><input type="text" name="collegeSchool" class="span12" value="<?php echo $educationalbackground['0']['college'] ?>"/></div>
+					<div class="span3"><input type="text" name="collegeSchool" class="span12" value="<?php echo $educationalbackground['0']['college'] ?>"/></div>
 					<div class="span2" style="text-align:center">
 						<select name="collegeStart"  class="span6">
 							<option>YYYY</option>
@@ -449,7 +419,7 @@
 				</div>
 				<div class="row-fluid span">
 					<div class="span2"><label>Vocational Course</label></div>
-					<div class="span2"><input type="text" name="vocationalCourse" class="span12" value="<?php echo $educationalbackground['0']['vocational'] ?>"/></div>
+					<div class="span3"><input type="text" name="vocationalCourse" class="span12" value="<?php echo $educationalbackground['0']['vocational'] ?>"/></div>
 					<div class="span2" style="text-align:center">
 						<select name="vocationalStart"  class="span6">
 							<option>YYYY</option>
@@ -480,7 +450,7 @@
 				</div>
 				<div class="row-fluid span">
 					<div class="span2"><label>Post Graduate</label></div>
-					<div class="span2"><input type="text" name="postSchool" class="span12" value="<?php echo $educationalbackground['0']['postgraduate'] ?>"/></div>
+					<div class="span3"><input type="text" name="postSchool" class="span12" value="<?php echo $educationalbackground['0']['postgraduate'] ?>"/></div>
 					<div class="span2" style="text-align:center">
 						<select name="postStart"  class="span6">
 							<option>YYYY</option>
@@ -538,7 +508,7 @@
 								var bStartDate=startDate.split("-");
 								var endDate=skill[i]['endDate'];
 								var bEndDate=endDate.split("-");
-								$('#skill-background').append(""+
+								$('#skill-background').append("<div class=\"row-fluid\">"+
 										"<div id='skillCourse"+id+"' class='span3'"+style+"><input type='text' name='skillCourse[]' class='span12' value='"+skill[i].course+"'/></div>"+
 										"<div id='skillSchool"+id+"' class='span3'><input type='text' name='skillSchool[]' class='span12' value='"+skill[i].school+"'/></div>"+
 										"<div id='skillStart"+id+"' class='span2' style='text-align:center'>"+
@@ -560,19 +530,12 @@
 											"</select>"+
 										"</div>"+
 										"<div id='skillButton"+id+"'  class='span1' style='text-align:left'>"+
-										"</div>"
+										"</div></div>"
 								);
 								id++;
 							}
 						};
 					});
-					function deletenode(node){
-						$("#skillCourse"+node).remove();
-						$("#skillSchool"+node).remove();
-						$("#skillStart"+node).remove();
-						$("#skillEnd"+node).remove();
-						$("#skillButton"+node).remove();
-					}
 				</script>
 			</div>
 			<!--<h2>Wok Experience Background</h2>-->
@@ -600,7 +563,7 @@
 								var bStartDate=startDate.split("-");
 								var endDate=local[i]['end'];
 								var bEndDate=endDate.split("-");
-								$('#local-experience').append(""+
+								$('#local-experience').append("<div class=\"row-fluid\">"+
 										"<div id='localExperienceCompany"+id+"'  class='span2' "+style+"><input type='text' name='localExperienceCompany[]' class='span12' value='"+local[i].company+"'/></div>"+
 										"<div id='localExperiencePosition"+id+"'  class='span2'><input type='text' name='localExperiencePosition[]' class='span12' value='"+local[i].position+"'/></div>"+
 										"<div id='localExperienceStart"+id+"'  class='span2' style='text-align:center'>"+
@@ -622,21 +585,12 @@
 										"<div id='localExperienceDuties"+id+"'  class='span2'><input type='text' name='localExperienceDuties[]' class='span12' value='"+local[i].main+"'/></div>"+
 										"<div id='localExperienceReason"+id+"'  class='span1'><input type='text' name='localExperienceReason[]' class='span12' value='"+local[i].reason+"'/></div>"+
 										"<div id='localButton"+id+"'  class='span1' style='text-align:left;width:10px'>"+
-										"</div>"
+										"</div></div>"
 								);
 								id++;
 							}
 						};
 					});
-					function deletelocalnode(node){
-						$("#localExperienceCompany"+node).remove();
-						$("#localExperiencePosition"+node).remove();
-						$("#localExperienceStart"+node).remove();
-						$("#localExperienceEnd"+node).remove();
-						$("#localExperienceDuties"+node).remove();
-						$("#localExperienceReason"+node).remove();
-						$("#localButton"+node).remove();
-					}
 				</script>
 				<hr>
 				<legend>Abroad Work Information<a href="<?php echo base_url()."admin/worker/edit/".$this->uri->segment(4) ?>" class="pull-right btn btn-info"><i class="icon-edit icon-white"></i> Edit</a></legend>
@@ -648,7 +602,7 @@
 					<div class="span2"><h5>Main Duties</h5></div>
 					<div class="span1"><h5>R of Leaving	</h5></div>
 				</div>
-				<div class="row-fluid" id="abroad-experience"></div>
+				<div class="row-fluid" id="abroad-experience" style="height:inherit"></div>
 				<script>
 					var id=0;
 					var abroad = <?php echo json_encode($abroadexperience); ?>;
@@ -662,7 +616,7 @@
 								var bStartDate=startDate.split("-");
 								var endDate=abroad[i]['end'];
 								var bEndDate=endDate.split("-");
-								$('#abroad-experience').append(""+
+								$('#abroad-experience').append("<div class=\"row-fluid\">"+
 										"<div id='abroadExperienceCompany"+id+"' class='span2'"+style+"><input type='text' name='abroadExperienceCompany[]' class='span12' value='"+abroad[i].company+"'/></div>"+
 										"<div id='abroadExperiencePosition"+id+"'  class='span2'><input type='text' name='abroadExperiencePosition[]' class='span12' value='"+abroad[i].position+"'/></div>"+
 										"<div id='abroadExperienceStart"+id+"'  class='span2' style='text-align:center'>"+
@@ -683,27 +637,18 @@
 										"</div>"+
 										"<div id='abroadExperienceDuties"+id+"'  class='span2'><input type='text' name='abroadExperienceDuties[]' class='span12' value='"+abroad[i].main+"'/></div>"+
 										"<div id='abroadExperienceReason"+id+"'  class='span1'><input type='text' name='abroadExperienceReason[]' class='span12' value='"+abroad[i].reason+"'/></div>"+
-										"<div id='abroadButton"+id+"'  class='span1' style='text-align:left;width:10px'>"+
-										"</div>"
+										"</div></div>"
 								);
 								id++;
 							}
 						};
 					});
-					function deleteabroadnode(node){
-						$("#abroadExperienceCompany"+node).remove();
-						$("#abroadExperiencePosition"+node).remove();
-						$("#abroadExperienceStart"+node).remove();
-						$("#abroadExperienceEnd"+node).remove();
-						$("#abroadExperienceDuties"+node).remove();
-						$("#abroadExperienceReason"+node).remove();
-						$("#abroadButton"+node).remove();
-					}
 				</script>
 			</div>
 		</div>
 	</fieldset>
 </form>
+
 <script>
 	$(document).ready(function(){
 		  $('#tin').mask('99-9999999');
@@ -734,6 +679,22 @@
 				 $("#top_margin3").css('margin-top','180px');
 			};
 		  });
+		  $("input[type=text]").each(function(){
+			  $(this).parent().append('<p>'+$(this).val()+'</p>');
+			  $(this).remove();
+          });  
+		  $("select").each(function(){
+			  $(this).parent().append('<span style="font-size:12px;text-align:center">'+$(this).val()+'-</span>');
+			  $(this).remove();
+          });  
+		  $("input[type=email]").each(function(){
+			  $(this).parent().append('<span style="font-size:12px;text-align:center">'+$(this).val()+'</span>');
+			  $(this).remove();
+          });  
+		  $("input[type=password]").each(function(){
+			  $(this).parent().append('<span style="font-size:12px;text-align:center">'+$(this).val()+'</span>');
+			  $(this).remove();
+          }); 
 	});
 	function getThisMonth(node){
 		str = "<option value='00'>MM</option>";

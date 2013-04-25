@@ -2,11 +2,21 @@
 
 class Admin extends CI_Controller {	
 	
-	public function index()
-	{
-		$this->load->helper('url');
+	public function __construct(){
+		parent::__construct();
+		$this->load->helper('url');		
+		$this->load->model('databankmodel');		
+		$this->databank['applicant'] = $this->databankmodel->load('1');
+		$this->databank['propose'] = $this->databankmodel->load('2');
+		$this->databank['recruit'] = $this->databankmodel->load('3');
+		$this->databank['process'] = $this->databankmodel->load('4');
+		$this->databank['departure'] = $this->databankmodel->load('5');
+		$this->databank['arrival'] = $this->databankmodel->load('6');
+	}
+	
+	public function index()	{
 		
-		$this->load->view('admin/header');
+		$this->load->view('admin/header',$this->databank);
 		$this->load->view('admin/nav');
 		$this->load->view('admin/databank');
 		$this->load->view('admin/admin');
@@ -17,14 +27,25 @@ class Admin extends CI_Controller {
 	
 	public function rnm(){
 		$this->load->database();
-		$sql = "SELECT id, firstname, lastname FROM applicant ORDER BY lastname";
+		$sql = "SELECT id, firstname, lastname,middlename, status FROM applicant ORDER BY lastname";
 		$query = $this->db->query($sql);
+		$myFile = "./documents/logfile.txt";
+		$fh = fopen($myFile, 'w') or die("can't open file");
+		$i = 1;
 		foreach($query->result() as $rows){
-			$fname = strtolower($rows->lastname)."_".strtolower($rows->firstname);
-			mkdir("./documents/attachments/".$fname);
+			$fname = strtolower($rows->lastname)."_".strtolower($rows->firstname)."_".strtolower($rows->middlename);
+			if (file_exists("./documents/attachments/".$fname)){
+				if($rows->status == 1){
+					$stringData = $i.". ".$fname."  (".$rows->id.") (".$rows->status.") \n";
+					fwrite($fh, $stringData);
+					$i++;
+				}
+			}else{
+				mkdir("./documents/attachments/".$fname);
+			}
 				//rename("./documents/attachments/".$fname,"./documents/attachments/".$rows->id);
-		}			
-		echo $i;
+		}		
+		fclose($fh);	
 		//mkdir("./documents/attachments/", 0700);
 	    //rename("./documents/attachments/","./documents/attachments/");
 
@@ -37,7 +58,7 @@ class Admin extends CI_Controller {
 		switch($link)
 		{
 			case 'add' 		:							
-							$this->load->view('admin/header');
+							$this->load->view('admin/header',$this->databank);
 							$this->load->view('admin/nav');
 							$this->load->view('admin/databank');
 							$this->load->model('personalmodel');
@@ -54,7 +75,7 @@ class Admin extends CI_Controller {
 							$this->load->view('admin/footer');
 							break;
 			case 'edit' 	:							
-							$this->load->view('admin/header');
+							$this->load->view('admin/header',$this->databank);
 							$this->load->view('admin/nav');
 							$this->load->view('admin/databank');
 							$this->load->model('personalmodel');
@@ -79,7 +100,7 @@ class Admin extends CI_Controller {
 							$this->load->view('admin/footer');
 							break;
 			case 'view'		:
-							$this->load->view('admin/header');
+							$this->load->view('admin/header',$this->databank);
 							$this->load->view('admin/nav');
 							$this->load->view('admin/databank');
 							$this->load->model('personalmodel');
@@ -103,7 +124,7 @@ class Admin extends CI_Controller {
 							redirect(base_url()."admin/worker/search");
 							break;
 			case 'search'	:
-							$this->load->view('admin/header');
+							$this->load->view('admin/header',$this->databank);
 							$this->load->view('admin/nav');
 							$this->load->view('admin/databank');
 							$this->load->view('admin/applicantsearch');

@@ -30,3 +30,40 @@
 	<script src="<?php echo base_url() ?>js/jquery.validate.js"></script>
   </head>
   <body>
+	<div class="row-fluid">
+	  <div class="span2">
+			  <table class="table table-bordered" style="background:white;margin-left:10px;position:fixed;width:15%;box-shadow: 0px 0px 3px #e2e2e2">
+				<tr style="background:#eaeaea">
+					<th colspan="2">DATA BANK</th>
+				</tr>
+				<tr>
+					<td><span>Applicant</span></td>
+					<td><b><?php echo $applicant[0]->count ?></b></td>
+				</tr>
+				<tr>
+					<td>Proposed</td>
+					<td><b><?php echo $propose[0]->count ?></b></td>
+				</tr>
+				<tr>
+					<td>Recruited</td>
+					<td><b><?php echo $recruit[0]->count ?></b></td>
+				</tr>
+				<tr>
+					<td>Proccesed</td>
+					<td><b><?php echo $process[0]->count ?></b></td>
+				</tr>
+				<tr>
+					<td>Departured</td>
+					<td><b><?php echo $departure[0]->count ?></b></td>
+				</tr>
+				<tr>
+					<td>Arrived</td>
+					<td><b><?php echo $arrival[0]->count ?></b></td>
+				</tr>
+				<tr style="font-weight:bold">
+					<td>Total</td>
+					<td><b><?php echo ($arrival[0]->count+$applicant[0]->count+$propose[0]->count+$recruit[0]->count+$process[0]->count+$departure[0]->count) ?></b></td>
+				</tr>
+			  </table>
+	  </div>
+	  <div class="span10">

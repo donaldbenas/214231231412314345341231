@@ -4,7 +4,7 @@ class modelJsonp extends CI_Model{
 		
 	var $status;	
 		
-	public function getTable($status,$agency){
+	public function getTable($status,$agency,$company){
 		
 		$this->load->helper('url');
 		$this->load->database();
@@ -134,7 +134,7 @@ class modelJsonp extends CI_Model{
             }
             
 			$row[] = "<button href=\"#myModal\" role=\"button\" data-toggle=\"modal\" class='btn btn-success' onclick=\"erase('{$id}','{$fname} {$lname}')\"><i class='icon-ok'></i></button></td>";
-			$row[] = "<button href=\"#myModal1\" role=\"button\" data-toggle=\"modal\" class='btn btn-warning' onclick=\"view('{$id}')\"><i class='icon-search'></i></button></td>";
+			$row[] = "<button class=\"btn btn-warning\" type=\"button\" onclick=\"window.location.href = '".base_url("transaction/propose/".$company."/view/".$id)."'\"><i class='icon-search'></i></button></td>";
 			
             $output['aaData'][] = $row;
 		}

@@ -12,7 +12,8 @@ class dataBankModel extends CI_Model{
 		$sql = "
 				SELECT count(id) as count 
 				FROM applicant 
-				WHERE status = ?			
+				WHERE status = ?
+				AND activate = '1'		
 		";
 		$query = $this->db->query($sql,$status);
 		return $query->result();;

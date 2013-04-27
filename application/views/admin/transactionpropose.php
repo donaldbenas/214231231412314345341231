@@ -1,7 +1,6 @@
 	<ul class="breadcrumb breadcrumb-medium">
 	  <li><a href="#">TRANSACTION</a><span class="divider"><i class="icon-play"></i></span></li>
-	  <li><a href="#">PROPOSE</a><span class="divider"><i class="icon-play"></i></span></li>
-	  <li class="active" style="text-transform:capitalize"><?php if(isset($company))	echo $company ?></li>
+	  <li class="active" >PROPOSE</li>
 	  <li class="pull-right span7 active">
 	     <div class="form-horizontal pull-right">
 		  <div class="control-group">
@@ -64,21 +63,6 @@
 		  </div>
 		  <div class="modal-body">
 			<p id="modal-body-text"></p>
-		  </div>
-		  <div class="modal-footer">
-			<button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
-			<button class="btn btn-primary">Propose</button>
-		  </div>
-		</div>
- 
-		<!-- Modal -->
-		<div id="myModal1" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		  <div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-			<h3 id="myModalLabel">Propose Applicant</h3>
-		  </div>
-		  <div class="modal-body">
-			<p id="modal-body-text1"></p>
 		  </div>
 		  <div class="modal-footer">
 			<button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>

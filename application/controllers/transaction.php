@@ -7,11 +7,10 @@ class Transaction extends CI_Controller{
 		$this->load->helper('url');		
 		$this->load->model('databankmodel');		
 		$this->databank['applicant'] = $this->databankmodel->load('1');
-		$this->databank['propose'] = $this->databankmodel->load('2');
-		$this->databank['recruit'] = $this->databankmodel->load('3');
-		$this->databank['process'] = $this->databankmodel->load('4');
-		$this->databank['departure'] = $this->databankmodel->load('5');
-		$this->databank['arrival'] = $this->databankmodel->load('6');
+		$this->databank['recruit'] = $this->databankmodel->load('2');
+		$this->databank['process'] = $this->databankmodel->load('3');
+		$this->databank['departure'] = $this->databankmodel->load('4');
+		$this->databank['arrival'] = $this->databankmodel->load('5');
 	}
 	
 	
@@ -20,11 +19,6 @@ class Transaction extends CI_Controller{
 		$this->load->view('admin/header',$this->databank);
 		$this->load->view('admin/nav');
 		$this->load->view('admin/databank');
-		
-		$this->load->model('modelagency');
-		$data['agency'] = $this->modelagency->agencyName();
-		
-		$this->load->view('admin/transactionpropose',$data);
 		$this->load->view('admin/footer');
 	}
 	
@@ -50,7 +44,24 @@ class Transaction extends CI_Controller{
             $data['agency'][] = $row;
 		}
 		
-		$this->load->view('admin/transactionpropose',$data);
+		if($this->uri->segment(4)=='view'){
+			$this->load->model('personalmodel');
+			$this->load->model('applicantModel');
+			$data['position'] = $this->personalmodel->position();
+			$data['nationality'] = $this->personalmodel->nationality();
+			$data['civil'] = $this->personalmodel->civil();
+			$data['religion'] = $this->personalmodel->religion();
+			$data['personalbackground'] = $this->applicantModel->loadpersonalbackground($this->uri->segment(5));
+			$data['educationalbackground'] = $this->applicantModel->loadeducationalbackground($this->uri->segment(5));
+			$data['skillbackground'] = $this->applicantModel->loadskillbackground($this->uri->segment(5));
+			$data['localexperience'] = $this->applicantModel->loadlocalexperience($this->uri->segment(5));
+			$data['abroadexperience'] = $this->applicantModel->loadabroadexperience($this->uri->segment(5));
+			$data['uploadphoto'] = $this->applicantModel->loaduploadphoto($this->uri->segment(5));
+			$data['uploadresume'] = $this->applicantModel->loaduploadresume($this->uri->segment(5));
+			$this->load->view('admin/transactionproposeview',$data);
+		}else{
+			$this->load->view('admin/transactionpropose',$data);
+		}
 		$this->load->view('admin/footer');
 	}
 	
@@ -170,7 +181,7 @@ class Transaction extends CI_Controller{
 	
     public function jsonp($status,$id = null){
 		$this->load->model('modeljsonp');
-		echo $this->modeljsonp->getTable($status,$id);
+		echo $this->modeljsonp->getTable($status,$id,$this->uri->segment(4));
 	}
 	
 	public function attachment($id=""){

@@ -41,10 +41,6 @@
 					<td><b><?php echo $applicant[0]->count ?></b></td>
 				</tr>
 				<tr>
-					<td>Proposed</td>
-					<td><b><?php echo $propose[0]->count ?></b></td>
-				</tr>
-				<tr>
 					<td>Recruited</td>
 					<td><b><?php echo $recruit[0]->count ?></b></td>
 				</tr>
@@ -62,7 +58,7 @@
 				</tr>
 				<tr style="font-weight:bold">
 					<td>Total</td>
-					<td><b><?php echo ($arrival[0]->count+$applicant[0]->count+$propose[0]->count+$recruit[0]->count+$process[0]->count+$departure[0]->count) ?></b></td>
+					<td><b><?php echo ($arrival[0]->count+$recruit[0]->count+$process[0]->count+$departure[0]->count) ?></b></td>
 				</tr>
 			  </table>
 	  </div>

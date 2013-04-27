@@ -22,25 +22,9 @@
 				<li><a tabindex="-1" href="#">Promote</a></li>
 			  </ul>
 			</li>
-			<li class="dropdown">
-			  <a href="<?php echo base_url() ?>admin/worker/add" id="drop2" role="button" class="dropdown-toggle">Report </a>
-			</li>
-			<li id="fat-menu" class="dropdown">
-			  <a href="#" id="drop3" role="button" class="dropdown-toggle" data-toggle="dropdown">Definition <b class="caret"></b></a>
-			  <ul class="dropdown-menu" role="menu" aria-labelledby="drop3">
-				<li><a tabindex="-1" href="#">Position</a></li>
-				<li><a tabindex="-1" href="#">Nationality</a></li>
-				<li><a tabindex="-1" href="#">Reason</a></li>
-				<li><a tabindex="-1" href="#">Requirement</a></li>
-				<li><a tabindex="-1" href="#">Country</a></li>
-				<li class="divider"></li>
-				<li><a tabindex="-1" href="#">Job Order</a></li>
-				<li><a tabindex="-1" href="#">Requirement</a></li>
-				<li><a tabindex="-1" href="#">Document</a></li>
-				<li class="divider"></li>
-				<li><a tabindex="-1" href="#">Job Post</a></li>
-			  </ul>
-			</li>
+			<li><a href="<?php echo base_url() ?>report">Report </a></li>
+			<li><a href="<?php echo base_url() ?>definition">Definition </a></li>
+
 			<li id="fat-menu" class="dropdown">
 			  <a href="#" id="drop4" role="button" class="dropdown-toggle" data-toggle="dropdown">Maintenance <b class="caret"></b></a>
 			  <ul class="dropdown-menu" role="menu" aria-labelledby="drop4">

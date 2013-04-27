@@ -162,7 +162,7 @@ class Transaction extends CI_Controller{
 		$this->load->view('admin/footer');
 	}
 	
-	public function countAgency($status,$id)
+	public function countagency($status,$id)
 	{		
 		return $this->modelagency->getCount($status,$id);
 	}
@@ -171,6 +171,21 @@ class Transaction extends CI_Controller{
     public function jsonp($status,$id = null){
 		$this->load->model('modeljsonp');
 		echo $this->modeljsonp->getTable($status,$id);
+	}
+	
+	public function attachment($id=""){
+		$sql = "SELECT * FROM req ORDER BY value";
+		$query = $this->db->query($sql);
+		$list = array();
+		foreach($query->result() as $rows){
+			if (file_exists("./documents/attachments/".$id."/".$rows->value.".pdf")){
+				array_push($list,array($rows->value => TRUE));
+			}else{
+				array_push($list,array($rows->value => FALSE));
+			}
+		}
+		var_dump($list);
+		return $list;
 	}
 	
 }

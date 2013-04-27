@@ -10,3 +10,42 @@
 #agency{
 	width:100%;
 }
+.definition-container{
+	border: 1px solid #EAEAEA;
+	margin-bottom: 20px;
+	margin-left: 20px;
+	padding: 20px;
+	border-radius: 5px;
+	width:520px;
+	float:left;
+ }
+.definition-container label.head{
+	font-size: 20px;
+}
+.definition-form{
+	margin: 5px 5px;
+}
+.definition-form input[type=text]{
+	width:350px;
+}
+.definition-form select{
+	width:365px;
+}
+.definition-employee{
+	border: 1px solid #EAEAEA;
+	border-radius: 5px;
+}
+.definition-employee div.input-prepend{
+	margin-left: 20px;
+	padding: 20px;
+}
+.definition-container-employee{
+	margin-bottom: 20px;
+	margin-left: 20px;
+	padding: 20px;
+	width:600px;
+	float:left;
+ }
+.definition-container-employee label.head{
+	font-size: 20px;
+}

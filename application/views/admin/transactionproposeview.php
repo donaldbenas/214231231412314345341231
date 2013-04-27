@@ -1,17 +1,52 @@
-<form method="post" name="myform" enctype="multipart/form-data" id="myform">
-	<input type="text" name="appid" value="<?php echo $personalbackground['0']['appid'] ?>" style="display:none">
-	<fieldset>
-		<div class="container-fluid">
+	<ul class="breadcrumb breadcrumb-medium">
+	  <li><a href="#">TRANSACTION</a><span class="divider"><i class="icon-play"></i></span></li>
+	  <li class="active" >PROPOSE</li>
+	  <li class="pull-right span7 active">
+	     <div class="form-horizontal pull-right">
+		  <div class="control-group">
+			  <div class="control-label">
+				  <label>Select Company :</label>
+			  </div>
+			  <div class="controls">
+				  <select id="agency">
+					<option value='<?php echo base_url()."transaction/propose" ?>'>AGENCY</option>
+					<?php
+					for($i=0;$i<count($agency);$i++){
+						if($id == $agency[$i][0]) {
+							?>
+								<option value='<?php echo base_url()."transaction/propose/".$agency[$i][0] ?>' selected><?php echo $agency[$i][1] ?></option>
+							<?php
+						}else{ 
+							?>
+								<option value='<?php echo base_url()."transaction/propose/".$agency[$i][0] ?>'><?php echo $agency[$i][1] ?></option>
+							<?php
+						}
+					}
+					?>
+				  </select>
+				  <script type="text/javascript" charset="utf-8">
+					$('#agency').bind("change keyup",function(){
+						  window.location = $(this).val();
+					});
+				  </script>
+			  </div>
+		    </div>
+		  </div>
+	  </li>
+	</ul>
+	<?php if(isset($company)){ ?>
+
+		<div class="container-fluid" id="view">
 			<!--<h2>Personal Background</h2>-->
 			<div class="container-fluid well" id="personal-background">
-				<legend>Applicant Information</legend>
+				<legend>Applicant Information<a href="<?php echo base_url()."transaction/propose/".$this->uri->segment(3) ?>" class="pull-right btn btn-danger"><i class="icon-chevron-left icon-white"></i> Back</a></legend>
 				<div class="row-fluid span">
-					<div class="span2" id="top_margin1"><label>Upload Photo</label></div>
+					<div class="span2" id="top_margin1" style="margin-top:190px"><label>Upload Photo</label></div>
 					<div class="span3">
-						<img src="<?php echo base_url()."photos/".$uploadphoto[0]['appid'].".".$uploadphoto[0]['type']; ?>" class="img-polaroid" style="height:20px;width:20px;margin-bottom:15px" id="photo">
+						<img src="<?php if(isset($uploadphoto[0]['appid'])) echo base_url()."documents/photos/".$uploadphoto[0]['appid'].".".$uploadphoto[0]['type']; ?>" class="img-polaroid" style="height:200px;width:180px;margin-bottom:15px" 	>
 					</div>
-					<div class="span2" id="top_margin2"><label>Date Apply</label></div> 
-					<div class="span3" id="top_margin3">
+					<div class="span2" id="top_margin2" style="margin-top:190px"><label>Date Apply</label></div> 
+					<div class="span3" id="top_margin3" style="margin-top:190px">
 						<select name="applyMonth" class="span3">
 							<option>MM</option>
 							<?php
@@ -94,7 +129,7 @@
 					<div class="span2"><label>Salary Expected</label></div>
 					<div class="span3"><input type="text" name="salary2" class="span12" value="<?php echo $personalbackground['0']['salary2'] ?>"/></div>
 				</div>
-				<legend>Personal Information</legend>
+				<legend>Personal Information<a href="<?php echo base_url()."transaction/propose/".$this->uri->segment(3) ?>" class="pull-right btn btn-danger"><i class="icon-chevron-left icon-white"></i> Back</a></legend>
 				<div class="row-fluid span">
 					<div class="span2"><label class="required">Firt Name</label></div>
 					<div class="span3"><input type="text" name="firstname" class="span12" value="<?php echo $personalbackground['0']['firstname'] ?>"/></div>
@@ -200,7 +235,7 @@
 						</select>
 					</div>
 				</div>
-				<legend>Address Information</legend>
+				<legend>Address Information<a href="<?php echo base_url()."transaction/propose/".$this->uri->segment(3) ?>" class="pull-right btn btn-danger"><i class="icon-chevron-left icon-white"></i> Back</a></legend>
 				<div class="row-fluid span">
 					<div class="span2"><label>Current Address</label></div>
 					<div class="span3"><input type="text" name="currentAddressMunicpality" placeholder="Town / Municipality" class="span12" value="<?php $caddress = explode('--',$personalbackground['0']['caddress'] ); if(isset($caddress[0])) echo $caddress[0]; ?>"/></div>
@@ -225,7 +260,7 @@
 					<div class="span2"><label>Mobile Number</label></div>
 					<div class="span3"><input type="text" name="permanentMobile" class="span12" value="<?php echo $personalbackground['0']['pmobile'] ?>"/></div>
 				</div>
-				<legend>Other Information</legend>
+				<legend>Other Information<a href="<?php echo base_url()."transaction/propose/".$this->uri->segment(3) ?>" class="pull-right btn btn-danger"><i class="icon-chevron-left icon-white"></i> Back</a></legend>
 				<div class="row-fluid span">
 					<div class="span2"><label>Religion</label></div>
 					<div class="span3">
@@ -248,45 +283,16 @@
 				</div>
 				<div class="row-fluid span">
 					<div class="span2"><label>Height</label></div>
-					<div class="span3 input-prepend">
-						<span class="add-on">CM</span>
+					<div class="span3">
 						<input type="text" id="prependedInput"  name="height" class="span3" placeholder="Centimeter" value="<?php echo $personalbackground['0']['height'] ?>"/>
-						<span class="add-on" style="margin-left:10px">CONVERTER</span>
-						<input id="prependedInput" type="text"  class="span2" name="feet" placeholder="FT">
-						<script>
-							$(document).ready(function(){
-									$("input[name=feet]").keyup(function () {
-									  var eng =$(this).val();
-									  var ans = eng.split("'");
-									  if(ans[1]!=null) var inch = 30.48*(ans[1]/12);
-									  else var inch=0;
-									  if(ans[0]!=null) var feet = (ans[0]*30.48);
-									  else var feet=0;
-									  var conv = feet + inch;
-									  if(conv!=0)$("input[name=height]").val(conv.toFixed(0));
-									}).keyup()
-							});
-						</script>
 					</div>
 					<div class="span2"><label>SSS Number</label></div>
 					<div class="span3"><input type="text" name="sss" id="sss" class="span12" maxlength="11" placeholder="___-__-____" value="<?php echo $personalbackground['0']['sss'] ?>"/></div>
 				</div>
 				<div class="row-fluid span">
 					<div class="span2"><label>Weight</label></div>
-					<div class="span3 input-prepend">
-						<span class="add-on">KG</span>
+					<div class="span3">
 						<input type="text" id="prependedInput"  name="weight" class="span3" placeholder="Kilogram" value="<?php echo $personalbackground['0']['weight'] ?>"/>
-						<span class="add-on" style="margin-left:10px">CONVERTER</span>
-						<input id="prependedInput" type="text"  class="span2" name="lbs" placeholder="LBS">
-						<script>
-							$(document).ready(function(){
-									$("input[name=lbs]").keyup(function () {
-									  var ans =$(this).val();
-									  var conv = ans*0.45359;
-									  if(conv!=0)$("input[name=weight]").val(conv.toFixed(0));
-									}).keyup()
-							});
-						</script>
 					</div>
 					<div class="span2"><label>TIN Number</label></div>
 					<div class="span3"><input type="text" name="tin" id="tin" class="span12" maxlength="10" placeholder="__-_______" value="<?php echo $personalbackground['0']['tin'] ?>"/></div>
@@ -297,7 +303,7 @@
 					<div class="span2"><label>Pagibig Number</label></div>
 					<div class="span3"><input type="text" name="pagibig" id="pagibig" class="span12" maxlength="14" placeholder="____-____-____" value="<?php echo $personalbackground['0']['pagibig'] ?>"/></div>
 				</div>
-				<legend>Emergency Information</legend>
+				<legend>Emergency Information<a href="<?php echo base_url()."transaction/propose/".$this->uri->segment(3) ?>" class="pull-right btn btn-danger"><i class="icon-chevron-left icon-white"></i> Back</a></legend>
 				<div class="row-fluid span">
 					<div class="span2"><label>Person Noitfy</label></div>
 					<div class="span3"><input type="text" name="emergencyNotify"class="span12" value="<?php echo $personalbackground['0']['notify'] ?>"/></div>
@@ -328,20 +334,30 @@
 					<div class="span2"><label>Mobile Number</label></div>
 					<div class="span3"><input type="text" name="spouseMobile" class="span12" value="<?php echo $personalbackground['0']['smobile'] ?>"/></div>
 				</div>
+				<legend>Document Attachment<a href="<?php echo base_url()."transaction/propose/".$this->uri->segment(3) ?>" class="pull-right btn btn-danger"><i class="icon-chevron-left icon-white"></i> Back</a></legend>
+				<div class="row-fluid span">
+					<div class="span2"><label>Upload Resume</label></div>
+					<div class="span3">
+						<?php if(isset($uploadresume['0'])){ ?>
+						<a href="<?php echo "http://docs.google.com/viewer?url=".base_url()."documents/resumes/".$uploadresume['0']['appid'].".".$uploadresume['0']['type'] ?>" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="" data-original-title="View" id="view"><i class="icon-zoom-in"></i></a>
+						<a href="<?php echo base_url()."documents/resumes/".$uploadresume['0']['appid'].".".$uploadresume['0']['type'] ?>" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="" data-original-title="Download" id="download"><i class=" icon-download-alt"></i></a>
+						<?php }else  echo "No Resume Uploaded"; ?>
+					</div>
+				 </div>
 			</div>
 			<!--<h2>Educational Background</h2>-->
 			<div class="container-fluid well tab-pane" id="educational-background">
-				<legend>Educational Information</legend>
+				<legend>Educational Information<a href="<?php echo base_url()."transaction/propose/".$this->uri->segment(3) ?>" class="pull-right btn btn-danger"><i class="icon-chevron-left icon-white"></i> Back</a></legend>
 				<div class="row-fluid span">
 					<div class="span2"><h5>Educational Level</h5></div>
-					<div class="span2"><h5>School Graduated / Course</h5></div>
+					<div class="span3"><h5>School Graduated / Course</h5></div>
 					<div class="span2" style="text-align:center"><h5>Year Start</h5></div>
 					<div class="span2" style="text-align:center"><h5>Year End</h5></div>
 					<div class="span2"><h5>College Degree</h5></div>
 				</div>
 				<div class="row-fluid span">
 					<div class="span2"><label>Primary Level</label></div>
-					<div class="span2"><input type="text" name="primarySchool" class="span12" value="<?php echo $educationalbackground['0']['elementary'] ?>"/></div>
+					<div class="span3"><input type="text" name="primarySchool" class="span12" value="<?php echo $educationalbackground['0']['elementary'] ?>"/></div>
 					<div class="span2" style="text-align:center">
 						<select name="primaryStart"  class="span6">
 							<option>YYYY</option>
@@ -372,7 +388,7 @@
 				</div>
 				<div class="row-fluid span">
 					<div class="span2"><label>Secondary Level</label></div>
-					<div class="span2"><input type="text" name="secondarySchool" class="span12" value="<?php echo $educationalbackground['0']['highschool'] ?>"/></div>
+					<div class="span3"><input type="text" name="secondarySchool" class="span12" value="<?php echo $educationalbackground['0']['highschool'] ?>"/></div>
 					<div class="span2" style="text-align:center">
 						<select name="secondaryStart"  class="span6">
 							<option>YYYY</option>
@@ -403,7 +419,7 @@
 				</div>
 				<div class="row-fluid span">
 					<div class="span2"><label>College Level</label></div>
-					<div class="span2"><input type="text" name="collegeSchool" class="span12" value="<?php echo $educationalbackground['0']['college'] ?>"/></div>
+					<div class="span3"><input type="text" name="collegeSchool" class="span12" value="<?php echo $educationalbackground['0']['college'] ?>"/></div>
 					<div class="span2" style="text-align:center">
 						<select name="collegeStart"  class="span6">
 							<option>YYYY</option>
@@ -434,7 +450,7 @@
 				</div>
 				<div class="row-fluid span">
 					<div class="span2"><label>Vocational Course</label></div>
-					<div class="span2"><input type="text" name="vocationalCourse" class="span12" value="<?php echo $educationalbackground['0']['vocational'] ?>"/></div>
+					<div class="span3"><input type="text" name="vocationalCourse" class="span12" value="<?php echo $educationalbackground['0']['vocational'] ?>"/></div>
 					<div class="span2" style="text-align:center">
 						<select name="vocationalStart"  class="span6">
 							<option>YYYY</option>
@@ -465,7 +481,7 @@
 				</div>
 				<div class="row-fluid span">
 					<div class="span2"><label>Post Graduate</label></div>
-					<div class="span2"><input type="text" name="postSchool" class="span12" value="<?php echo $educationalbackground['0']['postgraduate'] ?>"/></div>
+					<div class="span3"><input type="text" name="postSchool" class="span12" value="<?php echo $educationalbackground['0']['postgraduate'] ?>"/></div>
 					<div class="span2" style="text-align:center">
 						<select name="postStart"  class="span6">
 							<option>YYYY</option>
@@ -500,7 +516,7 @@
 				<?php 
 					//echo print_r($skillbackground);
 				?>
-				<legend>Spcecial Skill Information</legend>
+				<legend>Spcecial Skill Information<a href="<?php echo base_url()."transaction/propose/".$this->uri->segment(3) ?>" class="pull-right btn btn-danger"><i class="icon-chevron-left icon-white"></i> Back</a></legend>
 				<div class="row-fluid span">
 					<div class="span3"><h5>Couse / Seminar</h5></div>
 					<div class="span3"><h5>School or Training Center</h5></div>
@@ -523,7 +539,7 @@
 								var bStartDate=startDate.split("-");
 								var endDate=skill[i]['endDate'];
 								var bEndDate=endDate.split("-");
-								$('#skill-background').append(""+
+								$('#skill-background').append("<div class=\"row-fluid\">"+
 										"<div id='skillCourse"+id+"' class='span3'"+style+"><input type='text' name='skillCourse[]' class='span12' value='"+skill[i].course+"'/></div>"+
 										"<div id='skillSchool"+id+"' class='span3'><input type='text' name='skillSchool[]' class='span12' value='"+skill[i].school+"'/></div>"+
 										"<div id='skillStart"+id+"' class='span2' style='text-align:center'>"+
@@ -545,24 +561,17 @@
 											"</select>"+
 										"</div>"+
 										"<div id='skillButton"+id+"'  class='span1' style='text-align:left'>"+
-										"</div>"
+										"</div></div>"
 								);
 								id++;
 							}
 						};
 					});
-					function deletenode(node){
-						$("#skillCourse"+node).remove();
-						$("#skillSchool"+node).remove();
-						$("#skillStart"+node).remove();
-						$("#skillEnd"+node).remove();
-						$("#skillButton"+node).remove();
-					}
 				</script>
 			</div>
 			<!--<h2>Wok Experience Background</h2>-->
 			<div class="container-fluid well tab-pane" id="work-experience-background">
-				<legend>Local Work Information</legend>
+				<legend>Local Work Information<a href="<?php echo base_url()."transaction/propose/".$this->uri->segment(3) ?>" class="pull-right btn btn-danger"><i class="icon-chevron-left icon-white"></i> Back</a></legend>
 				<div class="row-fluid span">
 					<div class="span2"><h5>Company</h5></div>
 					<div class="span2"><h5>Position</h5></div>
@@ -585,7 +594,7 @@
 								var bStartDate=startDate.split("-");
 								var endDate=local[i]['end'];
 								var bEndDate=endDate.split("-");
-								$('#local-experience').append(""+
+								$('#local-experience').append("<div class=\"row-fluid\">"+
 										"<div id='localExperienceCompany"+id+"'  class='span2' "+style+"><input type='text' name='localExperienceCompany[]' class='span12' value='"+local[i].company+"'/></div>"+
 										"<div id='localExperiencePosition"+id+"'  class='span2'><input type='text' name='localExperiencePosition[]' class='span12' value='"+local[i].position+"'/></div>"+
 										"<div id='localExperienceStart"+id+"'  class='span2' style='text-align:center'>"+
@@ -607,24 +616,15 @@
 										"<div id='localExperienceDuties"+id+"'  class='span2'><input type='text' name='localExperienceDuties[]' class='span12' value='"+local[i].main+"'/></div>"+
 										"<div id='localExperienceReason"+id+"'  class='span1'><input type='text' name='localExperienceReason[]' class='span12' value='"+local[i].reason+"'/></div>"+
 										"<div id='localButton"+id+"'  class='span1' style='text-align:left;width:10px'>"+
-										"</div>"
+										"</div></div>"
 								);
 								id++;
 							}
 						};
 					});
-					function deletelocalnode(node){
-						$("#localExperienceCompany"+node).remove();
-						$("#localExperiencePosition"+node).remove();
-						$("#localExperienceStart"+node).remove();
-						$("#localExperienceEnd"+node).remove();
-						$("#localExperienceDuties"+node).remove();
-						$("#localExperienceReason"+node).remove();
-						$("#localButton"+node).remove();
-					}
 				</script>
 				<hr>
-				<legend>Abroad Work Information</legend>
+				<legend>Abroad Work Information<a href="<?php echo base_url()."transaction/propose/".$this->uri->segment(3) ?>" class="pull-right btn btn-danger"><i class="icon-chevron-left icon-white"></i> Back</a></legend>
 				<div class="row-fluid span">
 					<div class="span2"><h5>Company</h5></div>
 					<div class="span2"><h5>Position</h5></div>
@@ -633,7 +633,7 @@
 					<div class="span2"><h5>Main Duties</h5></div>
 					<div class="span1"><h5>R of Leaving	</h5></div>
 				</div>
-				<div class="row-fluid" id="abroad-experience"></div>
+				<div class="row-fluid" id="abroad-experience" style="height:inherit"></div>
 				<script>
 					var id=0;
 					var abroad = <?php echo json_encode($abroadexperience); ?>;
@@ -647,7 +647,7 @@
 								var bStartDate=startDate.split("-");
 								var endDate=abroad[i]['end'];
 								var bEndDate=endDate.split("-");
-								$('#abroad-experience').append(""+
+								$('#abroad-experience').append("<div class=\"row-fluid\">"+
 										"<div id='abroadExperienceCompany"+id+"' class='span2'"+style+"><input type='text' name='abroadExperienceCompany[]' class='span12' value='"+abroad[i].company+"'/></div>"+
 										"<div id='abroadExperiencePosition"+id+"'  class='span2'><input type='text' name='abroadExperiencePosition[]' class='span12' value='"+abroad[i].position+"'/></div>"+
 										"<div id='abroadExperienceStart"+id+"'  class='span2' style='text-align:center'>"+
@@ -668,77 +668,127 @@
 										"</div>"+
 										"<div id='abroadExperienceDuties"+id+"'  class='span2'><input type='text' name='abroadExperienceDuties[]' class='span12' value='"+abroad[i].main+"'/></div>"+
 										"<div id='abroadExperienceReason"+id+"'  class='span1'><input type='text' name='abroadExperienceReason[]' class='span12' value='"+abroad[i].reason+"'/></div>"+
-										"<div id='abroadButton"+id+"'  class='span1' style='text-align:left;width:10px'>"+
-										"</div>"
+										"</div></div>"
 								);
 								id++;
 							}
 						};
 					});
-					function deleteabroadnode(node){
-						$("#abroadExperienceCompany"+node).remove();
-						$("#abroadExperiencePosition"+node).remove();
-						$("#abroadExperienceStart"+node).remove();
-						$("#abroadExperienceEnd"+node).remove();
-						$("#abroadExperienceDuties"+node).remove();
-						$("#abroadExperienceReason"+node).remove();
-						$("#abroadButton"+node).remove();
-					}
 				</script>
 			</div>
 		</div>
-	</fieldset>
-</form>
-<script>
-	$(document).ready(function(){
-		  $('#tin').mask('99-9999999');
-		  $('#pagibig').mask('9999-9999-9999');
-		  $('#sss').mask('999-99-9999');
-		  $('#philhealth').mask('9999-9999-9999');	
-		  $('.required').append('<span style="color:red;"> *</span>');
-		  $('#myTab a').click(function (e) {
-			  e.preventDefault();
-			  $(this).tab('show');
-		  });
-		  $("input").attr('disabled','disabled').css('color','#2C2C2C');
-		  $("select").attr('disabled','disabled').css('color','#2C2C2C');
-		  
-		  TriggerClick = 1;
-		  $("#photo").on('click', function(){
-			if(TriggerClick==0){
-				 TriggerClick=1;
-				 $("#photo").css({width:'20px',height:'20px'}, 200);
-				 $("#top_margin1").css('margin-top','10px', 500);
-				 $("#top_margin2").css('margin-top','10px', 500);
-				 $("#top_margin3").css('margin-top','10px', 500);
-			}else{
-				 TriggerClick=0;
-				 $("#photo").css({width:'180px',height:'200px'});
-				 $("#top_margin1").css('margin-top','195px');
-				 $("#top_margin2").css('margin-top','195px');
-				 $("#top_margin3").css('margin-top','180px');
-			};
-		  });
-	});
-	function getThisMonth(node){
-		str = "<option value='00'>MM</option>";
-		for (k = 1; k < 13; k++){
-			if(k==node) str =  str + "<option selected>"+zeroPad(k,2)+"</option>";
-			else str =  str + "<option>"+zeroPad(k,2)+"</option>";
+	  <?php } ?>
+	  
+	  <script type="text/javascript" charset="utf-8">
+		$(function(){ 
+			$('#data').dataTable({
+				'bProcessing'		: true,
+				'bServerSide'		: true,
+				"sAjaxSource": "<?php echo site_url() ?>transaction/jsonp/1",
+				"fnServerData": function( sUrl, aoData, fnCallback, oSettings ) {
+					oSettings.jqXHR = $.ajax( {
+						"url": sUrl,
+						"data": aoData,
+						"success": fnCallback,
+						"dataType": "jsonp",
+						"cache": false
+					} );
+				},
+				"sPaginationType": "full_numbers",
+				"iDisplayLength": 10,
+				"aLengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+				"aaSorting": [[0, 'asc']],
+				"fnDrawCallback"	: function(){
+					$("#data").addClass('table well table-striped table-hover');
+					$("#data_previous").html('&laquo;');
+					$("#data_next").html('&raquo;');
+				},
+				"bStateSave"		: true,
+				"aoColumns": [
+				{ "bVisible": true, "bSearchable": true, "bSortable": true },
+				{ "bVisible": true, "bSearchable": true, "bSortable": true },
+				{ "bVisible": true, "bSearchable": true, "bSortable": true },
+				{ "bVisible": true, "bSearchable": true, "bSortable": true },
+				{ "bVisible": true, "bSearchable": false, "bSortable": false },
+				{ "bVisible": true, "bSearchable": false, "bSortable": false }
+				]
+			})
+		}); 
+		function erase(id,name){
+		$('#modal-body-text').html("Do you wish to propose applicant <b>"+name+"</b> and all data related to it?");
+		$('#modal-footer-delete').attr("href","<?php echo base_url()."clients/delete/" ?>"+id);
 		}
-		return str;
-	}
-	function getThisYear(node){
-		cDate = new Date();
-		str = "<option value='00'>YYYY</option>";
-		for (k =  cDate.getFullYear(); k > 1900; k--){
-			if(k==node) str =  str + "<option selected>"+k+"</option>";
-			else str =  str + "<option>"+k+"</option>";
+		function view(id,name){
+		$('#modal-body-text1').html("http:\\www.google.com");
+		$('#modal-footer-delete1').attr("href","<?php echo base_url()."clients/delete/" ?>"+id);
 		}
-		return str;
-	}
-	function zeroPad(num, places) {
-		var zero = places - num.toString().length + 1;
-		return Array(+(zero > 0 && zero)).join("0") + num;
-	}
-</script>
+		$(document).ready(function(){
+			  $('#tin').mask('99-9999999');
+			  $('#pagibig').mask('9999-9999-9999');
+			  $('#sss').mask('999-99-9999');
+			  $('#philhealth').mask('9999-9999-9999');	
+			  $('.required').append('<span style="color:red;"> *</span>');
+			  $('#myTab a').click(function (e) {
+				  e.preventDefault();
+				  $(this).tab('show');
+			  });
+			  $("input").attr('disabled','disabled').css('color','#2C2C2C');
+			  $("select").attr('disabled','disabled').css('color','#2C2C2C');
+			  
+			  TriggerClick = 1;
+			  $("#photo").on('click', function(){
+				if(TriggerClick==0){
+					 TriggerClick=1;
+					 $("#photo").css({width:'20px',height:'20px'}, 200);
+					 $("#top_margin1").css('margin-top','10px', 500);
+					 $("#top_margin2").css('margin-top','10px', 500);
+					 $("#top_margin3").css('margin-top','10px', 500);
+				}else{
+					 TriggerClick=0;
+					 $("#photo").css({width:'180px',height:'200px'});
+					 $("#top_margin1").css('margin-top','195px');
+					 $("#top_margin2").css('margin-top','195px');
+					 $("#top_margin3").css('margin-top','180px');
+				};
+			  });
+			  $("input[type=text]").each(function(){
+				  $(this).parent().append('<p>'+$(this).val()+'</p>');
+				  $(this).remove();
+			  });  
+			  $("#view").find('select').each(function(){
+				  $(this).parent().append('<span style="font-size:12px;text-align:center">'+$(this).find("option:selected").text()+' </span>');
+				  $(this).remove();
+			  });  
+			  $("input[type=email]").each(function(){
+				  $(this).parent().append('<span style="font-size:12px;text-align:center">'+$(this).val()+'</span>');
+				  $(this).remove();
+			  });  
+			  $("input[type=password]").each(function(){
+				  $(this).parent().append('<span style="font-size:12px;text-align:center">'+$(this).val()+'</span>');
+				  $(this).remove();
+			  }); 
+		});
+		function getThisMonth(node){
+			str = "<option value='00'>MM</option>";
+			for (k = 1; k < 13; k++){
+				if(k==node) str =  str + "<option selected>"+zeroPad(k,2)+"</option>";
+				else str =  str + "<option>"+zeroPad(k,2)+"</option>";
+			}
+			return str;
+		}
+		function getThisYear(node){
+			cDate = new Date();
+			str = "<option value='00'>YYYY</option>";
+			for (k =  cDate.getFullYear(); k > 1900; k--){
+				if(k==node) str =  str + "<option selected>"+k+"</option>";
+				else str =  str + "<option>"+k+"</option>";
+			}
+			return str;
+		}
+		function zeroPad(num, places) {
+			var zero = places - num.toString().length + 1;
+			return Array(+(zero > 0 && zero)).join("0") + num;
+		}
+		$('#view').tooltip();
+		$('#download').tooltip();
+		</script>

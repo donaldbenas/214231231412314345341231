@@ -7,11 +7,10 @@ class Admin extends CI_Controller {
 		$this->load->helper('url');		
 		$this->load->model('databankmodel');		
 		$this->databank['applicant'] = $this->databankmodel->load('1');
-		$this->databank['propose'] = $this->databankmodel->load('2');
-		$this->databank['recruit'] = $this->databankmodel->load('3');
-		$this->databank['process'] = $this->databankmodel->load('4');
-		$this->databank['departure'] = $this->databankmodel->load('5');
-		$this->databank['arrival'] = $this->databankmodel->load('6');
+		$this->databank['recruit'] = $this->databankmodel->load('2');
+		$this->databank['process'] = $this->databankmodel->load('3');
+		$this->databank['departure'] = $this->databankmodel->load('4');
+		$this->databank['arrival'] = $this->databankmodel->load('5');
 	}
 	
 	public function index()	{
@@ -27,21 +26,23 @@ class Admin extends CI_Controller {
 	
 	public function rnm(){
 		$this->load->database();
-		$sql = "SELECT id, firstname, lastname,middlename, status FROM applicant ORDER BY lastname";
+		$sql = "SELECT id, firstname, lastname,appid,middlename, status FROM applicant WHERE activate ='1' ORDER BY lastname";
 		$query = $this->db->query($sql);
 		$myFile = "./documents/logfile.txt";
 		$fh = fopen($myFile, 'w') or die("can't open file");
 		$i = 1;
 		foreach($query->result() as $rows){
-			$fname = strtolower($rows->lastname)."_".strtolower($rows->firstname)."_".strtolower($rows->middlename);
-			if (file_exists("./documents/attachments/".$fname)){
-				if($rows->status == 1){
-					$stringData = $i.". ".$fname."  (".$rows->id.") (".$rows->status.") \n";
+			//$fname = strtolower($rows->lastname)."_".strtolower($rows->firstname)."_".strtolower($rows->middlename);
+			$fname = strtolower($rows->lastname)."_".strtolower($rows->firstname);
+			if (file_exists("./documents/attachments/".$rows->appid)){
+				if($rows->status >= 1){
+					/**$stringData = $i.". ".$fname."  (".$rows->id.") (".$rows->status.") \n";
 					fwrite($fh, $stringData);
-					$i++;
+					$i++;**/
+				//rename("./documents/attachments/".$fname,"./documents/attachments/".$rows->appid);
 				}
 			}else{
-				mkdir("./documents/attachments/".$fname);
+				mkdir("./documents/attachments/".$rows->appid);
 			}
 				//rename("./documents/attachments/".$fname,"./documents/attachments/".$rows->id);
 		}		
@@ -53,7 +54,6 @@ class Admin extends CI_Controller {
 	
 	public function worker($link)
 	{
-		$this->load->helper('url');
 		
 		switch($link)
 		{
@@ -105,6 +105,7 @@ class Admin extends CI_Controller {
 							$this->load->view('admin/databank');
 							$this->load->model('personalmodel');
 							$this->load->model('applicantModel');
+							$data['position'] = $this->personalmodel->position();
 							$data['nationality'] = $this->personalmodel->nationality();
 							$data['civil'] = $this->personalmodel->civil();
 							$data['religion'] = $this->personalmodel->religion();

@@ -1,7 +1,6 @@
 	<ul class="breadcrumb breadcrumb-medium">
 	  <li><a href="#">TRANSACTION</a><span class="divider"><i class="icon-play"></i></span></li>
-	  <li><a href="#">PROCESSING</a><span class="divider"><i class="icon-play"></i></span></li>
-	  <li class="active" style="text-transform:capitalize"><?php if(isset($company))	echo $company ?></li>
+	  <li class="active" >PROCESSING</li>
 	  <li class="pull-right span7 active">
 	     <div class="form-horizontal pull-right">
 		  <div class="control-group">

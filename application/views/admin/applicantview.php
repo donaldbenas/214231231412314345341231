@@ -684,7 +684,7 @@
 			  $(this).remove();
           });  
 		  $("select").each(function(){
-			  $(this).parent().append('<span style="font-size:12px;text-align:center">'+$(this).val()+'-</span>');
+			  $(this).parent().append('<span style="font-size:12px;text-align:center">'+$(this).find("option:selected").text()+' </span>');
 			  $(this).remove();
           });  
 		  $("input[type=email]").each(function(){

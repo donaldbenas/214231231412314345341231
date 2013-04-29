@@ -32,8 +32,8 @@
   <body>
 	<div class="row-fluid">
 	  <div class="span2">
-			  <table class="table table-bordered" style="background:white;margin-left:10px;position:fixed;width:15%;box-shadow: 0px 0px 3px #e2e2e2">
-				<tr style="background:#eaeaea">
+			  <table class="table table-bordered" style="background:white;margin-left:10px;position:fixed;width:15%;box-shadow: 0px 0px 2px #e2e2e2">
+				<tr style="background:#F8F8F8">
 					<th colspan="2">DATA BANK</th>
 				</tr>
 				<tr>

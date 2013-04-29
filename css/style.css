@@ -50,8 +50,8 @@
 	font-size: 20px;
 }
 #report-form{
+	width:450px;
 	padding-right:20px;
-	position:fixed;
 	background:#FBFBFB;
 	box-shadow: 0px 0px 2px #e2e2e2;
 	border: 1px solid #EAEAEA;

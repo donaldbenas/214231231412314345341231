@@ -1,6 +1,8 @@
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript">
+</script>
 <div class="row" id="report-form">
-	<div class="span1" id="toggle"><div>SHOW</div></div>
-	<div class="span9" id="generate" style="padding:20px;margin:right:20px">
+	<div id="generate" style="padding:20px;margin:right:20px">
 		<form class="form form-horizontal" >
 			<h2>Generate Report</h3> 
 			<div class="control-group">
@@ -26,10 +28,62 @@
 		</form>
 	</div>
 </div>
+<div id="chart_div" style="width:90%;height:500px;padding:0px;margin:0px"></div>
 <script>
-	$(document).ready(function(){
-		$('#toggle').click(function(){
-			$('#generate').toggle();
-		});
-	});
+	google.load("visualization", "1", {packages:["corechart"]});
+	google.setOnLoadCallback(drawChart);
+	function drawChart() {
+		var data = google.visualization.arrayToDataTable([
+		  ['Month', 'Applicant', 'Proposed', 'Recruited', 'Proccesed', 'Departured', 'Arrived', 'Average'],
+		  ['2013/01', 1000, 400, 400, 400, 400, 400, 400],
+		  ['2013/02', 1170, 460, 400, 400, 400, 400, 400],
+		  ['2013/03', 660, 1120, 400, 400, 400, 400, 400],
+		  ['2013/04', 1030, 540, 400, 400, 400, 400, 400],
+		  ['2013/05', 1170, 460, 400, 400, 400, 400, 400],
+		  ['2013/06', 660, 1120, 400, 400, 400, 400, 400],
+		  ['2013/07', 1030, 540, 400, 400, 400, 400, 400],
+		  ['2013/08', 1170, 460, 400, 400, 400, 400, 400],
+		  ['2013/09', 660, 1120, 400, 400, 400, 400, 400],
+		  ['2013/10', 1030, 540, 400, 400, 400, 400, 400],
+		  ['2013/11', 660, 1120, 400, 400, 400, 400, 400],
+		  ['2013/12', 1030, 540, 400, 400, 400, 400, 400],
+		]);
+
+        var options = {
+          title : 'Monthly Company Performance',
+          vAxis: {title: "Cups"},
+          hAxis: {title: "Month"},
+          seriesType: "bars",
+          series: {6: {type: "line"}}
+        };
+
+        var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+      google.setOnLoadCallback(drawVisualization);
+      
 </script>
+<legend>Applicant</legend>
+<table class="table table-bordered table-hover table-condensed">
+<tr>
+	<th>Date</th>
+	<th>Applicant</th>
+	<th>Proposed</th>
+	<th>Recruited</th>
+	<th>Proccesed</th>
+	<th>Departured</th>
+	<th>Arrived</th>
+</tr>
+</table>
+<legend>Proposed</legend>
+<table class="table table-bordered table-hover table-condensed">
+<tr>
+	<th>Date</th>
+	<th>Applicant</th>
+	<th>Proposed</th>
+	<th>Recruited</th>
+	<th>Proccesed</th>
+	<th>Departured</th>
+	<th>Arrived</th>
+</tr>
+</table>

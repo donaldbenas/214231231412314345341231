@@ -33,10 +33,10 @@
 	<div class="row-fluid">
 	  <div class="span2">
 			  <table class="table table-bordered" style="background:white;margin-left:10px;position:fixed;width:15%;box-shadow: 0px 0px 2px #e2e2e2">
-				<tr style="background:#F8F8F8">
+				<tr style="background:#282828;color:white;">
 					<th colspan="2">DATA BANK</th>
 				</tr>
-				<tr>
+				<tr class="info">
 					<td><span>Applicant</span></td>
 					<td><b><?php echo $applicant[0]->count ?></b></td>
 				</tr>
@@ -56,7 +56,7 @@
 					<td>Arrived</td>
 					<td><b><?php echo $arrival[0]->count ?></b></td>
 				</tr>
-				<tr style="font-weight:bold">
+				<tr style="font-weight:bold"  class="warning">
 					<td>Total</td>
 					<td><b><?php echo ($arrival[0]->count+$recruit[0]->count+$process[0]->count+$departure[0]->count) ?></b></td>
 				</tr>

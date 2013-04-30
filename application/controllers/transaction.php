@@ -28,6 +28,12 @@ class Transaction extends CI_Controller{
 		$this->load->view('admin/nav');
 		$this->load->view('admin/databank');
 		
+		if($this->input->post()!=""){
+			$this->load->model('approvemodel');
+			$this->approvemodel->propose($this->input->post('appid'),$id);
+			redirect(base_url()."transaction/propose/".$id);
+		}
+		
 		$this->load->model('modelagency');
 		foreach($this->modelagency->agency($id) as $row){
 			$data['id'] = $row['id'];
@@ -74,6 +80,20 @@ class Transaction extends CI_Controller{
 		$this->load->view('admin/header',$this->databank);
 		$this->load->view('admin/nav');
 		$this->load->view('admin/databank');
+		
+		
+		if($this->input->post()!=""){
+			$this->load->model('approvemodel');
+			if($this->input->post('erase')==""){
+				foreach($this->input->post('appidall') as $val){
+					$this->approvemodel->recruit($val,$this->input->post('comment'));
+				}
+			}else{
+				$this->approvemodel->recruit($this->input->post('appid'),$this->input->post('comment'),false);
+			}
+			redirect(base_url()."transaction/recruitment/".$id);
+			
+		}
 		
 		$this->load->model('modelagency');
 		foreach($this->modelagency->agency($id) as $row){
@@ -178,10 +198,18 @@ class Transaction extends CI_Controller{
 		return $this->modelagency->getCount($status,$id);
 	}
 	
-	
     public function jsonp($status,$id = null){
 		$this->load->model('modeljsonp');
-		echo $this->modeljsonp->getTable($status,$id,$this->uri->segment(4));
+		if($this->input->get('company')=="") $company = null;
+		else $company = $this->input->get('company');
+		echo $this->modeljsonp->getTable($status,$id,$company);
+	}
+	
+    public function jsonprecruited($status,$id = null){
+		$this->load->model('modeljsonp');
+		if($this->input->get('company')=="") $company = null;
+		else $company = $this->input->get('company');
+		echo $this->modeljsonp->getTableRecruited($status,$id,$company);
 	}
 	
 	public function attachment($id=""){

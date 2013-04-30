@@ -234,6 +234,16 @@ class applicantModel extends CI_Model{
 			);
 			$this->db->insert("abroad",$abroad);
 		}
+		
+		$disapprove = array(
+			'appid' => $appid,
+		);
+		$this->db->insert("disapprove",$disapprove);
+		
+		$statistic = array(
+			'appid' => $appid,
+		);
+		$this->db->insert("statistic",$statistic);
 	}
 	
 	

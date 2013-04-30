@@ -40,6 +40,7 @@
 			<thead>
 				<tr>
 					<th width="5%" style="text-align:center">ID</th>
+					<th width="5%" style="text-align:center">ID</th>
 					<th width="23%">First Name</th>
 					<th width="22%">Last Name</th>
 					<th width="48%">Position</th>
@@ -55,18 +56,21 @@
 		</table>
 	  </div>
  
-		<!-- Modal -->
 		<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		  <div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-			<h3 id="myModalLabel">Propose Applicant</h3>
+			<h3 id="myModalLabel">Recruit Applicant</h3>
 		  </div>
 		  <div class="modal-body">
 			<p id="modal-body-text"></p>
+			<form method="post" name="rform" class="hideme">
+				<input type="text" name="appid" id="appid">
+				<input type="text" name="companyid" value="<?php echo $this->uri->segment(3) ?>">
+			</form>
 		  </div>
 		  <div class="modal-footer">
 			<button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
-			<button class="btn btn-primary">Propose</button>
+			<button class="btn btn-primary" onclick="$('form[name=rform]').submit()">Recruit</button>
 		  </div>
 		</div>
 	  <?php } ?>
@@ -76,7 +80,7 @@
 			$('#data').dataTable({
 				'bProcessing'		: true,
 				'bServerSide'		: true,
-				"sAjaxSource": "<?php echo site_url() ?>transaction/jsonp/1",
+				"sAjaxSource": "<?php echo base_url() ?>transaction/jsonp/1?company=<?php echo $this->uri->segment(3)?>",
 				"fnServerData": function( sUrl, aoData, fnCallback, oSettings ) {
 					oSettings.jqXHR = $.ajax( {
 						"url": sUrl,
@@ -97,6 +101,7 @@
 				},
 				"bStateSave"		: true,
 				"aoColumns": [
+				{ "sClass": "hideme", "bSearchable": false, "bSortable": false },
 				{ "bVisible": true, "bSearchable": true, "bSortable": true },
 				{ "bVisible": true, "bSearchable": true, "bSortable": true },
 				{ "bVisible": true, "bSearchable": true, "bSortable": true },
@@ -107,11 +112,7 @@
 			})
 		  }); 
 		  function erase(id,name){
-			$('#modal-body-text').html("Do you wish to propose applicant <b>"+name+"</b> and all data related to it?");
-			$('#modal-footer-delete').attr("href","<?php echo base_url()."clients/delete/" ?>"+id);
-		  }
-		  function view(id,name){
-			$('#modal-body-text1').html("http:\\www.google.com");
-			$('#modal-footer-delete1').attr("href","<?php echo base_url()."clients/delete/" ?>"+id);
+			$('#modal-body-text').html("Do you wish to recruit this applicant <b>"+name+"</b> and all data related to it?");
+			$('#appid').attr("value",id);
 		  }
 		</script>

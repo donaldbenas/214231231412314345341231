@@ -7,7 +7,7 @@ class modelSearchJsonp extends CI_Model{
 		$this->load->database();
 	
 		$aColumns = array('applicant.appid AS id', 'applicant.firstname AS firstname', 'applicant.lastname AS lastname', 'list.value AS position');
-        $cColumns = array('applicant.appid', 'applicant.firstname', 'applicant.lastname', 'list.value');
+        $cColumns = array(' ', 'applicant.appid', 'applicant.firstname', 'applicant.lastname', 'list.value');
         $nColumns = array('id', 'firstname', 'lastname', 'position');
         
 		$sIndexColumn = 'applicant.id';
@@ -112,7 +112,7 @@ class modelSearchJsonp extends CI_Model{
 		foreach ($rResult->result_array() as $aRow)
 		{
 			$row = array();
-            
+            $row[] = " ";
             foreach($nColumns as $col)
             {
                 $row[] = $aRow[$col];

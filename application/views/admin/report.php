@@ -28,7 +28,7 @@
 		</form>
 	</div>
 </div>
-<div id="chart_div" style="width:90%;height:500px;padding:0px;margin:0px"></div>
+<div id="chart_div" style="width:90%;height:500px;padding:0px;margin:0px;margin-top:250px"></div>
 <script>
 	google.load("visualization", "1", {packages:["corechart"]});
 	google.setOnLoadCallback(drawChart);
@@ -67,23 +67,65 @@
 <table class="table table-bordered table-hover table-condensed">
 <tr>
 	<th>Date</th>
-	<th>Applicant</th>
-	<th>Proposed</th>
-	<th>Recruited</th>
-	<th>Proccesed</th>
-	<th>Departured</th>
-	<th>Arrived</th>
+	<th>Name</th>
+	<th>Position</th>
+	<th>Address</th>
+	<th>Mobile</th>
+	<th>Email</th>
 </tr>
 </table>
 <legend>Proposed</legend>
 <table class="table table-bordered table-hover table-condensed">
 <tr>
 	<th>Date</th>
-	<th>Applicant</th>
-	<th>Proposed</th>
-	<th>Recruited</th>
-	<th>Proccesed</th>
-	<th>Departured</th>
-	<th>Arrived</th>
+	<th>Name</th>
+	<th>Position</th>
+	<th>Address</th>
+	<th>Mobile</th>
+	<th>Email</th>
+</tr>
+</table>
+<legend>Recruited</legend>
+<table class="table table-bordered table-hover table-condensed">
+<tr>
+	<th>Date</th>
+	<th>Name</th>
+	<th>Position</th>
+	<th>Address</th>
+	<th>Mobile</th>
+	<th>Email</th>
+</tr>
+</table>
+<legend>Proccesed</legend>
+<table class="table table-bordered table-hover table-condensed">
+<tr>
+	<th>Date</th>
+	<th>Name</th>
+	<th>Position</th>
+	<th>Address</th>
+	<th>Mobile</th>
+	<th>Email</th>
+</tr>
+</table>
+<legend>Departured</legend>
+<table class="table table-bordered table-hover table-condensed">
+<tr>
+	<th>Date</th>
+	<th>Name</th>
+	<th>Position</th>
+	<th>Address</th>
+	<th>Mobile</th>
+	<th>Email</th>
+</tr>
+</table>
+<legend>Arrived</legend>
+<table class="table table-bordered table-hover table-condensed">
+<tr>
+	<th>Date</th>
+	<th>Name</th>
+	<th>Position</th>
+	<th>Address</th>
+	<th>Mobile</th>
+	<th>Email</th>
 </tr>
 </table>

@@ -35,10 +35,17 @@
 	  </li>
 	</ul>
 	<?php if(isset($company)){ ?>
+	<form method="post" name="allrecruit">
+	<ul class="comment">
+		<li><label><h5>Comment:</h5> </label></li>
+		<li><textarea name="comment" required></textarea></li>
+		<li><button class="btn btn-success" type="submit"><i class="icon-download-alt icon-white"></i> Submit</button></li>
+	</ul>
 	<div class="container-fluid well">
 		<table cellpadding="0" cellspacing="0" border="0" class="dsiplay" id="data">
 			<thead>
 				<tr>
+					<th style="width:20px;text-align:center"><input type="checkbox" id="checkall"  data-toggle="tooltip" data-placement="top" title="" data-original-title="Check All"></th>
 					<th width="5%" style="text-align:center">ID</th>
 					<th width="23%">First Name</th>
 					<th width="22%">Last Name</th>
@@ -54,6 +61,30 @@
 			</tbody>
 		</table>
 	  </div>
+	  </form>
+	  
+		<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		  <div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+			<h3 id="myModalLabel">Recruit Applicant</h3>
+		  </div>
+		  <div class="modal-body">
+			<p id="modal-body-text"></p>
+			<form method="post" name="rform" >
+				<ul class="ecomment">
+					<li><label><h5>Comment:</h5> </label></li>
+					<li><textarea name="comment" required></textarea></li>
+				</ul>
+				<input type="text" name="erase" value="true" style="display:none">
+				<input type="text" name="appid" id="appid" style="display:none">
+				<input type="text" name="companyid" value="<?php echo $this->uri->segment(3) ?>" style="display:none">
+			</form>
+		  </div>
+		  <div class="modal-footer">
+			<button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+			<button class="btn btn-primary" onclick="$('form[name=rform]').submit()">Recruit</button>
+		  </div>
+		</div>
 	  <?php } ?>
 	  
 	  <script type="text/javascript" charset="utf-8">
@@ -61,7 +92,7 @@
 			$('#data').dataTable({
 				'bProcessing'		: true,
 				'bServerSide'		: true,
-				"sAjaxSource": "<?php echo site_url() ?>transaction/jsonp/2/<?php echo $id ?>",
+				"sAjaxSource": "<?php echo site_url() ?>transaction/jsonprecruited/2/<?php echo $id ?>",
 				"fnServerData": function( sUrl, aoData, fnCallback, oSettings ) {
 					oSettings.jqXHR = $.ajax( {
 						"url": sUrl,
@@ -82,6 +113,7 @@
 				},
 				"bStateSave"		: true,
 				"aoColumns": [
+				{ "bVisible": true, "bSearchable": false, "bSortable": false },
 				{ "bVisible": true, "bSearchable": true, "bSortable": true },
 				{ "bVisible": true, "bSearchable": true, "bSortable": true },
 				{ "bVisible": true, "bSearchable": true, "bSortable": true },
@@ -91,5 +123,21 @@
 				]
 			})
 		  });
-			  
+		$("#checkall").change(function(){
+			if($(this).is(':checked')){
+				$('input[type=checkbox]').prop('checked', true);
+				$(this).removeAttr('data-original-title');
+				$(this).attr('data-original-title','Uncheck All');
+			}else{
+				$('input[type=checkbox]').prop('checked', false);
+				$(this).removeAttr('data-original-title');
+				$(this).attr('data-original-title','Check All');
+			}
+		});
+		$('#checkall').tooltip();
+		
+		function erase(id,name){
+			$('#modal-body-text').html("Do you wish to recruit this applicant <b>"+name+"</b> and all data related to it?");
+			$('#appid').attr("value",id);
+		}
 		</script>

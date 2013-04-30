@@ -7,11 +7,10 @@ class Definition extends CI_Controller{
 		$this->load->helper('url');
 		$this->load->model('databankmodel');		
 		$this->databank['applicant'] = $this->databankmodel->load('1');
-		$this->databank['propose'] = $this->databankmodel->load('2');
-		$this->databank['recruit'] = $this->databankmodel->load('3');
-		$this->databank['process'] = $this->databankmodel->load('4');
-		$this->databank['departure'] = $this->databankmodel->load('5');
-		$this->databank['arrival'] = $this->databankmodel->load('6');
+		$this->databank['recruit'] = $this->databankmodel->load('2');
+		$this->databank['process'] = $this->databankmodel->load('3');
+		$this->databank['departure'] = $this->databankmodel->load('4');
+		$this->databank['arrival'] = $this->databankmodel->load('5');
 				
 	}
 	

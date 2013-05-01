@@ -128,7 +128,6 @@ class applicantModel extends CI_Model{
 		}
 		
 		$data = array(
-			'status' => '1',
 			'appid' => $appid,
 			'empid' => '1',
 			'emrid' => '',
@@ -244,6 +243,13 @@ class applicantModel extends CI_Model{
 			'appid' => $appid,
 		);
 		$this->db->insert("statistic",$statistic);
+		
+		$documents = array(
+			'appid' => $appid,
+		);
+		$this->db->insert("documents",$documents);
+		
+		mkdir("./documents/attachments/".$appid);
 	}
 	
 	
@@ -312,7 +318,6 @@ class applicantModel extends CI_Model{
 		
 		$data = array(
 			'empid' => '1',
-			'emrid' => '',
 			'position1' => strtoupper($_POST['position1']),
 			'position2' => strtoupper($_POST['position2']),
 			'prefer1' => strtoupper($_POST['reference1']),

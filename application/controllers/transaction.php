@@ -71,10 +71,6 @@ class Transaction extends CI_Controller{
 		$this->load->view('admin/footer');
 	}
 	
-	public function view($id){
-		$this->load->load('admin/transactionproposeview');
-	}
-	
 	public function recruitment($id = null)
 	{		
 		$this->load->view('admin/header',$this->databank);
@@ -137,7 +133,20 @@ class Transaction extends CI_Controller{
             $data['agency'][] = $row;
 		}
 		
-		$this->load->view('admin/transactionprocessing',$data);
+		if($this->uri->segment(4)=='view'){
+			$this->load->library('session');
+			$this->session->set_userdata(array('FILE_PATH'=>'/documents/attachments/'.$this->uri->segment(5).'/'));
+			echo $this->session->userdata('FILE_PATH');
+			$this->load->model('personalmodel');
+			$this->load->model('applicantModel');
+			$data['position'] = $this->personalmodel->position();
+			$data['uploadphoto'] = $this->applicantModel->loaduploadphoto($this->uri->segment(5));
+			$data['uploadresume'] = $this->applicantModel->loaduploadresume($this->uri->segment(5));
+			$data['personalbackground'] = $this->applicantModel->loadpersonalbackground($this->uri->segment(5));
+			$this->load->view('admin/transactionprocessingview',$data);
+		}else{
+			$this->load->view('admin/transactionprocessing',$data);
+		}
 		$this->load->view('admin/footer');
 	}
 	
@@ -212,6 +221,13 @@ class Transaction extends CI_Controller{
 		echo $this->modeljsonp->getTableRecruited($status,$id,$company);
 	}
 	
+    public function jsonproccesed($status,$id = null){
+		$this->load->model('modeljsonp');
+		if($this->input->get('company')=="") $company = null;
+		else $company = $this->input->get('company');
+		echo $this->modeljsonp->getTableProccesed($status,$id,$company);
+	}
+	
 	public function attachment($id=""){
 		$sql = "SELECT * FROM req ORDER BY value";
 		$query = $this->db->query($sql);
@@ -226,5 +242,56 @@ class Transaction extends CI_Controller{
 		var_dump($list);
 		return $list;
 	}
+	
+	public function doc(){
+		$this->load->database();
+		$sql = "SELECT appid FROM applicant";
+		$query = $this->db->query($sql);
+		foreach($query->result() as $row){
+			$sql = "INSERT INTO documents (appid) VALUES (?)";
+			$this->db->query($sql, array($row->appid));
+		}
+	}
+	
+    public function upload(){
+		$this->load->library('session');
+		$this->load->helper("file");
+		
+        error_reporting(E_ALL | E_STRICT);
+
+        $this->load->helper("upload.class");
+        $upload_handler = new UploadHandler();
+
+        header('Pragma: no-cache');
+        header('Cache-Control: no-store, no-cache, must-revalidate');
+        header('Content-Disposition: inline; filename="files.json"');
+        header('X-Content-Type-Options: nosniff');
+        header('Access-Control-Allow-Origin: *');
+        header('Access-Control-Allow-Methods: OPTIONS, HEAD, GET, POST, PUT, DELETE');
+        header('Access-Control-Allow-Headers: X-File-Name, X-File-Type, X-File-Size');
+		$path = base_url('documents/text.txt');
+		delete_files($path);
+        switch ($_SERVER['REQUEST_METHOD']) {
+            case 'OPTIONS':
+                break;
+            case 'HEAD':
+            case 'GET':
+                $upload_handler->get();
+                break;
+            case 'POST':
+                if (isset($_REQUEST['_method']) && $_REQUEST['_method'] === 'DELETE') {
+                    $upload_handler->delete();
+                } else {
+                    $upload_handler->post();
+                }
+                break;
+            case 'DELETE':
+                $upload_handler->delete();
+                break;
+            default:
+                header('HTTP/1.1 405 Method Not Allowed');
+        }
+
+    }
 	
 }

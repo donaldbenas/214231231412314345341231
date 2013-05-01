@@ -112,11 +112,7 @@ class Transaction extends CI_Controller{
 	}
 	
 	public function processing($id = null)
-	{		
-		$this->load->view('admin/header',$this->databank);
-		$this->load->view('admin/nav');
-		$this->load->view('admin/databank');
-		
+	{				
 		$this->load->model('modelagency');
 		foreach($this->modelagency->agency($id) as $row){
 			$data['id'] = $row['id'];
@@ -134,9 +130,11 @@ class Transaction extends CI_Controller{
 		}
 		
 		if($this->uri->segment(4)=='view'){
+			$this->load->view('admin/header',$this->databank);
+			$this->load->view('admin/nav');
+			$this->load->view('admin/databank');
 			$this->load->library('session');
 			$this->session->set_userdata(array('FILE_PATH'=>'/documents/attachments/'.$this->uri->segment(5).'/'));
-			echo $this->session->userdata('FILE_PATH');
 			$this->load->model('personalmodel');
 			$this->load->model('applicantModel');
 			$data['position'] = $this->personalmodel->position();
@@ -145,6 +143,9 @@ class Transaction extends CI_Controller{
 			$data['personalbackground'] = $this->applicantModel->loadpersonalbackground($this->uri->segment(5));
 			$this->load->view('admin/transactionprocessingview',$data);
 		}else{
+			$this->load->view('admin/header',$this->databank);
+			$this->load->view('admin/nav');
+			$this->load->view('admin/databank');
 			$this->load->view('admin/transactionprocessing',$data);
 		}
 		$this->load->view('admin/footer');
@@ -269,8 +270,6 @@ class Transaction extends CI_Controller{
         header('Access-Control-Allow-Origin: *');
         header('Access-Control-Allow-Methods: OPTIONS, HEAD, GET, POST, PUT, DELETE');
         header('Access-Control-Allow-Headers: X-File-Name, X-File-Type, X-File-Size');
-		$path = base_url('documents/text.txt');
-		delete_files($path);
         switch ($_SERVER['REQUEST_METHOD']) {
             case 'OPTIONS':
                 break;

@@ -34,6 +34,8 @@
 		  </div>
 	  </li>
 	</ul>
+	<button class="btn" type="button" onclick="window.location.href='<?php echo base_url('transaction/processing/'.$this->uri->segment(3))?>'"><i class="icon-arrow-left"></i> Return</button>
+	<br><br>
 	<table class="table table-condensed table-hover table-bordered" id="processtable">
 		<tr>
 			<td style="width:200px" rowspan="7"><img src="<?php if(isset($uploadphoto[0]['appid'])) echo base_url()."documents/photos/".$uploadphoto[0]['appid'].".".$uploadphoto[0]['type']; ?>" class="img-polaroid" style="height:200px;width:180px;" 	></td>
@@ -187,15 +189,16 @@
 		</tr>
 	{% } %}
 	</script>
-	<script src="<?php echo base_url()?>js/jquery.min.js"></script>
 	<script src="<?php echo base_url()?>js/vendor/jquery.ui.widget.js"></script>
 	<script src="<?php echo base_url()?>js/tmpl.min.js"></script>
 	<script src="<?php echo base_url()?>js/load-image.min.js"></script>
 	<script src="<?php echo base_url()?>js/canvas-to-blob.min.js"></script>
-	<script src="<?php echo base_url()?>js/bootstrap.min.js"></script>
 	<script src="<?php echo base_url()?>js/jquery.iframe-transport.js"></script>
 	<script src="<?php echo base_url()?>js/jquery.fileupload.js"></script>
 	<script src="<?php echo base_url()?>js/jquery.fileupload-fp.js"></script>
 	<script src="<?php echo base_url()?>js/jquery.fileupload-ui.js"></script>
 	<script src="<?php echo base_url()?>js/locale.js"></script>
 	<script src="<?php echo base_url()?>js/main.js"></script>
+	<script>
+		$('.files').parent().css('width','900px');
+	</script>

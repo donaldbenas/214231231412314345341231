@@ -36,10 +36,10 @@
 	</ul>
 	<?php if(isset($company)){ ?>
 
-		<div class="container-fluid" id="view">
+		<div class="container" id="view">
 			<!--<h2>Personal Background</h2>-->
-			<div class="container-fluid well" id="personal-background">
-				<legend>Applicant Information<a href="<?php echo base_url()."transaction/propose/".$this->uri->segment(3) ?>" class="pull-right btn btn-danger"><i class="icon-chevron-left icon-white"></i> Back</a></legend>
+			<div class="container well" id="personal-background">
+				<legend>Applicant Information<button class="btn pull-right" type="button" onclick="window.location.href='<?php echo base_url('transaction/propose/'.$this->uri->segment(3))?>'"><i class="icon-arrow-left"></i> Return</button></legend>
 				<div class="row-fluid span">
 					<div class="span2" id="top_margin1" style="margin-top:190px"><label>Upload Photo</label></div>
 					<div class="span3">
@@ -129,7 +129,7 @@
 					<div class="span2"><label>Salary Expected</label></div>
 					<div class="span3"><input type="text" name="salary2" class="span12" value="<?php echo $personalbackground['0']['salary2'] ?>"/></div>
 				</div>
-				<legend>Personal Information<a href="<?php echo base_url()."transaction/propose/".$this->uri->segment(3) ?>" class="pull-right btn btn-danger"><i class="icon-chevron-left icon-white"></i> Back</a></legend>
+				<legend>Personal Information</legend>
 				<div class="row-fluid span">
 					<div class="span2"><label class="required">Firt Name</label></div>
 					<div class="span3"><input type="text" name="firstname" class="span12" value="<?php echo $personalbackground['0']['firstname'] ?>"/></div>
@@ -235,7 +235,7 @@
 						</select>
 					</div>
 				</div>
-				<legend>Address Information<a href="<?php echo base_url()."transaction/propose/".$this->uri->segment(3) ?>" class="pull-right btn btn-danger"><i class="icon-chevron-left icon-white"></i> Back</a></legend>
+				<legend>Address Information</legend>
 				<div class="row-fluid span">
 					<div class="span2"><label>Current Address</label></div>
 					<div class="span3"><input type="text" name="currentAddressMunicpality" placeholder="Town / Municipality" class="span12" value="<?php $caddress = explode('--',$personalbackground['0']['caddress'] ); if(isset($caddress[0])) echo $caddress[0]; ?>"/></div>
@@ -260,7 +260,7 @@
 					<div class="span2"><label>Mobile Number</label></div>
 					<div class="span3"><input type="text" name="permanentMobile" class="span12" value="<?php echo $personalbackground['0']['pmobile'] ?>"/></div>
 				</div>
-				<legend>Other Information<a href="<?php echo base_url()."transaction/propose/".$this->uri->segment(3) ?>" class="pull-right btn btn-danger"><i class="icon-chevron-left icon-white"></i> Back</a></legend>
+				<legend>Other Information</legend>
 				<div class="row-fluid span">
 					<div class="span2"><label>Religion</label></div>
 					<div class="span3">
@@ -303,7 +303,7 @@
 					<div class="span2"><label>Pagibig Number</label></div>
 					<div class="span3"><input type="text" name="pagibig" id="pagibig" class="span12" maxlength="14" placeholder="____-____-____" value="<?php echo $personalbackground['0']['pagibig'] ?>"/></div>
 				</div>
-				<legend>Emergency Information<a href="<?php echo base_url()."transaction/propose/".$this->uri->segment(3) ?>" class="pull-right btn btn-danger"><i class="icon-chevron-left icon-white"></i> Back</a></legend>
+				<legend>Emergency Information</legend>
 				<div class="row-fluid span">
 					<div class="span2"><label>Person Noitfy</label></div>
 					<div class="span3"><input type="text" name="emergencyNotify"class="span12" value="<?php echo $personalbackground['0']['notify'] ?>"/></div>
@@ -334,7 +334,7 @@
 					<div class="span2"><label>Mobile Number</label></div>
 					<div class="span3"><input type="text" name="spouseMobile" class="span12" value="<?php echo $personalbackground['0']['smobile'] ?>"/></div>
 				</div>
-				<legend>Document Attachment<a href="<?php echo base_url()."transaction/propose/".$this->uri->segment(3) ?>" class="pull-right btn btn-danger"><i class="icon-chevron-left icon-white"></i> Back</a></legend>
+				<legend>Document Attachment</legend>
 				<div class="row-fluid span">
 					<div class="span2"><label>Upload Resume</label></div>
 					<div class="span3">
@@ -346,8 +346,8 @@
 				 </div>
 			</div>
 			<!--<h2>Educational Background</h2>-->
-			<div class="container-fluid well tab-pane" id="educational-background">
-				<legend>Educational Information<a href="<?php echo base_url()."transaction/propose/".$this->uri->segment(3) ?>" class="pull-right btn btn-danger"><i class="icon-chevron-left icon-white"></i> Back</a></legend>
+			<div class="container well tab-pane" id="educational-background">
+				<legend>Educational Information<button class="btn pull-right" type="button" onclick="window.location.href='<?php echo base_url('transaction/propose/'.$this->uri->segment(3))?>'"><i class="icon-arrow-left"></i> Return</button></legend>
 				<div class="row-fluid span">
 					<div class="span2"><h5>Educational Level</h5></div>
 					<div class="span3"><h5>School Graduated / Course</h5></div>
@@ -512,11 +512,11 @@
 				</div>
 			</div>
 			<!--<h2>Special Skill Background</h2>-->
-			<div class="container-fluid well tab-pane" id="special-skill-background">
+			<div class="container well tab-pane" id="special-skill-background">
 				<?php 
 					//echo print_r($skillbackground);
 				?>
-				<legend>Spcecial Skill Information<a href="<?php echo base_url()."transaction/propose/".$this->uri->segment(3) ?>" class="pull-right btn btn-danger"><i class="icon-chevron-left icon-white"></i> Back</a></legend>
+				<legend>Spcecial Skill Information<button class="btn pull-right" type="button" onclick="window.location.href='<?php echo base_url('transaction/propose/'.$this->uri->segment(3))?>'"><i class="icon-arrow-left"></i> Return</button></legend>
 				<div class="row-fluid span">
 					<div class="span3"><h5>Couse / Seminar</h5></div>
 					<div class="span3"><h5>School or Training Center</h5></div>
@@ -570,8 +570,8 @@
 				</script>
 			</div>
 			<!--<h2>Wok Experience Background</h2>-->
-			<div class="container-fluid well tab-pane" id="work-experience-background">
-				<legend>Local Work Information<a href="<?php echo base_url()."transaction/propose/".$this->uri->segment(3) ?>" class="pull-right btn btn-danger"><i class="icon-chevron-left icon-white"></i> Back</a></legend>
+			<div class="container well tab-pane" id="work-experience-background">
+				<legend>Local Work Information<button class="btn pull-right" type="button" onclick="window.location.href='<?php echo base_url('transaction/propose/'.$this->uri->segment(3))?>'"><i class="icon-arrow-left"></i> Return</button></legend>
 				<div class="row-fluid span">
 					<div class="span2"><h5>Company</h5></div>
 					<div class="span2"><h5>Position</h5></div>
@@ -624,7 +624,7 @@
 					});
 				</script>
 				<hr>
-				<legend>Abroad Work Information<a href="<?php echo base_url()."transaction/propose/".$this->uri->segment(3) ?>" class="pull-right btn btn-danger"><i class="icon-chevron-left icon-white"></i> Back</a></legend>
+				<legend>Abroad Work Information</legend>
 				<div class="row-fluid span">
 					<div class="span2"><h5>Company</h5></div>
 					<div class="span2"><h5>Position</h5></div>

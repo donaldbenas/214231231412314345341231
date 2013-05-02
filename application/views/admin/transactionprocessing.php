@@ -36,11 +36,6 @@
 	</ul>
 	<?php if(isset($company)){ ?>
 	<form method="post" name="allrecruit">
-	<ul class="comment">
-		<li><label><h5>Comment:</h5> </label></li>
-		<li><textarea name="comment" required></textarea></li>
-		<li><button class="btn btn-success" type="submit"><i class="icon-download-alt icon-white"></i> Submit</button></li>
-	</ul>
 	<div class="container-fluid well">
 		<table cellpadding="0" cellspacing="0" border="0" class="dsiplay" id="data">
 			<thead>
@@ -62,6 +57,11 @@
 			</tbody>
 		</table>
 	  </div>
+		<ul class="comment">
+			<li><label><h5>Comment:</h5> </label></li>
+			<li><textarea name="comment" required></textarea></li>
+			<li><button class="btn btn-success" type="submit"><i class="icon-download-alt icon-white"></i> Submit</button></li>
+		</ul>
 	  </form>
 	  
 		<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

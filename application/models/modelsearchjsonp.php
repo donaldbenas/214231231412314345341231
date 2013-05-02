@@ -6,13 +6,14 @@ class modelSearchJsonp extends CI_Model{
 		
 		$this->load->database();
 	
-		$aColumns = array('applicant.appid AS id', 'applicant.firstname AS firstname', 'applicant.lastname AS lastname', 'list.value AS position');
-        $cColumns = array(' ', 'applicant.appid', 'applicant.firstname', 'applicant.lastname', 'list.value');
-        $nColumns = array('id', 'firstname', 'lastname', 'position');
+		$aColumns = array('applicant.appid AS id', 'status.value AS status', 'applicant.firstname AS firstname', 'applicant.lastname AS lastname', 'list.value AS position');
+        $cColumns = array('applicant.appid', 'status.value', 'applicant.firstname', 'applicant.lastname', 'list.value');
+        $nColumns = array('id', 'status', 'firstname', 'lastname', 'position');
         
 		$sIndexColumn = 'applicant.id';
 		        
         $sTable = 'applicant LEFT JOIN list ON applicant.position1=list.id';
+        $sTable.= '			 LEFT JOIN status ON applicant.status=status.id';
 		
 		$iDisplayStart = $this->input->get('iDisplayStart');
 		$iDisplayLength = $this->input->get('iDisplayLength');
@@ -112,7 +113,6 @@ class modelSearchJsonp extends CI_Model{
 		foreach ($rResult->result_array() as $aRow)
 		{
 			$row = array();
-            $row[] = " ";
             foreach($nColumns as $col)
             {
                 $row[] = $aRow[$col];

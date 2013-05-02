@@ -74,18 +74,7 @@
 	<th>Email</th>
 </tr>
 </table>
-<legend>Proposed</legend>
-<table class="table table-bordered table-hover table-condensed">
-<tr>
-	<th>Date</th>
-	<th>Name</th>
-	<th>Position</th>
-	<th>Address</th>
-	<th>Mobile</th>
-	<th>Email</th>
-</tr>
-</table>
-<legend>Recruited</legend>
+<legend>Approved</legend>
 <table class="table table-bordered table-hover table-condensed">
 <tr>
 	<th>Date</th>

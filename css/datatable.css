@@ -6,7 +6,7 @@
 	line-height: 30px;
 	border-right: 1px dashed #E1E1E1;
 }
-#data > tbody > tr :nth-child(6), #data > tbody > tr :nth-child(7), #data > tbody > tr :nth-child(2){
+#data > tbody > tr :nth-child(1), #data > tbody > tr :nth-child(6), #data > tbody > tr :nth-child(7), #data > tbody > tr :nth-child(2){
 	text-align:center;
 }#data > thead > tr{
 	height: 40px;

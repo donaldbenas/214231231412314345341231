@@ -15,7 +15,7 @@
 			  <a href="#" id="drop2" role="button" class="dropdown-toggle" data-toggle="dropdown">Transaction <b class="caret"></b></a>
 			  <ul class="dropdown-menu" role="menu" aria-labelledby="drop2">
 				<li><a tabindex="-1" href="<?php echo base_url() ?>transaction/propose">Propose</a></li>
-				<li><a tabindex="-1" href="<?php echo base_url() ?>transaction/recruitment">Rectruit</a></li>
+				<li><a tabindex="-1" href="<?php echo base_url() ?>transaction/recruitment">Approve</a></li>
 				<li><a tabindex="-1" href="<?php echo base_url() ?>transaction/processing">Process</a></li>
 				<li><a tabindex="-1" href="<?php echo base_url() ?>transaction/departure">Departure</a></li>
 				<li><a tabindex="-1" href="<?php echo base_url() ?>transaction/arrival">Arrival</a></li>

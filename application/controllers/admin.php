@@ -24,6 +24,57 @@ class Admin extends CI_Controller {
 		
 	}
 	
+	public function ptinfo(){
+		$this->load->database();
+		$sql = "SELECT appid, firstname, lastname FROM applicant";
+		$query = $this->db->query($sql);
+		foreach($query->result() as $rows){
+			//resume
+			$name = './documents/resumes/'.$rows->lastname.'_'.$rows->firstname;
+			$type = array('','.doc','.docx','.pdf');
+			for($i=0;$i<4;$i++){
+				$rfile = $name.$type[$i];
+				if (file_exists($rfile)) {
+					if($type[$i]==''){
+						if(!file_exists('./documents/resumes/'.$rows->appid.'.pdf')){
+							rename($rfile,'./documents/resumes/'.$rows->appid.'.pdf');
+						}
+						$ntype = 'pdf';
+					}else{
+						if(!file_exists('./documents/resumes/'.$rows->appid.$type[$i])){
+							rename($rfile,'./documents/resumes/'.$rows->appid.$type[$i]);
+						}
+						$ntype = substr($type[$i],1);
+					}
+					$this->db->query("INSERT INTO resume (appid,type) VALUES (?,?)",array($rows->appid,$ntype));
+					break;
+				}
+			}
+			
+			//photo
+			$pname = './documents/photos/'.$rows->lastname.'_'.$rows->firstname;
+			$ptype = array('','.png','.jpg','.jpeg');
+			for($l=0;$l<4;$l++){
+				$rfile = $pname.$ptype[$l];
+				if (file_exists($rfile)) {
+					if($ptype[$l]==''){
+						if(!file_exists('./documents/photos/'.$rows->appid.'.pdf')){
+							rename($rfile,'./documents/photos/'.$rows->appid.'.pdf');
+						}
+						$pntype = 'pdf';
+					}else{
+						if(!file_exists('./documents/photos/'.$rows->appid.$ptype[$l])){
+							rename($rfile,'./documents/photos/'.$rows->appid.$ptype[$l]);
+						}
+						$pntype = substr($ptype[$l],1);
+					}
+					$this->db->query("INSERT INTO photo (appid,type) VALUES (?,?)",array($rows->appid,$pntype));
+					break;
+				}
+			}
+		}
+	}
+	
 	public function rnm(){
 		$this->load->database();
 		$sql = "SELECT id, firstname, lastname,appid,middlename, status FROM applicant WHERE activate ='1' ORDER BY lastname";

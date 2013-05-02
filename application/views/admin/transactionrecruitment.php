@@ -1,6 +1,6 @@
 	<ul class="breadcrumb breadcrumb-medium">
 	  <li><a href="#">TRANSACTION</a><span class="divider"><i class="icon-play"></i></span></li>
-	  <li class="active" >RECRUITMENT</li>
+	  <li class="active" >APPROVEMENT</li>
 	  <li class="pull-right span7 active">
 	     <div class="form-horizontal pull-right">
 		  <div class="control-group">
@@ -35,12 +35,7 @@
 	  </li>
 	</ul>
 	<?php if(isset($company)){ ?>
-	<form method="post" name="allrecruit">
-	<ul class="comment">
-		<li><label><h5>Comment:</h5> </label></li>
-		<li><textarea name="comment" required></textarea></li>
-		<li><button class="btn btn-success" type="submit"><i class="icon-download-alt icon-white"></i> Submit</button></li>
-	</ul>
+	<form method="post" name="allapprove">
 	<div class="container-fluid well">
 		<table cellpadding="0" cellspacing="0" border="0" class="dsiplay" id="data">
 			<thead>
@@ -61,12 +56,17 @@
 			</tbody>
 		</table>
 	  </div>
+		<ul class="comment">
+			<li><label><h5>Comment:</h5> </label></li>
+			<li><textarea class="100%" required></textarea></li>
+			<li><button class="btn btn-success" type="submit"><i class="icon-download-alt icon-white"></i> Submit</button></li>
+		</ul>
 	  </form>
 	  
 		<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		  <div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-			<h3 id="myModalLabel">Recruit Applicant</h3>
+			<h3 id="myModalLabel">Remove Applicant</h3>
 		  </div>
 		  <div class="modal-body">
 			<p id="modal-body-text"></p>
@@ -82,7 +82,7 @@
 		  </div>
 		  <div class="modal-footer">
 			<button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
-			<button class="btn btn-primary" onclick="$('form[name=rform]').submit()">Recruit</button>
+			<button class="btn btn-primary" onclick="$('form[name=rform]').submit()">Approve</button>
 		  </div>
 		</div>
 	  <?php } ?>
@@ -137,7 +137,7 @@
 		$('#checkall').tooltip();
 		
 		function erase(id,name){
-			$('#modal-body-text').html("Do you wish to recruit this applicant <b>"+name+"</b> and all data related to it?");
+			$('#modal-body-text').html("Do you wish to approve this applicant <b>"+name+"</b> and all data related to it?");
 			$('#appid').attr("value",id);
 		}
 		</script>

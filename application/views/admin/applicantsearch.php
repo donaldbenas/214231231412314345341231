@@ -7,8 +7,8 @@
 		<table cellpadding="0" cellspacing="0" border="0" class="dsiplay" id="data">
 			<thead>
 				<tr>
-					<th width="5%" style="text-align:center;display:none">ID</th>
 					<th width="5%" style="text-align:center">ID</th>
+					<th width="5%" style="text-align:center">STATUS</th>
 					<th width="23%">First Name</th>
 					<th width="22%">Last Name</th>
 					<th width="48%">Position</th>
@@ -63,7 +63,7 @@
 				},
 				"bStateSave"		: true,
 				"aoColumns": [
-				{ "sClass": "hideme", "bSearchable": false, "bSortable": false },
+				{ "bVisible": true, "bSearchable": true, "bSortable": true },
 				{ "bVisible": true, "bSearchable": true, "bSortable": true },
 				{ "bVisible": true, "bSearchable": true, "bSortable": true },
 				{ "bVisible": true, "bSearchable": true, "bSortable": true },

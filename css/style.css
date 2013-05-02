@@ -87,10 +87,10 @@
 }
 .comment{
 	margin-bottom: 30px;
+	margin-left:0px;
 }
 .comment li{
 	list-style-type: none;
-	display: inline-block;
 	vertical-align: top;
 }
 .comment li h5{
@@ -101,7 +101,7 @@
 }
 .comment li textarea{
 	height:40px;
-	width:500px;
+	width:99%;
 }
 .comment li:last-child{
 	height:40px;
@@ -114,7 +114,6 @@
 }
 .ecomment li{
 	list-style-type: none;
-	display: inline-block;
 	vertical-align: top;
 }
 .ecomment li h5{
@@ -124,6 +123,6 @@
 	font-weight: normal;
 }
 .ecomment li textarea{
-	height:60px;
-	width:420px;
+	height:40px;
+	width:99%;
 }

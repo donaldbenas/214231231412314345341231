@@ -41,7 +41,7 @@
 					<td><b><?php echo $applicant[0]->count ?></b></td>
 				</tr>
 				<tr>
-					<td>Recruited</td>
+						<td>Approved</td>
 					<td><b><?php echo $recruit[0]->count ?></b></td>
 				</tr>
 				<tr>

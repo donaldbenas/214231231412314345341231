@@ -30,7 +30,7 @@ class Admin extends CI_Controller {
 		$query = $this->db->query($sql);
 		foreach($query->result() as $rows){
 			//resume
-			$name = './documents/resumes/'.$rows->lastname.'_'.$rows->firstname;
+			/**$name = './documents/resumes/'.$rows->lastname.'_'.$rows->firstname;
 			$type = array('','.doc','.docx','.pdf');
 			for($i=0;$i<4;$i++){
 				$rfile = $name.$type[$i];
@@ -71,6 +71,11 @@ class Admin extends CI_Controller {
 					$this->db->query("INSERT INTO photo (appid,type) VALUES (?,?)",array($rows->appid,$pntype));
 					break;
 				}
+			}**/
+			
+			$rfile ='./documents/photos/'.$rows->appid;
+			if(file_exists($rfile.'.pdf')){
+				rename($rfile.'.pdf',$rfile.'.jpg');
 			}
 		}
 	}

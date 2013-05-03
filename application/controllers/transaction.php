@@ -5,12 +5,13 @@ class Transaction extends CI_Controller{
 	public function __construct(){
 		parent::__construct();
 		$this->load->helper('url');		
-		$this->load->model('databankmodel');		
+		$this->load->model('databankmodel');	
 		$this->databank['applicant'] = $this->databankmodel->load('1');
-		$this->databank['recruit'] = $this->databankmodel->load('2');
-		$this->databank['process'] = $this->databankmodel->load('3');
-		$this->databank['departure'] = $this->databankmodel->load('4');
-		$this->databank['arrival'] = $this->databankmodel->load('5');
+		$this->databank['propose'] = $this->databankmodel->load('2');
+		$this->databank['recruit'] = $this->databankmodel->load('3');
+		$this->databank['process'] = $this->databankmodel->load('4');
+		$this->databank['departure'] = $this->databankmodel->load('5');
+		$this->databank['arrival'] = $this->databankmodel->load('6');
 	}
 	
 	
@@ -114,6 +115,8 @@ class Transaction extends CI_Controller{
 	public function processing($id = null)
 	{				
 		$this->load->model('modelagency');
+		$this->load->model('employermodel');
+		$this->employermodel->getvalidate();
 		foreach($this->modelagency->agency($id) as $row){
 			$data['id'] = $row['id'];
 			$data['company'] = $row['company'];
@@ -137,6 +140,7 @@ class Transaction extends CI_Controller{
 			$this->session->set_userdata(array('FILE_PATH'=>'/documents/attachments/'.$this->uri->segment(5).'/'));
 			$this->load->model('personalmodel');
 			$this->load->model('applicantModel');
+			$data['requirements'] = $this->employermodel->requirements($this->uri->segment(3));
 			$data['position'] = $this->personalmodel->position();
 			$data['uploadphoto'] = $this->applicantModel->loaduploadphoto($this->uri->segment(5));
 			$data['uploadresume'] = $this->applicantModel->loaduploadresume($this->uri->segment(5));
@@ -223,7 +227,7 @@ class Transaction extends CI_Controller{
 	}
 	
     public function jsonproccesed($status,$id = null){
-		$this->load->model('modeljsonp');
+		$this->load->model('modeljsonp');	
 		if($this->input->get('company')=="") $company = null;
 		else $company = $this->input->get('company');
 		echo $this->modeljsonp->getTableProccesed($status,$id,$company);
@@ -261,7 +265,7 @@ class Transaction extends CI_Controller{
         error_reporting(E_ALL | E_STRICT);
 
         $this->load->helper("upload.class");
-        $upload_handler = new UploadHandler();
+        $upload_handler = new UploadHandler();        
 
         header('Pragma: no-cache');
         header('Cache-Control: no-store, no-cache, must-revalidate');

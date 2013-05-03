@@ -40,7 +40,7 @@
 		<tr>
 			<td style="width:200px" rowspan="7"><img src="<?php if(isset($uploadphoto[0]['appid'])) echo base_url()."documents/photos/".$uploadphoto[0]['appid'].".".$uploadphoto[0]['type']; ?>" class="img-polaroid" style="height:200px;width:180px;" 	></td>
 			
-			<td><b>Status :</b> Proccess</td>
+			<td><b>Status :</b> Processed</td>
 			<td><b>Date Approve :</b> Proccess</td>
 		</tr>
 		<tr>
@@ -67,7 +67,19 @@
 						<?php }else  echo "No Resume Uploaded"; ?></td>
 		</tr>
 		<tr>
-			<td colspan="3"><b>List Of Requirements :</b></td>
+			<td colspan="3">
+				<b>List Of Requirements :</b> 
+				<?php 
+					$numItems = count($requirements);
+					$i = 0;
+					if(!empty($requirements)){
+						foreach($requirements as $rows){
+							if(++$i === $numItems) echo $rows['requirement']."... "; 
+							else echo $rows['requirement'].", "; 
+						}
+					}
+				?>
+			</td>
 		</tr>
 	</table>
 	<?php //var_dump($personalbackground); ?>

@@ -293,7 +293,7 @@ class modelJsonp extends CI_Model{
 	public function getTableProccesed($status,$agency,$company){
 		
 		$this->load->helper('url');
-		$this->load->database();
+		$this->load->database();		
 		
         $aColumns = array('applicant.appid AS appid', 'applicant.firstname AS firstname', 'applicant.lastname AS lastname', 'list.value AS position', 'documents.complete AS complete');
         $cColumns = array(' ','applicant.appid', 'applicant.firstname', 'applicant.lastname', 'list.value', 'documents.complete' );
@@ -416,14 +416,17 @@ class modelJsonp extends CI_Model{
             {
                 if($col === 'appid'){ 
 					$id =  $aRow[$col];
-					$row[] = "<input type='checkbox' style='margin-top:0px;' name='appidall[]' value='".$id."'>";
+					if($aRow['complete'])
+						$row[] = "<input type='checkbox' style='margin-top:0px;' name='appidall[]' value='".$id."'>";
+					else
+						$row[] = "<input type='checkbox' disabled style='margin-top:0px;' name='appidall[]' value='".$id."'>";
 				}
                 if($col === 'firstname') $fname =  $aRow[$col];
                 if($col === 'lastname') $lname =  $aRow[$col];	
                 $row[] = $aRow[$col];
             }
             if($aRow['complete'])
-				$row[] = "<button type=\"button\" class='btn btn-success' disabled \" style=\"width:200px\"> Complete </button></td>";
+				$row[] = "<button type=\"button\" class='btn btn-success' \" style=\"width:200px\" onclick=\"window.location.href='".base_url("transaction/processing/".$agency."/view/".$id)."'\"> Complete </button></td>";
 			else
 				$row[] = "<button type=\"button\" class='btn btn-danger' \" style=\"width:200px\" onclick=\"window.location.href='".base_url("transaction/processing/".$agency."/view/".$id)."'\"> Uncomplete </button></td>";
 			$row[] = "<button href=\"#myModal\" role=\"button\" data-toggle=\"modal\" class='btn btn-danger' onclick=\"erase('{$id}','{$fname} {$lname}')\"><i class='icon-remove'></i></button></td>";

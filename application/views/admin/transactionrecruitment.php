@@ -72,7 +72,7 @@
 			<p id="modal-body-text"></p>
 			<form method="post" name="rform" >
 				<ul class="ecomment">
-					<li><label><h5>Comment:</h5> </label></li>
+					<li><label><h5>Leave comments here:</h5> </label></li>
 					<li><textarea name="comment" required></textarea></li>
 				</ul>
 				<input type="text" name="erase" value="true" style="display:none">
@@ -137,7 +137,7 @@
 		$('#checkall').tooltip();
 		
 		function erase(id,name){
-			$('#modal-body-text').html("Do you wish to approve this applicant <b>"+name+"</b> and all data related to it?");
+			$('#modal-body-text').html("Remove this applicant <b>"+name+"</b> from approved?");
 			$('#appid').attr("value",id);
 		}
 		</script>

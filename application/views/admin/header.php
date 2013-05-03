@@ -41,11 +41,15 @@
 					<td><b><?php echo $applicant[0]->count ?></b></td>
 				</tr>
 				<tr>
+						<td>Proposed</td>
+					<td><b><?php echo $propose[0]->count ?></b></td>
+				</tr>
+				<tr>
 						<td>Approved</td>
 					<td><b><?php echo $recruit[0]->count ?></b></td>
 				</tr>
 				<tr>
-					<td>Proccesed</td>
+					<td>Procesed</td>
 					<td><b><?php echo $process[0]->count ?></b></td>
 				</tr>
 				<tr>

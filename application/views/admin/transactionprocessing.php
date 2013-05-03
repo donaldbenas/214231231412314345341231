@@ -67,13 +67,13 @@
 		<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		  <div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-			<h3 id="myModalLabel">Recruit Applicant</h3>
+			<h3 id="myModalLabel">Remove Applicant</h3>
 		  </div>
 		  <div class="modal-body">
 			<p id="modal-body-text"></p>
 			<form method="post" name="rform" >
 				<ul class="ecomment">
-					<li><label><h5>Comment:</h5> </label></li>
+					<li><label><h5>Leave comments here:</h5> </label></li>
 					<li><textarea name="comment" required></textarea></li>
 				</ul>
 				<input type="text" name="erase" value="true" style="display:none">
@@ -137,5 +137,8 @@
 			}
 		});
 		$('#checkall').tooltip();
-			  
+		  function erase(id,name){
+			$('#modal-body-text').html("Remove this applicant <b>"+name+"</b> from processed?");
+			$('#appid').attr("value",id);
+		  }
 		</script>

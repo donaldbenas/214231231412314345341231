@@ -127,11 +127,11 @@
 		  });
 		$("#checkall").change(function(){
 			if($(this).is(':checked')){
-				$('input[type=checkbox]').prop('checked', true);
+				$('input[type=checkbox]').not(':disabled').prop('checked', true);
 				$(this).removeAttr('data-original-title');
 				$(this).attr('data-original-title','Uncheck All');
 			}else{
-				$('input[type=checkbox]').prop('checked', false);
+				$('input[type=checkbox]').not(':disabled').prop('checked', false);
 				$(this).removeAttr('data-original-title');
 				$(this).attr('data-original-title','Check All');
 			}

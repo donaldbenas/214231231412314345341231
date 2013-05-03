@@ -116,7 +116,8 @@ class Transaction extends CI_Controller{
 	{				
 		$this->load->model('modelagency');
 		$this->load->model('employermodel');
-		$this->employermodel->getvalidate();
+		if($id!=null && ($this->uri->segment(4)==""))
+			$this->employermodel->getvalidate($id);
 		foreach($this->modelagency->agency($id) as $row){
 			$data['id'] = $row['id'];
 			$data['company'] = $row['company'];

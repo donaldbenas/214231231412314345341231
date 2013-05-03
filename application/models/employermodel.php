@@ -78,10 +78,12 @@ class employerModel extends CI_Model{
 		return $validate;
 	}	
 
-	public function getvalidate(){			
+	public function getvalidate($emrid=""){			
 		$sql = "SELECT appid, emrid FROM applicant";
 		$sql.= "	LEFT JOIN employer ON applicant.emrid = employer.id";
 		$sql.= "	WHERE applicant.status > 2";
+		if($emrid!="")
+		$sql.= "	AND applicant.emrid = '".$emrid."'";	
 		$query = $this->db->query($sql);
 		foreach($query->result() as $rows){
 			$documents = $this->requirements($rows->emrid);

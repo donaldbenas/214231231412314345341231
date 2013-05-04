@@ -45,7 +45,7 @@
 					<th width="23%">First Name</th>
 					<th width="22%">Last Name</th>
 					<th width="48%">Position</th>
-					<th style="width:10px"></th>
+					<th style="width:10px;text-align:center">Requirement</th>
 					<th style="width:10px"></th>
 					<th style="width:10px"></th>
 				</tr>

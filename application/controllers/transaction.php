@@ -157,12 +157,13 @@ class Transaction extends CI_Controller{
 	}
 	
 	public function departure($id = null)
-	{
-		$this->load->view('admin/header',$this->databank);
-		$this->load->view('admin/nav');
-		$this->load->view('admin/databank');
-		
+	{		
 		$this->load->model('modelagency');
+		$this->load->model('employermodel');
+		$this->load->model('personalmodel');
+		$data['country'] = $this->personalmodel->country();
+		if($id!=null && ($this->uri->segment(4)==""))
+			$this->employermodel->getvalidate($id);
 		foreach($this->modelagency->agency($id) as $row){
 			$data['id'] = $row['id'];
 			$data['company'] = $row['company'];
@@ -178,7 +179,26 @@ class Transaction extends CI_Controller{
             $data['agency'][] = $row;
 		}
 		
-		$this->load->view('admin/transactiondeparture',$data);
+		if($this->uri->segment(4)=='view'){
+			$this->load->view('admin/header',$this->databank);
+			$this->load->view('admin/nav');
+			$this->load->view('admin/databank');
+			$this->load->library('session');
+			$this->session->set_userdata(array('FILE_PATH'=>'/documents/attachments/'.$this->uri->segment(5).'/'));
+			$this->load->model('personalmodel');
+			$this->load->model('applicantModel');
+			$data['requirements'] = $this->employermodel->requirements($this->uri->segment(3));
+			$data['position'] = $this->personalmodel->position();
+			$data['uploadphoto'] = $this->applicantModel->loaduploadphoto($this->uri->segment(5));
+			$data['uploadresume'] = $this->applicantModel->loaduploadresume($this->uri->segment(5));
+			$data['personalbackground'] = $this->applicantModel->loadpersonalbackground($this->uri->segment(5));
+			$this->load->view('admin/transactiondepartureview',$data);
+		}else{
+			$this->load->view('admin/header',$this->databank);
+			$this->load->view('admin/nav');
+			$this->load->view('admin/databank');
+			$this->load->view('admin/transactiondeparture',$data);
+		}
 		$this->load->view('admin/footer');
 	}
 	
@@ -232,6 +252,13 @@ class Transaction extends CI_Controller{
 		if($this->input->get('company')=="") $company = null;
 		else $company = $this->input->get('company');
 		echo $this->modeljsonp->getTableProccesed($status,$id,$company);
+	}
+	
+    public function jsondeparted($status,$id = null){
+		$this->load->model('modeljsonp');	
+		if($this->input->get('company')=="") $company = null;
+		else $company = $this->input->get('company');
+		echo $this->modeljsonp->getTableDeparted($status,$id,$company);
 	}
 	
 	public function attachment($id=""){

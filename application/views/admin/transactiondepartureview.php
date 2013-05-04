@@ -1,6 +1,6 @@
 	<ul class="breadcrumb breadcrumb-medium">
 	  <li><a href="#">TRANSACTION</a><span class="divider"><i class="icon-play"></i></span></li>
-	  <li class="active" >PROCESSING</li>
+	  <li class="active" >DEPARTING</li>
 	  <li class="pull-right span7 active">
 	     <div class="form-horizontal pull-right">
 		  <div class="control-group">
@@ -34,13 +34,13 @@
 		  </div>
 	  </li>
 	</ul>
-	<button class="btn" type="button" onclick="window.location.href='<?php echo base_url('transaction/processing/'.$this->uri->segment(3))?>'"><i class="icon-arrow-left"></i> Return</button>
+	<button class="btn" type="button" onclick="window.location.href='<?php echo base_url('transaction/departure/'.$this->uri->segment(3))?>'"><i class="icon-arrow-left"></i> Return</button>
 	<br><br>
 	<table class="table table-condensed table-hover table-bordered" id="processtable">
 		<tr>
 			<td style="width:200px" rowspan="7"><img src="<?php if(isset($uploadphoto[0]['appid'])) echo base_url()."documents/photos/".$uploadphoto[0]['appid'].".".$uploadphoto[0]['type']; ?>" class="img-polaroid" style="height:200px;width:180px;" 	></td>
 			
-			<td><b>Status :</b> Approved</td>
+			<td><b>Status :</b> Processed</td>
 			<td><b>Date Approve :</b> Proccess</td>
 		</tr>
 		<tr>

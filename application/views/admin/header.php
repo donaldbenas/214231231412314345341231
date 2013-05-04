@@ -53,7 +53,7 @@
 					<td><b><?php echo $process[0]->count ?></b></td>
 				</tr>
 				<tr>
-					<td>Departured</td>
+					<td>Departed</td>
 					<td><b><?php echo $departure[0]->count ?></b></td>
 				</tr>
 				<tr>

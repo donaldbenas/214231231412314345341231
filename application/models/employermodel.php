@@ -10,7 +10,7 @@ class employerModel extends CI_Model{
 		$this->load->database();		
 	}
 	
-	public function load($id){
+	public function load($id=""){
 		if($id==""){
 			$sql = "SELECT *
 						FROM employer
@@ -32,7 +32,7 @@ class employerModel extends CI_Model{
 	
 	}
 	
-	public function requirements($id){
+	public function requirements($id=""){
 		if($id!=""){
 			$sql = "SELECT * FROM requirements WHERE emrid = ?";
 			$query = $this->db->query($sql,array($id));
@@ -57,7 +57,7 @@ class employerModel extends CI_Model{
 		}
 	}
 	
-	public function validate($appid,$requirements){
+	public function validate($appid="",$requirements=""){
 		$path = './documents/attachments/'.$appid.'/';
 		$type = array('','.doc','.docx','.pdf');
 		$validate = false;

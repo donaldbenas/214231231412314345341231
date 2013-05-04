@@ -109,6 +109,22 @@ class Admin extends CI_Controller {
 
 	}
 	
+	public function changeemrid(){
+		$this->load->database();
+		if($this->input->post()!=""){
+			foreach($this->input->post('appid') as $rows){
+				$sql = "update applicant set emrid = ? where appid = ?";
+				$this->db->query($sql,array($this->input->post('emrid'),$rows));
+			}
+		}
+		$this->load->model('employermodel');
+		$data['employer'] =$this->employermodel->load();
+		$sql= "select appid, lastname, firstname from applicant where status = 5 order by lastname";
+		$query = $this->db->query($sql);
+		$data['applicant'] = $query->result();
+		$this->load->view('admin/changeemrid',$data);
+	}
+	
 	public function worker($link)
 	{
 		

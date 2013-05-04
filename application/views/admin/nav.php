@@ -17,7 +17,7 @@
 				<li><a tabindex="-1" href="<?php echo base_url() ?>transaction/propose">Propose</a></li>
 				<li><a tabindex="-1" href="<?php echo base_url() ?>transaction/recruitment">Approve</a></li>
 				<li><a tabindex="-1" href="<?php echo base_url() ?>transaction/processing">Process</a></li>
-				<li><a tabindex="-1" href="<?php echo base_url() ?>transaction/departure">Departure</a></li>
+				<li><a tabindex="-1" href="<?php echo base_url() ?>transaction/departure">Depart</a></li>
 				<li><a tabindex="-1" href="<?php echo base_url() ?>transaction/arrival">Arrival</a></li>
 				<li><a tabindex="-1" href="#">Promote</a></li>
 			  </ul>

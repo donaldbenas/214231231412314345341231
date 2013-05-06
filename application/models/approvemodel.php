@@ -48,5 +48,62 @@ class approveModel extends CI_Model{
 			$this->db->query($sql,array($comment,$id));			
 		}
 	}
+	
+	public function process($id,$comment,$approve = true){
+		if($approve){
+			$sql = "UPDATE applicant SET
+						status = 4
+					WHERE
+						appid = ? ";
+			$this->db->query($sql,array($id));
+			$sql = "UPDATE statistic SET
+						process = now(),
+						pinfo = ?
+					WHERE 
+						appid = ?"; 
+			$this->db->query($sql,array($comment,$id));
+		}else{
+			$sql = "UPDATE applicant SET
+						status = 1
+					WHERE
+						appid = ? ";
+			$this->db->query($sql,array($id));
+			$sql = "UPDATE disapprove SET
+						disapp = now(),
+						comment = ?
+					WHERE 
+						appid = ?"; 
+			$this->db->query($sql,array($comment,$id));			
+		}
+	}
+	
+	public function depart($id,$comment,$date,$country,$approve = true){
+		if($approve){
+			$sql = "UPDATE applicant SET
+						status = 5
+					WHERE
+						appid = ? ";
+			$this->db->query($sql,array($id));
+			$sql = "UPDATE statistic SET
+						depart = ?,
+						dcomment = ?,
+						ddestination = ?
+					WHERE 
+						appid = ?"; 
+			$this->db->query($sql,array($date,$comment,$country,$id));
+		}else{
+			$sql = "UPDATE applicant SET
+						status = 1
+					WHERE
+						appid = ? ";
+			$this->db->query($sql,array($id));
+			$sql = "UPDATE disapprove SET
+						disapp = now(),
+						comment = ?
+					WHERE 
+						appid = ?"; 
+			$this->db->query($sql,array($comment,$id));			
+		}
+	}
 
 }

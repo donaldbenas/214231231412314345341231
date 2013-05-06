@@ -121,7 +121,7 @@
 				{ "bVisible": true, "bSearchable": true, "bSortable": true },
 				{ "bVisible": true, "bSearchable": false, "bSortable": true },
 				{ "bVisible": true, "bSearchable": false, "bSortable": false },
-				{ "bVisible": true, "bSearchable": false, "bSortable": false }
+				{ "sClass": "hideme", "bSearchable": false, "bSortable": false }
 				]
 			})
 		  });

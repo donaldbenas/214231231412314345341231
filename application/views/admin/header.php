@@ -10,6 +10,7 @@
 	<link href="<?php echo base_url() ?>css/bootstrap-responsive.css" rel="stylesheet" type="text/css" />
 	<link href="<?php echo base_url() ?>css/style.css" rel="stylesheet" type="text/css" />
 	<link href="<?php echo base_url()?>css/jquery.fileupload-ui.css" rel="stylesheet">
+	<link href="<?php echo base_url() ?>css/jquery.datepick.css" rel="stylesheet" type="text/css" />
 	<style>
 		.tab-content{
 			overflow:hidden;
@@ -28,6 +29,7 @@
 	<script src="<?php echo base_url() ?>js/jquery.dataTables.js"></script>
 	<script src="<?php echo base_url() ?>js/bootstrap.js"></script>
 	<script src="<?php echo base_url() ?>js/jquery.validate.js"></script>
+	<script src="<?php echo base_url() ?>js/jquery.datepick.js"></script>
   </head>
   <body>
 	<div class="row-fluid">

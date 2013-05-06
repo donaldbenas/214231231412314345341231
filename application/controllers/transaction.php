@@ -77,8 +77,7 @@ class Transaction extends CI_Controller{
 		$this->load->view('admin/header',$this->databank);
 		$this->load->view('admin/nav');
 		$this->load->view('admin/databank');
-		
-		
+				
 		if($this->input->post()!=""){
 			$this->load->model('approvemodel');
 			if($this->input->post('erase')==""){
@@ -116,6 +115,20 @@ class Transaction extends CI_Controller{
 	{				
 		$this->load->model('modelagency');
 		$this->load->model('employermodel');
+				
+		if($this->input->post()!=""){
+			$this->load->model('approvemodel');
+			if($this->input->post('erase')==""){
+				foreach($this->input->post('appidall') as $val){
+					$this->approvemodel->process($val,$this->input->post('comment'));
+				}
+			}else{
+				$this->approvemodel->process($this->input->post('appid'),$this->input->post('comment'),false);
+			}
+			redirect(base_url()."transaction/processing/".$id);
+			
+		}
+		
 		if($id!=null && ($this->uri->segment(4)==""))
 			$this->employermodel->getvalidate($id);
 		foreach($this->modelagency->agency($id) as $row){
@@ -162,6 +175,15 @@ class Transaction extends CI_Controller{
 		$this->load->model('employermodel');
 		$this->load->model('personalmodel');
 		$data['country'] = $this->personalmodel->country();
+		if($this->input->post()!=""){			
+			$this->load->model('approvemodel');
+			if($this->input->post('erase')=="false"){	
+				$this->approvemodel->depart($this->input->post('appid'),$this->input->post('comment'),$this->input->post('departure'),$this->input->post('destination'));
+			}else{
+				$this->approvemodel->depart($this->input->post('appid'),$this->input->post('comment'),$this->input->post('departure'),$this->input->post('destination'),false);
+			}
+			redirect(base_url()."transaction/departure/".$id);
+		}
 		if($id!=null && ($this->uri->segment(4)==""))
 			$this->employermodel->getvalidate($id);
 		foreach($this->modelagency->agency($id) as $row){

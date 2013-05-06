@@ -87,13 +87,13 @@
 		  </div>
 		  <div class="modal-body">
 			<p id="modal-body-text2"></p>
-			<form method="post" name="rform" >
+			<form method="post" name="sform" >
 				<ul class="ecomment">
 					<li><label><h5>Destination:</h5> </label></li>
 					<li><select name="destination">
 							<?php 
 								foreach($country as $rows){
-									echo "<option value=".$rows['id'].">".strtoupper($rows['value'])."</option>";
+									echo "<option value=".$rows['value'].">".strtoupper($rows['value'])."</option>";
 								} 
 							?>
 						</select>
@@ -101,18 +101,18 @@
 					<li><label><h5>Flight Information:</h5> </label></li>
 					<li><textarea name="comment" required></textarea></li>
 					<li><label><h5>Date of Departure:</h5> </label></li>
-					<li><input type="text" name="departure" required></li>
+					<li><input type="text" name="departure" id="inputDate"></li>
 				</ul>
-				<input type="text" name="erase" value="true" style="display:none">
-				<input type="text" name="appid" id="appid" style="display:none">
+				<input type="text" name="erase" value="false" style="display:none">
+				<input type="text" name="appid" id="sappid" style="display:none">
 				<input type="text" name="companyid" value="<?php echo $this->uri->segment(3) ?>" style="display:none">
 			</form>
 		  </div>
 		  <div class="modal-footer">
 			<button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
-			<button class="btn btn-primary" onclick="$('form[name=rform]').submit()">Depart</button>
+			<button class="btn btn-primary" onclick="$('form[name=sform]').submit()">Depart</button>
 		  </div>
-		</div>
+		</div>	
 	  <?php } ?>
 	  
 	  <script type="text/javascript" charset="utf-8">
@@ -158,7 +158,9 @@
 		  }
 		  function approve(id,name){
 			$('#modal-body-text2').html("Do you wish to process this applicant <b>"+name+"</b> and all data related to it?");
-			$('#appid').attr("value",id);
+			$('#sappid').attr("value",id);
 		  }
-			  
+		$(document).ready(function(){
+			$('#inputDate').datepick({dateFormat: 'yyyy-mm-dd'});
+		});
 		</script>

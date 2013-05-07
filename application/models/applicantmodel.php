@@ -131,6 +131,7 @@ class applicantModel extends CI_Model{
 			'appid' => $appid,
 			'empid' => '1',
 			'emrid' => '',
+			'status' => '1',
 			'position1' => strtoupper($_POST['position1']),
 			'position2' => strtoupper($_POST['position2']),
 			'prefer1' => strtoupper($_POST['reference1']),

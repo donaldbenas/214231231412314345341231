@@ -3,19 +3,24 @@
 </script>
 <div class="row" id="report-form">
 	<div id="generate" style="padding:20px;margin:right:20px">
-		<form class="form form-horizontal" >
+		<form class="form form-horizontal" method="post">
 			<h2>Generate Report</h3> 
 			<div class="control-group">
 				<label class="control-label">Date</label>
 				<div class="controls">
-					<input type="text">
+					<input type="text" name="date" id="inputDate" <?php if($date!='') echo 'value="'.$date.'"'; ?>required>
 				</div>
 			</div>
 			<div class="control-group">
 				<label class="control-label">Status</label>
 				<div class="controls">
-					<select>
-						<option>All</option>
+					<select name="status">
+						<option value='1'>Applicant</option>
+						<option value='2'>Proposed</option>
+						<option value='3'>Approved</option>
+						<option value='4'>Processed</option>
+						<option value='5'>Departed</option>
+						<option value='6'>Arrival</option>
 					</select>
 				</div>
 			</div>
@@ -28,93 +33,154 @@
 		</form>
 	</div>
 </div>
-<div id="chart_div" style="width:90%;height:500px;padding:0px;margin:0px;margin-top:250px"></div>
+<?php if($status=='1'){ ?>
+<legend style="width:1200px;padding-top:20px;">Applicant</legend>
+<div id="table_div" style="width:1200px;height:inherit;padding:0px;margin:0px;;margin-top:10px;"></div>
 <script>
-	google.load("visualization", "1", {packages:["corechart"]});
-	google.setOnLoadCallback(drawChart);
-	function drawChart() {
-		var data = google.visualization.arrayToDataTable([
-		  ['Month', 'Applicant', 'Proposed', 'Recruited', 'Proccesed', 'Departured', 'Arrived', 'Average'],
-		  ['2013/01', 1000, 400, 400, 400, 400, 400, 400],
-		  ['2013/02', 1170, 460, 400, 400, 400, 400, 400],
-		  ['2013/03', 660, 1120, 400, 400, 400, 400, 400],
-		  ['2013/04', 1030, 540, 400, 400, 400, 400, 400],
-		  ['2013/05', 1170, 460, 400, 400, 400, 400, 400],
-		  ['2013/06', 660, 1120, 400, 400, 400, 400, 400],
-		  ['2013/07', 1030, 540, 400, 400, 400, 400, 400],
-		  ['2013/08', 1170, 460, 400, 400, 400, 400, 400],
-		  ['2013/09', 660, 1120, 400, 400, 400, 400, 400],
-		  ['2013/10', 1030, 540, 400, 400, 400, 400, 400],
-		  ['2013/11', 660, 1120, 400, 400, 400, 400, 400],
-		  ['2013/12', 1030, 540, 400, 400, 400, 400, 400],
+	google.load('visualization', '1', {packages:['table']});
+	google.setOnLoadCallback(drawTable);
+	function drawTable() {
+		var data = new google.visualization.DataTable();
+		data.addColumn('string', 'Name');
+		data.addColumn('string', 'Position');
+		data.addColumn('string', 'Principal');
+		data.addColumn('string', 'Date');
+		data.addRows([
+		<?php foreach($report as $val => $rows){ ?>
+					['<?php echo $rows->lastname.", ".$rows->firstname." ".substr($rows->middlename,0,1)."." ?>','<?php echo $rows->value ?>','Pacific Ace Resoureces','<?php echo date("F d, Y",strtotime($rows->added)) ?>'],
+		<?php } ?>
 		]);
 
-        var options = {
-          title : 'Monthly Company Performance',
-          vAxis: {title: "Cups"},
-          hAxis: {title: "Month"},
-          seriesType: "bars",
-          series: {6: {type: "line"}}
-        };
-
-        var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
-        chart.draw(data, options);
-      }
-      google.setOnLoadCallback(drawVisualization);
-      
+		var table = new google.visualization.Table(document.getElementById('table_div'));
+		table.draw(data, {showRowNumber: true});
+	}      
 </script>
-<legend>Applicant</legend>
-<table class="table table-bordered table-hover table-condensed">
-<tr>
-	<th>Date</th>
-	<th>Name</th>
-	<th>Position</th>
-	<th>Address</th>
-	<th>Mobile</th>
-	<th>Email</th>
-</tr>
-</table>
-<legend>Approved</legend>
-<table class="table table-bordered table-hover table-condensed">
-<tr>
-	<th>Date</th>
-	<th>Name</th>
-	<th>Position</th>
-	<th>Address</th>
-	<th>Mobile</th>
-	<th>Email</th>
-</tr>
-</table>
-<legend>Proccesed</legend>
-<table class="table table-bordered table-hover table-condensed">
-<tr>
-	<th>Date</th>
-	<th>Name</th>
-	<th>Position</th>
-	<th>Address</th>
-	<th>Mobile</th>
-	<th>Email</th>
-</tr>
-</table>
-<legend>Departured</legend>
-<table class="table table-bordered table-hover table-condensed">
-<tr>
-	<th>Date</th>
-	<th>Name</th>
-	<th>Position</th>
-	<th>Address</th>
-	<th>Mobile</th>
-	<th>Email</th>
-</tr>
-</table>
-<legend>Arrived</legend>
-<table class="table table-bordered table-hover table-condensed">
-<tr>
-	<th>Date</th>
-	<th>Name</th>
-	<th>Position</th>
-	<th>Address</th>
-	<th>Mobile</th>
-	<th>Email</th>
-</tr>
-</table>
+<?php } ?>
+<?php if($status=='2'){ ?>
+<legend style="width:1200px;padding-top:20px;">Proposed</legend>
+<div id="table_div" style="width:1200px;height:inherit;padding:0px;margin:0px;;margin-top:10px;"></div>
+<script>
+	google.load('visualization', '1', {packages:['table']});
+	google.setOnLoadCallback(drawTable);
+	function drawTable() {
+		var data = new google.visualization.DataTable();
+		data.addColumn('string', 'Name');
+		data.addColumn('string', 'Position');
+		data.addColumn('string', 'Principal');
+		data.addColumn('string', 'Date');
+		data.addRows([
+		<?php foreach($report as $val => $rows){ ?>
+					['<?php echo $rows->lastname.", ".$rows->firstname." ".substr($rows->middlename,0,1)."." ?>','<?php echo $rows->value ?>','<?php echo $rows->company?>','<?php echo date("F d, Y",strtotime($rows->approve)) ?>'],
+		<?php } ?>
+		]);
+
+		var table = new google.visualization.Table(document.getElementById('table_div'));
+		table.draw(data, {showRowNumber: true});
+	}      
+</script>
+<?php } ?>
+<?php if($status=='3'){ ?>
+<legend style="width:1200px;padding-top:20px;">Approved</legend>
+<div id="table_div" style="width:1200px;height:inherit;padding:0px;margin:0px;;margin-top:10px;"></div>
+<script>
+	google.load('visualization', '1', {packages:['table']});
+	google.setOnLoadCallback(drawTable);
+	function drawTable() {
+		var data = new google.visualization.DataTable();
+		data.addColumn('string', 'Name');
+		data.addColumn('string', 'Position');
+		data.addColumn('string', 'Principal');
+		data.addColumn('string', 'Date');
+		data.addRows([
+		<?php foreach($report as $val => $rows){ ?>
+					['<?php echo $rows->lastname.", ".$rows->firstname." ".substr($rows->middlename,0,1)."." ?>','<?php echo $rows->value ?>','<?php echo $rows->company ?>','<?php echo date("F d, Y",strtotime($rows->recruit)) ?>'],
+		<?php } ?>
+		]);
+
+		var table = new google.visualization.Table(document.getElementById('table_div'));
+		table.draw(data, {showRowNumber: true});
+	}      
+</script>
+<?php } ?>
+<?php if($status=='4'){ ?>
+<legend style="width:1200px;padding-top:20px;">Processed</legend>
+<div id="table_div" style="width:1200px;height:inherit;padding:0px;margin:0px;;margin-top:10px;"></div>
+<script>
+	google.load('visualization', '1', {packages:['table']});
+	google.setOnLoadCallback(drawTable);
+	function drawTable() {
+		var data = new google.visualization.DataTable();
+		data.addColumn('string', 'Name');
+		data.addColumn('string', 'Position');
+		data.addColumn('string', 'Principal');
+		data.addColumn('string', 'Date');
+		data.addRows([
+		<?php foreach($report as $val => $rows){ ?>
+					['<?php echo $rows->lastname.", ".$rows->firstname." ".substr($rows->middlename,0,1)."." ?>','<?php echo $rows->value ?>','<?php echo $rows->company?>','<?php echo date("F d, Y",strtotime($rows->process)) ?>'],
+		<?php } ?>
+		]);
+
+		var table = new google.visualization.Table(document.getElementById('table_div'));
+		table.draw(data, {showRowNumber: true});
+	}      
+</script>
+<?php } ?>
+<?php if($status=='5'){ ?>
+<legend style="width:1200px;padding-top:20px;">Departed</legend>
+<div id="table_div" style="width:1200px;height:inherit;padding:0px;margin:0px;;margin-top:10px;"></div>
+<script>
+	google.load('visualization', '1', {packages:['table']});
+	google.setOnLoadCallback(drawTable);
+	function drawTable() {
+		var data = new google.visualization.DataTable();
+		data.addColumn('string', 'Name');
+		data.addColumn('string', 'Position');
+		data.addColumn('string', 'Principal');
+		data.addColumn('string', 'Destination');
+		data.addColumn('string', 'Date');
+		data.addRows([
+		<?php foreach($report as $val => $rows){ ?>
+					['<?php echo $rows->lastname.", ".$rows->firstname." ".substr($rows->middlename,0,1)."." ?>','<?php echo $rows->value ?>','<?php echo $rows->company?>','<?php if($rows->ddestination!='0') echo $rows->ddestination; ?>','<?php echo date("F d, Y",strtotime($rows->depart)) ?>'],
+		<?php } ?>
+		]);
+
+		var table = new google.visualization.Table(document.getElementById('table_div'));
+		table.draw(data, {showRowNumber: true});
+	}      
+</script>
+<?php } ?>
+<?php if($status=='6'){ ?>
+<legend style="width:1200px;padding-top:20px;">Arrived</legend>
+<div id="table_div" style="width:1200px;height:inherit;padding:0px;margin:0px;;margin-top:10px;"></div>
+<script>
+	google.load('visualization', '1', {packages:['table']});
+	google.setOnLoadCallback(drawTable);
+	function drawTable() {
+		var data = new google.visualization.DataTable();
+		data.addColumn('string', 'Name');
+		data.addColumn('string', 'Position');
+		data.addColumn('string', 'Principal');
+		data.addColumn('string', 'Destination');
+		data.addColumn('string', 'Date');
+		data.addRows([
+		<?php foreach($report as $val => $rows){ ?>
+					['<?php echo $rows->lastname.", ".$rows->firstname." ".substr($rows->middlename,0,1)."." ?>','<?php echo $rows->value ?>','<?php echo $rows->company?>','<?php echo 'Philippines'; ?>','<?php echo date("F d, Y",strtotime($rows->arrival)) ?>'],
+		<?php } ?>
+		]);
+
+		var table = new google.visualization.Table(document.getElementById('table_div'));
+		table.draw(data, {showRowNumber: true});
+	}      
+</script>
+
+<?php } ?>
+<script>	
+	$(document).ready(function(){
+		$('#inputDate').datepick({ 
+			rangeSelect: true, 
+			monthsToShow: 3, 
+			showTrigger: '#calImg',
+			dateFormat: 'yyyy-mm-dd'
+		});
+	});
+</script>

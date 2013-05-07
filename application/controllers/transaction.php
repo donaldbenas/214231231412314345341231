@@ -231,6 +231,16 @@ class Transaction extends CI_Controller{
 		$this->load->view('admin/databank');
 		
 		$this->load->model('modelagency');
+		$this->load->model('personalmodel');
+		
+		
+		if($this->input->post()!=""){			
+			$this->load->model('approvemodel');
+			$this->approvemodel->arrival($this->input->post('appid'),$this->input->post('comment'),$this->input->post('departure'),$this->input->post('reason'));
+			redirect(base_url()."transaction/arrival/".$id);
+		}
+		
+		$data['reason'] = $this->personalmodel->reason();
 		foreach($this->modelagency->agency($id) as $row){
 			$data['id'] = $row['id'];
 			$data['company'] = $row['company'];

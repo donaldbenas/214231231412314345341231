@@ -55,6 +55,40 @@
 			</tbody>
 		</table>
 	  </div>
+ 
+	  
+		<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		  <div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+			<h3 id="myModalLabel">Arrived Applicant</h3>
+		  </div>
+		  <div class="modal-body">
+			<p id="modal-body-text"></p>
+			<form method="post" name="rform" >
+				<ul class="ecomment">
+					<li><label><h5>Reasong of leaving:</h5> </label></li>
+					<li>
+						<select name="reason" style='width:300px'>
+							<?php foreach($reason as $rows){?>
+							<option value="<?php echo $rows['value'] ?>"><?php echo $rows['value'] ?></option>
+							<?php }?>
+						</select>
+					</li>
+					<li><label><h5>Date of Departure:</h5> </label></li>
+					<li><input type="text" name="departure" id="inputDate"></li>
+					<li><label><h5>Leave comments here:</h5> </label></li>
+					<li><textarea name="comment" required></textarea></li>
+				</ul>
+				<input type="text" name="erase" value="true" style="display:none">
+				<input type="text" name="appid" id="appid" style="display:none">
+				<input type="text" name="companyid" value="<?php echo $this->uri->segment(3) ?>" style="display:none">
+			</form>
+		  </div>
+		  <div class="modal-footer">
+			<button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+			<button class="btn btn-primary" onclick="$('form[name=rform]').submit()">Arrived</button>
+		  </div>
+		</div>
 	  <?php } ?>
 	  
 	  <script type="text/javascript" charset="utf-8">
@@ -89,9 +123,16 @@
 				{ "bVisible": true, "bSearchable": true, "bSortable": true },
 				{ "bVisible": true, "bSearchable": true, "bSortable": true },
 				{ "bVisible": true, "bSearchable": false, "bSortable": false },
-				{ "bVisible": true, "bSearchable": false, "bSortable": false }
+				{ "sClass": "hideme", "bSearchable": false, "bSortable": false }
 				]
 			})
 		  });
+		  function erase(id,name){
+			$('#modal-body-text').html("Do you wish to approve this applicant <b>"+name+"</b> and all data related to it?");
+			$('#appid').attr("value",id);
+		  }
+		$(document).ready(function(){
+			$('#inputDate').datepick({dateFormat: 'yyyy-mm-dd'});
+		});
 			  
 		</script>

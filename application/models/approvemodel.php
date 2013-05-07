@@ -105,5 +105,20 @@ class approveModel extends CI_Model{
 			$this->db->query($sql,array($comment,$id));			
 		}
 	}
+	
+	public function arrival($id,$comment,$date,$reason){
+			$sql = "UPDATE applicant SET
+						status = 6
+					WHERE
+						appid = ? ";
+			$this->db->query($sql,array($id));
+			$sql = "UPDATE statistic SET
+						arrival = ?,
+						acomment = ?,
+						areason = ?
+					WHERE 
+						appid = ?"; 
+			$this->db->query($sql,array($date,$comment,$reason,$id));
+	}
 
 }

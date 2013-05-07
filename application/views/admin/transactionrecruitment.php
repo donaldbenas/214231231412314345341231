@@ -82,7 +82,7 @@
 		  </div>
 		  <div class="modal-footer">
 			<button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
-			<button class="btn btn-primary" onclick="$('form[name=rform]').submit()">Approve</button>
+			<button class="btn btn-primary" onclick="$('form[name=rform]').submit()">Remove</button>
 		  </div>
 		</div>
 	  <?php } ?>

@@ -25,7 +25,6 @@ class Definition extends CI_Controller{
 		$data['country'] = $this->personalmodel->country();
 		$data['civil'] = $this->personalmodel->civil();
 		$data['employer'] = $this->personalmodel->employer();
-		$data['requirements'] = $this->personalmodel->requirements(1);
 		$this->load->view('admin/header',$this->databank);
 		$this->load->view('admin/nav');
 		$this->load->view('admin/databank');

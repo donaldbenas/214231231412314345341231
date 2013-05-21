@@ -87,11 +87,22 @@ class personalModel extends CI_Model{
 		return $query->result_array();
 	
 	}
+	
 	public function requirement($arr){
 		foreach($arr as $rows){
 			$sql = "INSERT INTO requirement(emrid,value) VALUES (?,?)";
 			$this->db->query($sql,array($rows[0],$rows[1]));
 		}
+	}
+	
+	public function job($emrid){
+		$para = array($emrid);
+		$sql = "SELECT job.id, list.value FROM job";
+		$sql.= "	LEFT JOIN list ON list.id = job.listid";
+		$sql.= "	WHERE job.emrid = ?";
+		$sql.= "	ORDER BY list.value";
+		$query = $this->db->query($sql,$para);
+		return $query->result();
 	}
 
 

@@ -7,7 +7,7 @@
 			  <a id="drop1" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">Main <b class="caret"></b></a>
 			  <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
 				<li><a tabindex="-1" href="<?php echo base_url() ?>admin/worker/add">Applicant</a></li>
-				<li><a tabindex="-1" href="">Employer</a></li>
+				<li><a tabindex="-1" href="<?php echo base_url() ?>employer">Employer</a></li>
 				<li><a tabindex="-1" href="#">Agency</a></li>
 			  </ul>
 			</li>

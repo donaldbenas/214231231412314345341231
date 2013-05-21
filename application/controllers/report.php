@@ -33,7 +33,6 @@ class Report extends CI_Controller{
 			
 		
 	}
-<<<<<<< HEAD
 	
 	public function setdate(){
 		$this->load->view('admin/header',$this->databank);
@@ -70,7 +69,5 @@ class Report extends CI_Controller{
 			}*/
 		}
 	}
-=======
->>>>>>> 9d5e90a68a977fa41bfed8b59ad91a942da65ae3
 
 }

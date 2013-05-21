@@ -1,4 +1,4 @@
-php "applicantmodel.php"
+php "personalmodel.php"
 
 pause
 del "%0"

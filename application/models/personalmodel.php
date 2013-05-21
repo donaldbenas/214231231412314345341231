@@ -103,7 +103,6 @@ class personalModel extends CI_Model{
 		return $query->result_array();
 	
 	}
-<<<<<<< HEAD
 
 	public function dateapprove($id=""){
 		$this->db->select('*');
@@ -115,8 +114,6 @@ class personalModel extends CI_Model{
 		return $query->result_array();
 	
 	}
-=======
->>>>>>> 9d5e90a68a977fa41bfed8b59ad91a942da65ae3
 	
 	public function requirement($arr){
 		foreach($arr as $rows){

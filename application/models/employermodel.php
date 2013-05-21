@@ -14,13 +14,14 @@ class employerModel extends CI_Model{
 		if($id==""){
 			$sql = "SELECT *
 						FROM employer
+					ORDER BY company
 					";
 			$query = $this->db->query($sql);
 			return $query->result();
 		}else{
 			$sql = "SELECT *
 						FROM employer
-						WHERE emrid = ?
+						WHERE id = ?
 					";
 			$query = $this->db->query($sql,array($id));
 			foreach($query->result() as $rows){
@@ -30,6 +31,61 @@ class employerModel extends CI_Model{
 			return $query->result();
 		}
 	
+	}
+	
+	public function save($id=""){
+		if($id==""){
+			$para = array(
+				$this->input->post('company'),
+				$this->input->post('representative'),
+				$this->input->post('position'),
+				$this->input->post('address'),
+				$this->input->post('location'),
+				date("Y-m-d"),
+				$this->input->post('email'),
+				$this->input->post('password1'),
+				$this->input->post('telephone'),
+				$this->input->post('mobile'),
+				$this->input->post('remarks')
+				);
+			$sql = "
+					INSERT INTO employer(
+						company, representative,
+						position, address,
+						location, date,
+						email, password,
+						telephone, mobile,
+						remarks)
+					VALUES(?,?,?,?,?,?,?,?,?,?,?)					
+					";
+			$this->db->query($sql,$para);
+		}else{
+			$para = array(
+				$this->input->post('company'),
+				$this->input->post('representative'),
+				$this->input->post('position'),
+				$this->input->post('address'),
+				$this->input->post('location'),
+				date("Y-m-d"),
+				$this->input->post('email'),
+				$this->input->post('password1'),
+				$this->input->post('telephone'),
+				$this->input->post('mobile'),
+				$this->input->post('remarks'),
+				$id
+				);
+			$sql = "
+					UPDATE employer SET
+						company = ?, representative = ?,
+						position = ?, address = ?,
+						location = ?, date = ?,
+						email = ?, password = ?,
+						telephone = ?, mobile = ?,
+						remarks = ?		
+					WHERE id = ?				
+					";
+			$this->db->query($sql,$para);
+		}
 	}
 	
 	public function requirements($id=""){

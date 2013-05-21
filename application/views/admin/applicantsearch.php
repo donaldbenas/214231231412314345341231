@@ -8,7 +8,7 @@
 			<thead>
 				<tr>
 					<th width="5%" style="text-align:center">ID</th>
-					<th width="5%" style="text-align:center">STATUS</th>
+					<th width="5%" style="text-align:center">Status</th>
 					<th width="23%">First Name</th>
 					<th width="22%">Last Name</th>
 					<th width="48%">Position</th>

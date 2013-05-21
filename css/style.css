@@ -16,7 +16,7 @@
 	margin-left: 20px;
 	padding: 20px;
 	border-radius: 5px;
-	width:520px;
+	width:470px;
 	float:left;
  }
 .definition-container label.head{
@@ -26,7 +26,7 @@
 	margin: 5px 5px;
 }
 .definition-form input[type=text]{
-	width:350px;
+	width:330px;
 }
 .definition-form select{
 	width:365px;

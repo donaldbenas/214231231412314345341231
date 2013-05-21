@@ -34,27 +34,40 @@ class Report extends CI_Controller{
 		
 	}
 	
-	public function getdata(){
-		echo '
-					{
-			  "cols": [
-					{"id":"","label":"Month","pattern":"","type":"string"},
-					{"id":"","label":"Applicant","pattern":"","type":"number"}
-				  ],
-			  "rows": [
-					{"c":[{"v":"Jan","f":null},{"v":1,"f":null}]},
-					{"c":[{"v":"Mar","f":null},{"v":2,"f":null}]},
-					{"c":[{"v":"Apr","f":null},{"v":3,"f":null}]},
-					{"c":[{"v":"May","f":null},{"v":5,"f":null}]},
-					{"c":[{"v":"Jun","f":null},{"v":11,"f":null}]},
-					{"c":[{"v":"Jul","f":null},{"v":12,"f":null}]},
-					{"c":[{"v":"Aug","f":null},{"v":3,"f":null}]},
-					{"c":[{"v":"Sep","f":null},{"v":0,"f":null}]},
-					{"c":[{"v":"Oct","f":null},{"v":2,"f":null}]},
-					{"c":[{"v":"Nov","f":null},{"v":3,"f":null}]},
-					{"c":[{"v":"Dec","f":null},{"v":1,"f":null}]},
-				  ]
-			}';
+	public function setdate(){
+		$this->load->view('admin/header',$this->databank);
+		$this->load->database();
+		$sql = "SELECT * FROM applicant
+					LEFT JOIN statistic ON applicant.appid = statistic.appid
+					WHERE (statistic.depart = '0000-00-00' OR statistic.depart is NULL)
+					AND applicant.status = 5
+					ORDER BY applicant.lastname ASC";
+		$query = $this->db->query($sql);
+		var_dump($query->result());
+		echo '<form method="post">';
+		echo '<table class="table table-hover table-striped table-condensed table-bordered span5">';
+		echo '<tr><th>Name</th><th>Date</th></tr>';
+		foreach($query->result() as $applicant){
+			echo '<tr>';
+			echo '<td style="width:300px"><label>'.$applicant->lastname.', '.$applicant->firstname.'</label>';
+			echo '<input type="text" name="appid[]" value="'.$applicant->appid.'" style="display:block"></td>';
+			echo '<td><input type="text" name="disdate[]" data-mask="9999-99-99" ></td>';
+			echo '</tr>';
+		}
+		echo '<tr><td></td><td><input type="submit" value="submit"></td></tr>';
+		echo '</table>';
+		echo '</form>';
+		$this->load->view('admin/footer');
+		if($this->input->post()!=""){
+			
+				var_dump($this->input->post('disdate'));
+				var_dump($this->input->post('appid'));
+			/*foreach($this->input->post('appid') as $id=>$rows){
+				$disdate = $this->input->post('disdate');
+				$sql = "UPDATE statistic SET depart=? WHERE appid = ?";
+				$this->db->query($sql,array($disdate[$id],$rows)); 
+			}*/
+		}
 	}
 
 }

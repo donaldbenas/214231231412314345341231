@@ -4,7 +4,7 @@
 <div class="row" id="report-form">
 	<div id="generate" style="padding:20px;margin:right:20px">
 		<form class="form form-horizontal" method="post">
-			<h2>Generate Report</h3> 
+			<h4>Generate Report</h4> 
 			<div class="control-group">
 				<label class="control-label">Date</label>
 				<div class="controls">
@@ -34,8 +34,8 @@
 	</div>
 </div>
 <?php if($status=='1'){ ?>
-<legend style="width:1200px;padding-top:20px;">Applicant</legend>
-<div id="table_div" style="width:1200px;height:inherit;padding:0px;margin:0px;;margin-top:10px;"></div>
+<legend style="width:960px;padding-top:20px;">Applicant</legend>
+<div id="table_div" style="width:960px;height:inherit;padding:0px;margin:0px;;margin-top:10px;"></div>
 <script>
 	google.load('visualization', '1', {packages:['table']});
 	google.setOnLoadCallback(drawTable);
@@ -57,8 +57,8 @@
 </script>
 <?php } ?>
 <?php if($status=='2'){ ?>
-<legend style="width:1200px;padding-top:20px;">Proposed</legend>
-<div id="table_div" style="width:1200px;height:inherit;padding:0px;margin:0px;;margin-top:10px;"></div>
+<legend style="width:960px;padding-top:20px;">Proposed</legend>
+<div id="table_div" style="width:960px;height:inherit;padding:0px;margin:0px;;margin-top:10px;"></div>
 <script>
 	google.load('visualization', '1', {packages:['table']});
 	google.setOnLoadCallback(drawTable);
@@ -80,8 +80,8 @@
 </script>
 <?php } ?>
 <?php if($status=='3'){ ?>
-<legend style="width:1200px;padding-top:20px;">Approved</legend>
-<div id="table_div" style="width:1200px;height:inherit;padding:0px;margin:0px;;margin-top:10px;"></div>
+<legend style="width:960px;padding-top:20px;">Approved</legend>
+<div id="table_div" style="width:960px;height:inherit;padding:0px;margin:0px;;margin-top:10px;"></div>
 <script>
 	google.load('visualization', '1', {packages:['table']});
 	google.setOnLoadCallback(drawTable);
@@ -103,8 +103,8 @@
 </script>
 <?php } ?>
 <?php if($status=='4'){ ?>
-<legend style="width:1200px;padding-top:20px;">Processed</legend>
-<div id="table_div" style="width:1200px;height:inherit;padding:0px;margin:0px;;margin-top:10px;"></div>
+<legend style="width:960px;padding-top:20px;">Processed</legend>
+<div id="table_div" style="width:960px;height:inherit;padding:0px;margin:0px;;margin-top:10px;"></div>
 <script>
 	google.load('visualization', '1', {packages:['table']});
 	google.setOnLoadCallback(drawTable);
@@ -126,8 +126,8 @@
 </script>
 <?php } ?>
 <?php if($status=='5'){ ?>
-<legend style="width:1200px;padding-top:20px;">Departed</legend>
-<div id="table_div" style="width:1200px;height:inherit;padding:0px;margin:0px;;margin-top:10px;"></div>
+<legend style="width:960px;padding-top:20px;">Departed</legend>
+<div id="table_div" style="width:960px;height:inherit;padding:0px;margin:0px;;margin-top:10px;"></div>
 <script>
 	google.load('visualization', '1', {packages:['table']});
 	google.setOnLoadCallback(drawTable);
@@ -150,8 +150,8 @@
 </script>
 <?php } ?>
 <?php if($status=='6'){ ?>
-<legend style="width:1200px;padding-top:20px;">Arrived</legend>
-<div id="table_div" style="width:1200px;height:inherit;padding:0px;margin:0px;;margin-top:10px;"></div>
+<legend style="width:960px;padding-top:20px;">Arrived</legend>
+<div id="table_div" style="width:960px;height:inherit;padding:0px;margin:0px;;margin-top:10px;"></div>
 <script>
 	google.load('visualization', '1', {packages:['table']});
 	google.setOnLoadCallback(drawTable);

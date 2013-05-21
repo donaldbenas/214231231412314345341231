@@ -40,11 +40,11 @@
 		<tr>
 			<td style="width:200px" rowspan="7"><img src="<?php if(isset($uploadphoto[0]['appid'])) echo base_url()."documents/photos/".$uploadphoto[0]['appid'].".".$uploadphoto[0]['type']; ?>" class="img-polaroid" style="height:200px;width:180px;" 	></td>
 			
-			<td><b>Status :</b> Processed</td>
-			<td><b>Date Approve :</b> Proccess</td>
+			<td><b>Status :</b> PROCESSED</td>
+			<td><b>Date Approve :</b> <?php $approved = $this->personalmodel->dateapprove($personalbackground[0]['appid']); if(!empty($approved)) echo date('M d, Y',strtotime($approved[0]['process'])) ?></td>
 		</tr>
 		<tr>
-			<td colspan="2"><b>Position :</b> </td>
+			<td colspan="2"><b>Position :</b> <?php $position = $this->personalmodel->position($personalbackground[0]['position1']); echo $position[0]['value'] ?></td>
 		</tr>
 		</tr>
 		<tr>

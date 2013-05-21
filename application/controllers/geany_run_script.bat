@@ -1,4 +1,4 @@
-php "transaction.php"
+php "report.php"
 
 pause
 del "%0"

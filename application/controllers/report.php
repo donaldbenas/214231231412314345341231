@@ -35,39 +35,38 @@ class Report extends CI_Controller{
 	}
 	
 	public function setdate(){
-		$this->load->view('admin/header',$this->databank);
 		$this->load->database();
-		$sql = "SELECT * FROM applicant
+		if($this->input->post()!=""){
+			$appid = $this->input->post('appid');
+			$setdate = $this->input->post('setdate');
+			foreach($appid as $id => $row){
+				if($setdate[$id]!=""){
+					//echo $row." ".$setdate[$id];
+					$sql = "SELECT count(*) as count from statistic WHERE appid = ?";
+					$query = $this->db->query($sql, array($row));
+					$rows = $query->result();
+					if($rows[0]->count =='0'){
+						$sql = "INSERT INTO statistic (depart,appid) VALUES (?,?)";
+						$this->db->query($sql,array($setdate[$id],$row));
+					}else{
+						$sql = "UPDATE statistic SET depart = ? WHERE appid = ?";
+						$this->db->query($sql,array($setdate[$id],$row));
+					}
+				}
+			}
+		}
+		$sql = "SELECT applicant.* FROM applicant
 					LEFT JOIN statistic ON applicant.appid = statistic.appid
 					WHERE (statistic.depart = '0000-00-00' OR statistic.depart is NULL)
 					AND applicant.status = 5
 					ORDER BY applicant.lastname ASC";
 		$query = $this->db->query($sql);
-		var_dump($query->result());
-		echo '<form method="post">';
-		echo '<table class="table table-hover table-striped table-condensed table-bordered span5">';
-		echo '<tr><th>Name</th><th>Date</th></tr>';
-		foreach($query->result() as $applicant){
-			echo '<tr>';
-			echo '<td style="width:300px"><label>'.$applicant->lastname.', '.$applicant->firstname.'</label>';
-			echo '<input type="text" name="appid[]" value="'.$applicant->appid.'" style="display:block"></td>';
-			echo '<td><input type="text" name="disdate[]" data-mask="9999-99-99" ></td>';
-			echo '</tr>';
-		}
-		echo '<tr><td></td><td><input type="submit" value="submit"></td></tr>';
-		echo '</table>';
-		echo '</form>';
+		$data['setdate'] = $query->result();
+		$this->load->view('admin/header',$this->databank);
+		$this->load->view('admin/nav');
+		$this->load->view('admin/databank');
+		$this->load->view('setdate',$data);
 		$this->load->view('admin/footer');
-		if($this->input->post()!=""){
-			
-				var_dump($this->input->post('disdate'));
-				var_dump($this->input->post('appid'));
-			/*foreach($this->input->post('appid') as $id=>$rows){
-				$disdate = $this->input->post('disdate');
-				$sql = "UPDATE statistic SET depart=? WHERE appid = ?";
-				$this->db->query($sql,array($disdate[$id],$rows)); 
-			}*/
-		}
 	}
 
 }

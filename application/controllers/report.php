@@ -36,9 +36,12 @@ class Report extends CI_Controller{
 	
 	public function setdate(){
 		$this->load->database();
+		$this->load->model('personalmodel');
+		$data['country'] = $this->personalmodel->country();
 		if($this->input->post()!=""){
 			$appid = $this->input->post('appid');
 			$setdate = $this->input->post('setdate');
+			$country = $this->input->post('country');
 			foreach($appid as $id => $row){
 				if($setdate[$id]!=""){
 					//echo $row." ".$setdate[$id];
@@ -46,11 +49,11 @@ class Report extends CI_Controller{
 					$query = $this->db->query($sql, array($row));
 					$rows = $query->result();
 					if($rows[0]->count =='0'){
-						$sql = "INSERT INTO statistic (depart,appid) VALUES (?,?)";
-						$this->db->query($sql,array($setdate[$id],$row));
+						$sql = "INSERT INTO statistic (depart,ddestination,appid) VALUES (?,?,?)";
+						$this->db->query($sql,array($setdate[$id],$country[$id],$row));
 					}else{
-						$sql = "UPDATE statistic SET depart = ? WHERE appid = ?";
-						$this->db->query($sql,array($setdate[$id],$row));
+						$sql = "UPDATE statistic SET depart = ?, ddestination = ? WHERE appid = ?";
+						$this->db->query($sql,array($setdate[$id],$country[$id],$row));
 					}
 				}
 			}

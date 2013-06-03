@@ -71,5 +71,16 @@ class Report extends CI_Controller{
 		$this->load->view('setdate',$data);
 		$this->load->view('admin/footer');
 	}
+	
+	public function setstatistic(){
+		$this->load->database();
+		$sql = "SELECT * FROM statistic ORDER BY appid";
+		$query = $this->db->query($sql);
+		foreach($query->result() as $rows){
+			$param = array($rows->id,$rows->id);
+			$sql = "UPDATE statistic  SET appid = ? WHERE id = ?";
+			$this->db->query($sql,$param); 
+		}		
+	}
 
 }

@@ -25,6 +25,22 @@
 				</div>
 			</div>
 			<div class="control-group">
+				<label class="control-label">Position</label>
+				<div class="controls">
+						<select name="position">
+							<option value="0">All</option>
+							<?php
+								foreach($position as $arr){
+									foreach($arr as $id => $val){
+										if( $id == 'id') $ids = $val;
+										if( $id == 'value') echo "<option value='".$ids."'>".ucfirst(strtolower($val))."</option>";
+									}
+								}
+							?>
+						</select>
+				</div>
+			</div>
+			<div class="control-group">
 				<label class="control-label"></label>
 				<div class="controls">
 					<button type="submit" class="btn btn-primary"><i class="icon-filter icon-white"></i> Filter</button>
@@ -34,8 +50,8 @@
 	</div>
 </div>
 <?php if($status=='1'){ ?>
-<legend style="width:960px;padding-top:20px;">Applicant</legend>
-<div id="table_div" style="width:960px;height:inherit;padding:0px;margin:0px;;margin-top:10px;"></div>
+<legend style="width:100%;padding-top:20px;">Applicant</legend>
+<div id="table_div" style="width:100%;height:inherit;padding:0px;margin:0px;;margin-top:10px;"></div>
 <script>
 	google.load('visualization', '1', {packages:['table']});
 	google.setOnLoadCallback(drawTable);
@@ -44,10 +60,10 @@
 		data.addColumn('string', 'Name');
 		data.addColumn('string', 'Position');
 		data.addColumn('string', 'Principal');
-		data.addColumn('string', 'Date');
+		data.addColumn('date' , 'Date');
 		data.addRows([
 		<?php foreach($report as $val => $rows){ ?>
-					['<?php echo $rows->lastname.", ".$rows->firstname." ".substr($rows->middlename,0,1)."." ?>','<?php echo $rows->value ?>','Pacific Ace Resoureces','<?php echo date("F d, Y",strtotime($rows->added)) ?>'],
+					['<?php echo $rows->lastname.", ".$rows->firstname." ".substr($rows->middlename,0,1)."." ?>','<?php echo $rows->value ?>','Pacific Ace Resoureces', new Date('<?php echo date("F d, Y",strtotime($rows->added)) ?>')],
 		<?php } ?>
 		]);
 
@@ -57,8 +73,8 @@
 </script>
 <?php } ?>
 <?php if($status=='2'){ ?>
-<legend style="width:960px;padding-top:20px;">Proposed</legend>
-<div id="table_div" style="width:960px;height:inherit;padding:0px;margin:0px;;margin-top:10px;"></div>
+<legend style="width:100%;padding-top:20px;">Proposed</legend>
+<div id="table_div" style="width:100%;height:inherit;padding:0px;margin:0px;;margin-top:10px;"></div>
 <script>
 	google.load('visualization', '1', {packages:['table']});
 	google.setOnLoadCallback(drawTable);
@@ -67,10 +83,10 @@
 		data.addColumn('string', 'Name');
 		data.addColumn('string', 'Position');
 		data.addColumn('string', 'Principal');
-		data.addColumn('string', 'Date');
+		data.addColumn('date' , 'Date');
 		data.addRows([
 		<?php foreach($report as $val => $rows){ ?>
-					['<?php echo $rows->lastname.", ".$rows->firstname." ".substr($rows->middlename,0,1)."." ?>','<?php echo $rows->value ?>','<?php echo $rows->company?>','<?php echo date("F d, Y",strtotime($rows->approve)) ?>'],
+					['<?php echo $rows->lastname.", ".$rows->firstname." ".substr($rows->middlename,0,1)."." ?>','<?php echo $rows->value ?>','<?php echo $rows->company?>', new Date('<?php echo date("F d, Y",strtotime($rows->approve)) ?>')],
 		<?php } ?>
 		]);
 
@@ -80,8 +96,8 @@
 </script>
 <?php } ?>
 <?php if($status=='3'){ ?>
-<legend style="width:960px;padding-top:20px;">Approved</legend>
-<div id="table_div" style="width:960px;height:inherit;padding:0px;margin:0px;;margin-top:10px;"></div>
+<legend style="width:100%;padding-top:20px;">Approved</legend>
+<div id="table_div" style="width:100%;height:inherit;padding:0px;margin:0px;;margin-top:10px;"></div>
 <script>
 	google.load('visualization', '1', {packages:['table']});
 	google.setOnLoadCallback(drawTable);
@@ -90,10 +106,10 @@
 		data.addColumn('string', 'Name');
 		data.addColumn('string', 'Position');
 		data.addColumn('string', 'Principal');
-		data.addColumn('string', 'Date');
+		data.addColumn('date' , 'Date');
 		data.addRows([
 		<?php foreach($report as $val => $rows){ ?>
-					['<?php echo $rows->lastname.", ".$rows->firstname." ".substr($rows->middlename,0,1)."." ?>','<?php echo $rows->value ?>','<?php echo $rows->company ?>','<?php echo date("F d, Y",strtotime($rows->recruit)) ?>'],
+					['<?php echo $rows->lastname.", ".$rows->firstname." ".substr($rows->middlename,0,1)."." ?>','<?php echo $rows->value ?>','<?php echo $rows->company ?>', new Date('<?php echo date("F d, Y",strtotime($rows->recruit)) ?>')],
 		<?php } ?>
 		]);
 
@@ -103,8 +119,8 @@
 </script>
 <?php } ?>
 <?php if($status=='4'){ ?>
-<legend style="width:960px;padding-top:20px;">Processed</legend>
-<div id="table_div" style="width:960px;height:inherit;padding:0px;margin:0px;;margin-top:10px;"></div>
+<legend style="width:100%;padding-top:20px;">Processed</legend>
+<div id="table_div" style="width:100%;height:inherit;padding:0px;margin:0px;;margin-top:10px;"></div>
 <script>
 	google.load('visualization', '1', {packages:['table']});
 	google.setOnLoadCallback(drawTable);
@@ -113,10 +129,10 @@
 		data.addColumn('string', 'Name');
 		data.addColumn('string', 'Position');
 		data.addColumn('string', 'Principal');
-		data.addColumn('string', 'Date');
+		data.addColumn('date', 'Date');
 		data.addRows([
 		<?php foreach($report as $val => $rows){ ?>
-					['<?php echo $rows->lastname.", ".$rows->firstname." ".substr($rows->middlename,0,1)."." ?>','<?php echo $rows->value ?>','<?php echo $rows->company?>','<?php echo date("F d, Y",strtotime($rows->process)) ?>'],
+					['<?php echo $rows->lastname.", ".$rows->firstname." ".substr($rows->middlename,0,1)."." ?>','<?php echo $rows->value ?>','<?php echo $rows->company?>', new Date('<?php echo date("F d, Y",strtotime($rows->process)) ?>')],
 		<?php } ?>
 		]);
 
@@ -126,8 +142,8 @@
 </script>
 <?php } ?>
 <?php if($status=='5'){ ?>
-<legend style="width:960px;padding-top:20px;">Departed</legend>
-<div id="table_div" style="width:960px;height:inherit;padding:0px;margin:0px;;margin-top:10px;"></div>
+<legend style="width:100%;padding-top:20px;">Departed</legend>
+<div id="table_div" style="width:100%;height:inherit;padding:0px;margin:0px;;margin-top:10px;"></div>
 <script>
 	google.load('visualization', '1', {packages:['table']});
 	google.setOnLoadCallback(drawTable);
@@ -137,10 +153,10 @@
 		data.addColumn('string', 'Position');
 		data.addColumn('string', 'Principal');
 		data.addColumn('string', 'Destination');
-		data.addColumn('string', 'Date');
+		data.addColumn('date', 'Date');
 		data.addRows([
 		<?php foreach($report as $val => $rows){ ?>
-					['<?php echo $rows->lastname.", ".$rows->firstname." ".substr($rows->middlename,0,1)."." ?>','<?php echo $rows->value ?>','<?php echo $rows->company?>','<?php if($rows->ddestination!='0') echo $rows->ddestination; ?>','<?php echo date("F d, Y",strtotime($rows->depart)) ?>'],
+					['<?php echo $rows->lastname.", ".$rows->firstname." ".substr($rows->middlename,0,1)."." ?>','<?php echo $rows->value ?>','<?php echo $rows->company?>','<?php if($rows->ddestination!='0') echo $rows->ddestination; ?>', new Date('<?php echo date("F d, Y",strtotime($rows->depart)) ?>')],
 		<?php } ?>
 		]);
 
@@ -150,8 +166,8 @@
 </script>
 <?php } ?>
 <?php if($status=='6'){ ?>
-<legend style="width:960px;padding-top:20px;">Arrived</legend>
-<div id="table_div" style="width:960px;height:inherit;padding:0px;margin:0px;;margin-top:10px;"></div>
+<legend style="width:100%;padding-top:20px;">Arrived</legend>
+<div id="table_div" style="width:100%;height:inherit;padding:0px;margin:0px;;margin-top:10px;"></div>
 <script>
 	google.load('visualization', '1', {packages:['table']});
 	google.setOnLoadCallback(drawTable);
@@ -161,10 +177,10 @@
 		data.addColumn('string', 'Position');
 		data.addColumn('string', 'Principal');
 		data.addColumn('string', 'Destination');
-		data.addColumn('string', 'Date');
+		data.addColumn('date' , 'Date');
 		data.addRows([
 		<?php foreach($report as $val => $rows){ ?>
-					['<?php echo $rows->lastname.", ".$rows->firstname." ".substr($rows->middlename,0,1)."." ?>','<?php echo $rows->value ?>','<?php echo $rows->company?>','<?php echo 'Philippines'; ?>','<?php echo date("F d, Y",strtotime($rows->arrival)) ?>'],
+					['<?php echo $rows->lastname.", ".$rows->firstname." ".substr($rows->middlename,0,1)."." ?>','<?php echo $rows->value ?>','<?php echo $rows->company?>','<?php echo 'Philippines'; ?>', new Date('<?php echo date("F d, Y",strtotime($rows->arrival)) ?>')],
 		<?php } ?>
 		]);
 

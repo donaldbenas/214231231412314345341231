@@ -16,15 +16,20 @@ class Report extends CI_Controller{
 	
 	public function index()	{
 		$this->load->model('reportmodel');
+		$this->load->model('personalmodel');
 		if($this->input->post()!=""){
-			$data['report'] = $this->reportmodel->report($this->input->post('status'),$this->input->post('date'));
+			$data['report'] = $this->reportmodel->report($this->input->post('status'),$this->input->post('date'),$this->input->post('position'));
 			$data['status'] = $this->reportmodel->status;
 			$data['date'] = $this->input->post('date');
-			//echo var_dump($data['report']);
+/*
+			 var_dump($data['report']);
+			 var_dump($_POST);
+*/
 		}else{
 			$data['status'] = '';
 			$data['date'] = '';
 		}
+		$data['position'] = $this->personalmodel->position();
 		$this->load->view('admin/header',$this->databank);
 		$this->load->view('admin/nav');
 		$this->load->view('admin/databank');

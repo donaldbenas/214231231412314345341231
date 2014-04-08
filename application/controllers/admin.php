@@ -192,6 +192,26 @@ class Admin extends CI_Controller {
 							$this->load->view('admin/applicantview',$data);
 							$this->load->view('admin/footer');
 							break;
+			case 'print'	:
+							$this->load->view('admin/header',$this->databank);
+							$this->load->view('admin/nav');
+							$this->load->view('admin/databank');
+							$this->load->model('personalmodel');
+							$this->load->model('applicantModel');
+							$data['position'] = $this->personalmodel->position();
+							$data['nationality'] = $this->personalmodel->nationality();
+							$data['civil'] = $this->personalmodel->civil();
+							$data['religion'] = $this->personalmodel->religion();
+							$data['personalbackground'] = $this->applicantModel->loadpersonalbackground($this->uri->segment(4));
+							$data['educationalbackground'] = $this->applicantModel->loadeducationalbackground($this->uri->segment(4));
+							$data['skillbackground'] = $this->applicantModel->loadskillbackground($this->uri->segment(4));
+							$data['localexperience'] = $this->applicantModel->loadlocalexperience($this->uri->segment(4));
+							$data['abroadexperience'] = $this->applicantModel->loadabroadexperience($this->uri->segment(4));
+							$data['uploadphoto'] = $this->applicantModel->loaduploadphoto($this->uri->segment(4));
+							$data['uploadresume'] = $this->applicantModel->loaduploadresume($this->uri->segment(4));
+							$this->load->view('admin/applicantprinting',$data);
+							$this->load->view('admin/footer');
+							break;
 			case 'delete'	:
 							$this->load->model('applicantModel');
 							$this->applicantModel->delete($this->uri->segment(4));
@@ -215,6 +235,23 @@ class Admin extends CI_Controller {
         $this->load->model('modelsearchjsonp');
         echo $this->modelsearchjsonp->jsonTable();
 	
+	}
+	
+	public function printing(){
+		$this->load->model('personalmodel');
+		$this->load->model('applicantModel');
+		$data['position'] = $this->personalmodel->position();
+		$data['nationality'] = $this->personalmodel->nationality();
+		$data['civil'] = $this->personalmodel->civil();
+		$data['religion'] = $this->personalmodel->religion();
+		$data['personalbackground'] = $this->applicantModel->loadpersonalbackground($this->uri->segment(3));
+		$data['educationalbackground'] = $this->applicantModel->loadeducationalbackground($this->uri->segment(3));
+		$data['skillbackground'] = $this->applicantModel->loadskillbackground($this->uri->segment(3));
+		$data['localexperience'] = $this->applicantModel->loadlocalexperience($this->uri->segment(3));
+		$data['abroadexperience'] = $this->applicantModel->loadabroadexperience($this->uri->segment(3));
+		$data['uploadphoto'] = $this->applicantModel->loaduploadphoto($this->uri->segment(3));
+		$data['uploadresume'] = $this->applicantModel->loaduploadresume($this->uri->segment(3));
+		$this->load->view('admin/applicantprinting',$data);
 	}
 } 
 

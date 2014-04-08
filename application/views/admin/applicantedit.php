@@ -1,7 +1,6 @@
 <ul class="nav nav-pills">
   <li><a href="<?php echo base_url() ?>admin/worker/add">Add Applicant</a></li>
   <li class="active"><a href="<?php echo base_url() ?>admin/worker/search">Search Applicant</a></li>
-  <li><a href="#">Print Applicant</a></li>
 </ul>
 <ul class="nav nav-tabs" id="myTab">
   <li class="active"><a href="#personal-background">Personal Background</a></li>

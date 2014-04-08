@@ -1,7 +1,6 @@
 	  <ul class="nav nav-pills">
 		  <li><a href="<?php echo base_url()."admin/worker/add"?>">Add Applicant</a></li>
 		  <li class="active"><a href="<?php echo base_url()."admin/worker/search"?>">Search Applicant</a></li>
-		  <li><a href="#">Print Applicant</a></li>
 	  </ul>
 	  <div class="container-fluid well">
 		<table cellpadding="0" cellspacing="0" border="0" class="dsiplay" id="data">
@@ -12,6 +11,7 @@
 					<th width="23%">First Name</th>
 					<th width="22%">Last Name</th>
 					<th width="48%">Position</th>
+					<th style="width:10px"></th>
 					<th style="width:10px"></th>
 					<th style="width:10px"></th>
 					<th style="width:10px"></th>
@@ -68,6 +68,7 @@
 				{ "bVisible": true, "bSearchable": true, "bSortable": true },
 				{ "bVisible": true, "bSearchable": true, "bSortable": true },
 				{ "bVisible": true, "bSearchable": true, "bSortable": true },
+				{ "bVisible": true, "bSearchable": false, "bSortable": false },
 				{ "bVisible": true, "bSearchable": false, "bSortable": false },
 				{ "bVisible": true, "bSearchable": false, "bSortable": false },
 				{ "bVisible": true, "bSearchable": false, "bSortable": false }

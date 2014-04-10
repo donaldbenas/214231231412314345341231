@@ -46,6 +46,8 @@ class applicantModel extends CI_Model{
 	var $nphone;
 	var $nmobile;
 	var $added;
+	var $passportNumber;
+	var $passportDetails;
 	var $activate;
 	var $type;
 	
@@ -170,6 +172,8 @@ class applicantModel extends CI_Model{
 			'smobile' => strtoupper($_POST['spouseMobile']),
 			'nphone' => strtoupper($_POST['emergencyTelephone']),
 			'nmobile' => strtoupper($_POST['emergencyMobile']),
+			'passportNumber' => strtoupper($_POST['passportNumber']),
+			'passportDetails' => strtoupper($_POST['passportDetails']),
 			'added' => strtoupper($_POST['applyYear'])."-".strtoupper($_POST['applyMonth'])."-".strtoupper($_POST['applyDay']),
 			'activate' => '1',
 			'type' => '2'
@@ -357,6 +361,8 @@ class applicantModel extends CI_Model{
 			'smobile' => strtoupper($_POST['spouseMobile']),
 			'nphone' => strtoupper($_POST['emergencyTelephone']),
 			'nmobile' => strtoupper($_POST['emergencyMobile']),
+			'passportNumber' => strtoupper($_POST['passportNumber']),
+			'passportDetails' => strtoupper($_POST['passportDetails']),
 			'added' => strtoupper($_POST['applyYear'])."-".strtoupper($_POST['applyMonth'])."-".strtoupper($_POST['applyDay']),
 			'type' => '2'
 		);

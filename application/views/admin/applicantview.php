@@ -203,6 +203,12 @@
 						</select>
 					</div>
 				</div>
+				<div class="row-fluid span">
+					<div class="span2"><label>Passport Number</label></div>
+					<div class="span3"><input type="text" name="passportNumber" class="span12" value="<?php  echo $personalbackground['0']['passportNumber'] ?>"/></div>
+					<div class="span2"><label>Date & Place of Issue</label></div>
+					<div class="span3"><input type="text" name="passportDetails" class="span12" value="<?php  echo $personalbackground['0']['passportDetails'] ?>"/></div>
+				</div>
 				<legend>Address Information<a href="<?php echo base_url()."admin/worker/edit/".$this->uri->segment(4) ?>" class="pull-right btn btn-info"><i class="icon-edit icon-white"></i> Edit</a></legend>
 				<div class="row-fluid span">
 					<div class="span2"><label>Current Address</label></div>

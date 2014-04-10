@@ -200,6 +200,12 @@
 						</select>
 					</div>
 				</div>
+				<div class="row-fluid span">
+					<div class="span2"><label>Passport Number</label></div>
+					<div class="span3"><input type="text" name="passportNumber" class="span12"/></div>
+					<div class="span2"><label>Date & Place of Issue</label></div>
+					<div class="span3"><input type="text" name="passportDetails" class="span12"/></div>
+				</div>
 				<legend>Address Information</legend>
 				<div class="row-fluid span">
 					<div class="span2"><label>Current Address</label></div>

@@ -6,7 +6,7 @@
 		<?php if($this->uri->segment(4)!=''): ?>
 		<button type="button" class="btn btn-success printThis"> <i class="icon icon-print icon-white"></i> Print</button>
 		<?php endif; ?>
-		<div id="print" class="container">	
+		<div id="print">	
 			<style>
 				body, span, div, table, tr, tbody, tfoot, td, hr { 
 					-webkit-print-color-adjust: exact;
@@ -26,8 +26,8 @@
 			</style>
 			<table style="width:100%; margin-bottom:10px;">
 				<tr>
-					<td class="noborder" style="width:50%"><img src="img/logo.jpg"style="height:80px" /></td>
-					<td class="noborder" style="width:50%;text-align:right; position:relative"><img src="<?php if(isset($uploadphoto[0]['appid'])) echo base_url()."documents/photos/".$uploadphoto[0]['appid'].".".$uploadphoto[0]['type']; ?>"style="width:100px;height:100px;position:absolute; top:0px" /></td>
+					<td class="noborder" style="width:50%"><img src="<?php echo base_url('img/logo.jpg') ?>"style="height:80px" /></td>
+					<td class="noborder" style="width:50%;text-align:right; position:relative"><img src="<?php if(isset($uploadphoto[0]['appid'])) echo base_url()."documents/photos/".$uploadphoto[0]['appid'].".".$uploadphoto[0]['type']; ?>"style="width:100px;height:100px;position:absolute;right:0px;top:0px" /></td>
 				</tr>
 			</table>	
 			<table style="width:100%">
@@ -65,14 +65,14 @@
 					<td colspan=2 style="text-align:center">Birth</td>
 					<td style="">Sex</td>
 					<td style=""><?php echo ($personalbackground['0']['gender']==1)? 'MALE' : 'FEMALE';  ?></td>
-					<td style="width:50%">Passport No.:</td></tr>
+					<td style="width:50%">Passport No.: <?php echo ucwords($personalbackground['0']['passportNumber']) ?></td></tr>
 				<tr><td style="">First Name</td>
 					<td style=""><?php echo ucwords($personalbackground['0']['firstname']) ?></td>
 					<td style="width:20px">Date</td>
 					<td style=""><?php echo ucwords($personalbackground['0']['datebirth']) ?></td>
 					<td style="">Height</td>
 					<td style=""><?php echo ucwords($personalbackground['0']['height']) ?> CM</td>
-					<td style="">Date & Place of Issue</td></tr>
+					<td style="">Date & Place of Issue: <?php echo ucwords($personalbackground['0']['passportDetails']) ?></td></tr>
 				<tr><td style="">Middle Name</td>
 					<td style=""><?php echo ucwords($personalbackground['0']['middlename']) ?></td>
 					<td style="">Place</td>
@@ -156,14 +156,20 @@
 				<tr><td style="width:33.33%;text-align:center">Course / Seminar</td>
 					<td style="width:33.33%;text-align:center">School or Training Center</td>
 					<td style="width:33.33%;text-align:center">Period</td></tr>
-				<?php if($skillbackground==''){ ?>
+				<?php if(empty($skillbackground)){ for($i=0;$i<4;$i++){?>
 				<tr><td style="width:33.33%;text-align:center">&nbsp;</td>
 					<td style="width:33.33%;text-align:center"></td>
 					<td style="width:33.33%;text-align:center"></td></tr>
-				<?php }else{ foreach ($skillbackground as $arr ){ ?>
+				<?php }}else{ foreach ($skillbackground as $arr ){ ?>
 				<tr><td style="width:33.33%;text-align:center"><?php echo ucwords($arr['course']) ?> </td>
 					<td style="width:33.33%;text-align:center"><?php echo ucwords($arr['school']) ?></td>
 					<td style="width:33.33%;text-align:center"><?php echo ucwords($arr['startDate'].' - '.$arr['endDate']) ?></td></tr>
+				<?php }for($i=count($skillbackground);$i<4;$i++){ ?>
+				<tr><td style="width:12.5%;text-align:center">&nbsp;</td>
+					<td style="width:12.5%;text-align:center"></td>
+					<td style="width:12.5%;text-align:center"></td>
+					<td style="width:12.5%;text-align:center"></td>
+					<td style="width:12.5%;text-align:center"></td></tr>
 				<?php }}?>
 			</table>
 			<table style="width:100%">
@@ -173,18 +179,24 @@
 					<td style="width:12.5%;text-align:center">Period</td>
 					<td style="width:12.5%;text-align:center">Main Duties</td>
 					<td style="width:12.5%;text-align:center">Reason for Leaving</td></tr>
-				<?php if($localexperience==''){ ?>
+				<?php if(empty($localexperience)){ for($i=0;$i<4;$i++){ ?>
 				<tr><td style="width:12.5%;text-align:center">&nbsp;</td>
 					<td style="width:12.5%;text-align:center"></td>
 					<td style="width:12.5%;text-align:center"></td>
 					<td style="width:12.5%;text-align:center"></td>
 					<td style="width:12.5%;text-align:center"></td></tr>
-				<?php }else{ foreach ($localexperience as $arr ){ ?>
+				<?php }}else{ foreach ($localexperience as $arr ){ ?>
 				<tr><td style="width:12.5%;text-align:center"><?php echo ucwords($arr['company']) ?></td>
 					<td style="width:12.5%;text-align:center"><?php echo ucwords($arr['position']) ?></td>
 					<td style="width:12.5%;text-align:center"><?php echo ucwords($arr['start'].' - '.$arr['end']) ?></td>
 					<td style="width:12.5%;text-align:center"><?php echo ucwords($arr['main']) ?></td>
 					<td style="width:12.5%;text-align:center"><?php echo ucwords($arr['reason']) ?></td></tr>
+				<?php }for($i=count($localexperience);$i<4;$i++){ ?>
+				<tr><td style="width:12.5%;text-align:center">&nbsp;</td>
+					<td style="width:12.5%;text-align:center"></td>
+					<td style="width:12.5%;text-align:center"></td>
+					<td style="width:12.5%;text-align:center"></td>
+					<td style="width:12.5%;text-align:center"></td></tr>
 				<?php }}?>
 			</table>
 			<table style="width:100%">
@@ -194,18 +206,24 @@
 					<td style="width:12.5%;text-align:center">Period</td>
 					<td style="width:12.5%;text-align:center">Main Duties</td>
 					<td style="width:12.5%;text-align:center">Reason for Leaving</td></tr>
-				<?php if($abroadexperience==''){ ?>
+				<?php if(empty($abroadexperience)){ for($i=0;$i<4;$i++){ ?>
 				<tr><td style="width:12.5%;text-align:center">&nbsp;</td>
 					<td style="width:12.5%;text-align:center"></td>
 					<td style="width:12.5%;text-align:center"></td>
 					<td style="width:12.5%;text-align:center"></td>
 					<td style="width:12.5%;text-align:center"></td></tr>
-				<?php }else{ foreach ($abroadexperience as $arr ){ ?>
+				<?php }}else{ foreach ($abroadexperience as $arr ){ ?>
 				<tr><td style="width:12.5%;text-align:center"><?php echo ucwords($arr['company']) ?></td>
 					<td style="width:12.5%;text-align:center"><?php echo ucwords($arr['position']) ?></td>
 					<td style="width:12.5%;text-align:center"><?php echo ucwords($arr['start'].' - '.$arr['end']) ?></td>
 					<td style="width:12.5%;text-align:center"><?php echo ucwords($arr['main']) ?></td>
 					<td style="width:12.5%;text-align:center"><?php echo ucwords($arr['reason']) ?></td></tr>
+				<?php } for($i=count($abroadexperience);$i<4;$i++){ ?>
+				<tr><td style="width:12.5%;text-align:center">&nbsp;</td>
+					<td style="width:12.5%;text-align:center"></td>
+					<td style="width:12.5%;text-align:center"></td>
+					<td style="width:12.5%;text-align:center"></td>
+					<td style="width:12.5%;text-align:center"></td></tr>
 				<?php }}?>
 			</table>
 		</div>

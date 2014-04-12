@@ -7,11 +7,12 @@
   <li><a href="#educational-background">Educational Background</a></li>
   <li><a href="#special-skill-background">Special Skill Background</a></li>
   <li><a href="#work-experience-background">Work Experience Background</a></li>
+  <li><a href="#document-attachment">Document Attachment</a></li>
 </ul>
-<form method="post" name="myform" enctype="multipart/form-data" id="myform">
-	<input type="text" name="appid" value="<?php echo $personalbackground['0']['appid'] ?>" style="display:none">
 	<fieldset>
 		<div class="container-fluid tab-content">
+			<form method="post" name="myform" enctype="multipart/form-data" id="myform">
+			<input type="text" name="appid" value="<?php echo $personalbackground['0']['appid'] ?>" style="display:none">
 			<!--<h2>Personal Background</h2>-->
 			<div class="container-fluid well tab-pane active" id="personal-background">
 				<legend>Applicant Information <a href="<?php echo base_url()."admin/worker/view/".$this->uri->segment(4) ?>" class="pull-right btn btn-info"><i class="icon-search icon-white"></i> View</a></legend>
@@ -829,9 +830,14 @@
 				</script>
 				<input type="submit" name="submit" class="btn btn-primary" style="float:right" value="Submit">
 			</div>
+			
+			</form>
+			<div class="container-fluid well tab-pane" id="document-attachment">
+
+
+			</div>
 		</div>
 	</fieldset>
-</form>
 <script>
 	$(document).ready(function(){
 		  $('#tin').mask('99-9999999');
@@ -867,3 +873,4 @@
 	}
 </script>
 <script src="<?php echo base_url() ?>js/jquery.validate.worker-edit.js"></script>
+

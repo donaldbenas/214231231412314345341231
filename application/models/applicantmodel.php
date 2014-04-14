@@ -507,5 +507,11 @@ class applicantModel extends CI_Model{
 		$sql = "UPDATE applicant SET activate = '0' WHERE appid = ?";
 		$this->db->query($sql,array($appid));		
 	}
+	
+	public function attachment($appid){
+		$sql = "SELECT * FROM attachments WHERE appid = ?";
+		$query = $this->db->query($sql, array($appid));
+		return $query->result();
+	}
 
 }

@@ -226,6 +226,9 @@
 					<td style="width:12.5%;text-align:center"></td></tr>
 				<?php }}?>
 			</table>
+			<?php foreach($attachments as $row){ ?>
+				<img src="<?php echo base_url('upload/'.$row->name); ?>" style="width:auto" />
+			<?php }?>
 		</div>
 		<script>
 		$('.printThis').click( function(){

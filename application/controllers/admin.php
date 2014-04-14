@@ -155,6 +155,7 @@ class Admin extends CI_Controller {
 							$this->load->model('applicantModel');
 							$this->load->model('employermodel');
 							$this->load->library('session');
+							$this->uploadAttachments();
 							$this->session->set_userdata(array('FILE_PATH'=>'/documents/attachments/'.$this->uri->segment(4).'/'));
 							$data['requirements'] = $this->employermodel->requirements($this->uri->segment(3));
 							$data['position'] = $this->personalmodel->position();
@@ -169,6 +170,7 @@ class Admin extends CI_Controller {
 							$data['abroadexperience'] = $this->applicantModel->loadabroadexperience($this->uri->segment(4));
 							$data['uploadphoto'] = $this->applicantModel->loaduploadphoto($this->uri->segment(4));
 							$data['uploadresume'] = $this->applicantModel->loaduploadphoto($this->uri->segment(4));
+							$data['attachments'] = $this->applicantModel->attachment($this->uri->segment(4));
 							if(isset($_POST['submit'])){
 								$this->applicantModel->edit($this->input->post('appid'));
 								redirect(base_url()."admin/worker/edit/".$this->input->post('appid'));
@@ -213,6 +215,7 @@ class Admin extends CI_Controller {
 							$data['abroadexperience'] = $this->applicantModel->loadabroadexperience($this->uri->segment(4));
 							$data['uploadphoto'] = $this->applicantModel->loaduploadphoto($this->uri->segment(4));
 							$data['uploadresume'] = $this->applicantModel->loaduploadresume($this->uri->segment(4));
+							$data['attachments'] = $this->applicantModel->attachment($this->uri->segment(4));
 							$this->load->view('admin/applicantprinting',$data);
 							$this->load->view('admin/footer');
 							break;
@@ -258,44 +261,39 @@ class Admin extends CI_Controller {
 		$this->load->view('admin/applicantprinting',$data);
 	}
 	
-    public function upload(){
-		$this->load->library('session');
+    public function uploadAttachments(){
+		$appid = $this->uri->segment(4); 
+		$this->load->library('upload'); 
+		$this->upload->initialize(array( 
+		"upload_path" => "./upload",
+		"overwrite" => TRUE,
+		"encrypt_name" => TRUE,
+		"remove_spaces" => TRUE,
+		"allowed_types" => "jpg|png",
+		"max_size" => 3000,
+		"xss_clean" => FALSE
+		));
+		if ($this->upload->do_multi_upload("files")) { 
+			foreach($this->upload->get_multi_upload_data() as $id => $value){
+				$sql = "SELECT * FROM attachments WHERE name = ?";
+				$query = $this->db->query($sql, array($value['file_name']));
+				if($query->num_rows() == 0){
+					$sql = "INSERT INTO attachments (appid,name,path) VALUES(?,?,?)";
+					$this->db->query($sql, array($appid,$value['file_name'],$value['full_path']));
+				}
+			}
+		}
+	}
+	
+	public function deleteAttachment(){
 		$this->load->helper("file");
-		
-        error_reporting(E_ALL | E_STRICT);
-
-        $this->load->helper("upload.class");
-        $upload_handler = new UploadHandler();        
-
-        header('Pragma: no-cache');
-        header('Cache-Control: no-store, no-cache, must-revalidate');
-        header('Content-Disposition: inline; filename="files.json"');
-        header('X-Content-Type-Options: nosniff');
-        header('Access-Control-Allow-Origin: *');
-        header('Access-Control-Allow-Methods: OPTIONS, HEAD, GET, POST, PUT, DELETE');
-        header('Access-Control-Allow-Headers: X-File-Name, X-File-Type, X-File-Size');
-        switch ($_SERVER['REQUEST_METHOD']) {
-            case 'OPTIONS':
-                break;
-            case 'HEAD':
-            case 'GET':
-                $upload_handler->get();
-                break;
-            case 'POST':
-                if (isset($_REQUEST['_method']) && $_REQUEST['_method'] === 'DELETE') {
-                    $upload_handler->delete();
-                } else {
-                    $upload_handler->post();
-                }
-                break;
-            case 'DELETE':
-                $upload_handler->delete();
-                break;
-            default:
-                header('HTTP/1.1 405 Method Not Allowed');
-        }
-
-    }
+		$data['id'] = $this->input->get('id');
+		$data['path'] = $this->input->get('path');
+		$sql = "DELETE FROM attachments WHERE id = ?";
+		$this->db->query($sql,array($data['id']));
+		unlink($data['path']); 
+		echo json_encode($data);
+	}
 } 
 
 

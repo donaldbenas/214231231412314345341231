@@ -9,9 +9,9 @@
   <li><a href="#work-experience-background">Work Experience Background</a></li>
   <li><a href="#document-attachment">Document Attachment</a></li>
 </ul>
+<form method="post" name="myform" enctype="multipart/form-data" id="myform">
 	<fieldset>
 		<div class="container-fluid tab-content">
-			<form method="post" name="myform" enctype="multipart/form-data" id="myform">
 			<input type="text" name="appid" value="<?php echo $personalbackground['0']['appid'] ?>" style="display:none">
 			<!--<h2>Personal Background</h2>-->
 			<div class="container-fluid well tab-pane active" id="personal-background">
@@ -830,14 +830,18 @@
 				</script>
 				<input type="submit" name="submit" class="btn btn-primary" style="float:right" value="Submit">
 			</div>
-			
-			</form>
 			<div class="container-fluid well tab-pane" id="document-attachment">
-
-
+				<input class="btn btn-default" type="file" multiple="" name="files[]" />
+				<input class="btn btn-primary" type="submit" name="submit" value="Submit" />
+				<div>
+				<?php foreach($attachments as $row){ ?>
+					<span><?php echo $row->name ?> <a href="javascript:void(0)" style="color:red" onclick="deleteAttachment($(this))" data-path="<?php echo $row->path ?>" data-appid="<?php echo $row->appid ?>" data-id="<?php echo $row->id ?>">Remove</a><br></span>
+				<?php }?>
+				</div>
 			</div>
 		</div>
 	</fieldset>
+</form>
 <script>
 	$(document).ready(function(){
 		  $('#tin').mask('99-9999999');
@@ -870,6 +874,22 @@
 	function zeroPad(num, places) {
 		var zero = places - num.toString().length + 1;
 		return Array(+(zero > 0 && zero)).join("0") + num;
+	}
+	function deleteAttachment(data){
+		if (confirm('Are your sure you want to delete?')) {
+			data.parent().remove();
+			$.ajax({	
+				type: "GET",
+				url: "<?php echo base_url('admin/deleteAttachment') ?>",
+				data: 'id='+ data.attr('data-id') +'&path='+data.attr('data-path'),
+				dataType: 'json',
+				success: function(data){
+					console.log(data);
+				}
+			});
+		} else {
+			return false;
+		}
 	}
 </script>
 <script src="<?php echo base_url() ?>js/jquery.validate.worker-edit.js"></script>

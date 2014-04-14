@@ -13,7 +13,7 @@
 					font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 					 page-break-inside: avoid;
 				}
-				@print { 
+				@media print { 
 					html { width: 8.5in; height: 13in; } 
 					body { margin: 0px; }
 				}
@@ -226,9 +226,11 @@
 					<td style="width:12.5%;text-align:center"></td></tr>
 				<?php }}?>
 			</table>
+			<div style="page-break-before:always;text-align:center">
 			<?php foreach($attachments as $row){ ?>
-				<img src="<?php echo base_url('upload/'.$row->name); ?>" style="width:auto" />
+				<img src="<?php echo base_url('upload/'.$row->name); ?>" style="max-width:700px" />
 			<?php }?>
+			</div>
 		</div>
 		<script>
 		$('.printThis').click( function(){

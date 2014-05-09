@@ -419,7 +419,7 @@
 						  
 						</select>
 					</div>
-					<div class="span2"><input type="text" name="primaryDegree" disabled class="span12"/></div>
+					<div class="span2"><input type="text" name="primaryDegree" value="<?php echo $educationalbackground['0']['ecourse'] ?>" class="span12"/></div>
 				</div>
 				<div class="row-fluid span">
 					<div class="span2"><label>Secondary Level</label></div>
@@ -450,7 +450,7 @@
 						  
 						</select>
 					</div>
-					<div class="span2"><input type="text" name="secondaryDegree" disabled class="span12"/></div>
+					<div class="span2"><input type="text" name="secondaryDegree" class="span12" value="<?php echo $educationalbackground['0']['hcourse'] ?>"/></div>
 				</div>
 				<div class="row-fluid span">
 					<div class="span2"><label>College Level</label></div>
@@ -512,7 +512,7 @@
 						  
 						</select>
 					</div>
-					<div class="span2"><input type="text" name="vocationalDegree" disabled class="span12"/></div>
+					<div class="span2"><input type="text" name="vocationalDegree" class="span12" value="<?php echo $educationalbackground['0']['vcourse'] ?>"/></div>
 				</div>
 				<div class="row-fluid span">
 					<div class="span2"><label>Post Graduate</label></div>

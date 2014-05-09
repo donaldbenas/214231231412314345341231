@@ -389,7 +389,7 @@
 						  
 						</select>
 					</div>
-					<div class="span2"><input type="text" name="primaryDegree" disabled class="span12"/></div>
+					<div class="span2"><input type="text" name="primaryDegree" class="span12"/></div>
 				</div>
 				<div class="row-fluid span">
 					<div class="span2"><label>Secondary Level</label></div>
@@ -416,7 +416,7 @@
 						  
 						</select>
 					</div>
-					<div class="span2"><input type="text" name="secondaryDegree" disabled class="span12"/></div>
+					<div class="span2"><input type="text" name="secondaryDegree" class="span12"/></div>
 				</div>
 				<div class="row-fluid span">
 					<div class="span2"><label>College Level</label></div>
@@ -470,7 +470,7 @@
 						  
 						</select>
 					</div>
-					<div class="span2"><input type="text" name="vocationalDegree" disabled class="span12"/></div>
+					<div class="span2"><input type="text" name="vocationalDegree" class="span12"/></div>
 				</div>
 				<div class="row-fluid span">
 					<div class="span2"><label>Post Graduate</label></div>

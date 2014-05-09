@@ -137,19 +137,23 @@
 				<tr><td style="">Elementary</td>
 					<td style=""><?php echo ucwords($educationalbackground['0']['elementary']) ?></td>
 					<td style=";text-align:center"><?php echo ucwords($educationalbackground['0']['eto'])." - ".ucwords($educationalbackground['0']['efrom']) ?></td>
-					<td style=""></td></tr>
+					<td style=";text-align:center"><?php echo ucwords($educationalbackground['0']['ecourse'])?></td></tr>
 				<tr><td style="">High School</td>
 					<td style=""><?php echo ucwords($educationalbackground['0']['highschool']) ?></td>
 					<td style=";text-align:center"><?php echo ucwords($educationalbackground['0']['hto'])." - ".ucwords($educationalbackground['0']['hfrom']) ?></td>
-					<td style=""></td></tr>
+					<td style=";text-align:center"><?php echo ucwords($educationalbackground['0']['hcourse'])?></td></tr>
 				<tr><td style="">College</td>
 					<td style=""><?php echo ucwords($educationalbackground['0']['college']) ?></td>
 					<td style=";text-align:center"><?php echo ucwords($educationalbackground['0']['cto'])." - ".ucwords($educationalbackground['0']['cfrom']) ?></td>
 					<td style=";text-align:center"><?php echo ucwords($educationalbackground['0']['ccourse'])?></td></tr>
+				<tr><td style="">Vocational Course</td>
+					<td style=""><?php echo ucwords($educationalbackground['0']['vocational']) ?></td>
+					<td style=";text-align:center"><?php echo ucwords($educationalbackground['0']['vto'])." - ".ucwords($educationalbackground['0']['vfrom']) ?></td>
+					<td style=";text-align:center"><?php echo ucwords($educationalbackground['0']['vcourse'])?></td></tr>
 				<tr><td style="">Post Graduate</td>
 					<td style=""><?php echo ucwords($educationalbackground['0']['postgraduate']) ?></td>
 					<td style=";text-align:center"><?php echo ucwords($educationalbackground['0']['pto'])." - ".ucwords($educationalbackground['0']['pfrom']) ?></td>
-					<td style=""></td></tr>
+					<td style=";text-align:center"><?php echo ucwords($educationalbackground['0']['pcourse'])?></td></tr>
 			</table>
 			<table style="width:100%">
 				<tr><td colspan=8 class="title">SPECIAL SKILLS</td></tr>
